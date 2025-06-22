@@ -46,20 +46,11 @@ export default function Home() {
       
       {/* Hero Section with enhanced effects */}
       <section className="bg-gradient-hero text-white py-16 lg:py-24 relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 animate-float">
-            <Building className="w-16 h-16 text-white" />
-          </div>
-          <div className="absolute top-40 right-20 animate-float" style={{animationDelay: "1s"}}>
-            <Star className="w-12 h-12 text-white" />
-          </div>
-          <div className="absolute bottom-20 left-1/4 animate-float" style={{animationDelay: "2s"}}>
-            <MapPin className="w-14 h-14 text-white" />
-          </div>
-          <div className="absolute top-1/2 right-1/4 animate-float" style={{animationDelay: "3s"}}>
-            <Sparkles className="w-10 h-10 text-white" />
-          </div>
+        {/* Subtle geometric background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

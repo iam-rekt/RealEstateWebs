@@ -99,6 +99,14 @@ The application uses a PostgreSQL database with the following main entities:
 ```
 Changelog:
 - June 22, 2025. Initial setup
+- June 22, 2025. Enhanced typography and professional design
+  * Improved all titles with consistent extrabold fonts and tight tracking
+  * Upgraded statistics section with larger, more prominent fonts
+  * Enhanced Featured Properties section with professional styling
+  * Standardized property card typography for better readability
+  * Removed floating stars from hero section for professional appearance
+  * Added elegant glass effect for search filters with enhanced blur
+  * Implemented consistent font weights and spacing throughout
 ```
 
 ## User Preferences

@@ -54,8 +54,8 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
   };
 
   const containerClass = isHomePage 
-    ? "glass-effect rounded-3xl shadow-2xl p-8 lg:p-10 max-w-5xl mx-auto border border-white/20"
-    : "glass-effect p-6 rounded-2xl shadow-lg border border-white/10";
+    ? "elegant-glass-effect rounded-3xl shadow-2xl p-8 lg:p-10 max-w-5xl mx-auto border border-white/30"
+    : "elegant-glass-effect p-6 rounded-2xl shadow-lg border border-white/20";
 
   return (
     <Card className={containerClass}>
