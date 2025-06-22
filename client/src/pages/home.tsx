@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useState } from "react";
-import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles, Home as HomeIcon, TreePine, ShoppingCart, Key } from "lucide-react";
+import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles, Home as HomeIcon, TreePine, ShoppingCart, Key, X, Search } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
@@ -271,7 +271,7 @@ export default function Home() {
                         setBedrooms("");
                         setSelectedRegion("");
                       }}
-                      className="text-gray-600 hover:text-gray-800"
+                      className="bg-white hover:bg-red-50 border-red-200 text-red-600 hover:text-red-700 font-medium px-4 py-2 rounded-lg shadow-sm transition-all duration-200 hover:border-red-300"
                     >
                       Clear Filters
                     </Button>
