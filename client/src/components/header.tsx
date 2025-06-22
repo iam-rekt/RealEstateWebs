@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import hadprpLogo from "@assets/hadprp.png";
 
 export default function Header() {
   const [location] = useLocation();
@@ -34,7 +35,7 @@ export default function Header() {
               <Link href="/">
                 <div className="cursor-pointer transition-transform duration-300 group-hover:scale-105 flex items-center space-x-4">
                   <img 
-                    src="/attached_assets/hadprp.png" 
+                    src={hadprpLogo} 
                     alt="Haddadin Real Estate" 
                     className="h-12 w-auto object-contain"
                   />

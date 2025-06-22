@@ -157,6 +157,9 @@ Changelog:
   * Fixed tab container sizing issue - increased padding so buttons fit properly within container
   * Replaced all "Haddadin" text branding with hadprp.png logo throughout the website
   * Updated hero section and search card to display logo images instead of text
+  * Removed "Why Choose Haddadin Real Estate" features section as requested
+  * Fixed logo display issues by using proper import statements instead of direct file paths
+  * Optimized tab button sizing with smaller text and icons to fit perfectly in container
 ```
 
 ## User Preferences

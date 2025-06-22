@@ -2,6 +2,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useState } from "react";
 import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles, Home as HomeIcon, TreePine, ShoppingCart, Key, X, Search } from "lucide-react";
+import hadprpLogo from "@assets/hadprp.png";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
@@ -132,7 +133,7 @@ export default function Home() {
           <div className="text-center mb-12 animate-fade-in-up">
             <div className="flex justify-center mb-6">
               <img 
-                src="/attached_assets/hadprp.png" 
+                src={hadprpLogo} 
                 alt="Haddadin Real Estate" 
                 className="h-20 w-auto object-contain drop-shadow-lg"
               />
@@ -149,7 +150,7 @@ export default function Home() {
             <div className="text-center">
               <div className="mb-8">
                 <img 
-                  src="/attached_assets/hadprp.png" 
+                  src={hadprpLogo} 
                   alt="Haddadin Real Estate" 
                   className="h-16 w-auto object-contain mx-auto"
                 />
@@ -165,41 +166,7 @@ export default function Home() {
 
 
 
-      {/* Features Section */}
-      <section className="py-12 bg-gradient-to-br from-blue-50 to-sky-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Haddadin Real Estate</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Experience premium real estate services with our comprehensive approach to property buying, selling, and investment.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
-              <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Search className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Advanced Search</h3>
-              <p className="text-gray-600 text-sm">Find your perfect property with our powerful search filters and location-based recommendations.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
-              <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Expert Guidance</h3>
-              <p className="text-gray-600 text-sm">Our experienced team provides personalized consultation throughout your real estate journey.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
-              <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Award className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Proven Success</h3>
-              <p className="text-gray-600 text-sm">With 15+ years of experience and 98% success rate, we deliver exceptional results.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Property Categories and Regions */}
       <section id="properties" className="py-12 bg-white">
@@ -214,25 +181,25 @@ export default function Home() {
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 mb-6 bg-white rounded-xl p-2 shadow-sm border border-sky-200">
-              <TabsTrigger value="all" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-3 px-4">
-                <Star className="w-4 h-4" />
+            <TabsList className="grid w-full grid-cols-5 mb-6 bg-white rounded-xl p-3 shadow-sm border border-sky-200 min-h-[60px]">
+              <TabsTrigger value="all" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <Star className="w-3 h-3" />
                 All
               </TabsTrigger>
-              <TabsTrigger value="featured" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-3 px-4">
-                <Sparkles className="w-4 h-4" />
+              <TabsTrigger value="featured" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <Sparkles className="w-3 h-3" />
                 Featured
               </TabsTrigger>
-              <TabsTrigger value="buy" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-3 px-4">
-                <ShoppingCart className="w-4 h-4" />
+              <TabsTrigger value="buy" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <ShoppingCart className="w-3 h-3" />
                 For Sale
               </TabsTrigger>
-              <TabsTrigger value="renting" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-3 px-4">
-                <Key className="w-4 h-4" />
+              <TabsTrigger value="renting" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <Key className="w-3 h-3" />
                 For Rent
               </TabsTrigger>
-              <TabsTrigger value="regions" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-3 px-4">
-                <MapPin className="w-4 h-4" />
+              <TabsTrigger value="regions" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <MapPin className="w-3 h-3" />
                 By Area
               </TabsTrigger>
             </TabsList>
