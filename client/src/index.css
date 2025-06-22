@@ -88,13 +88,13 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* Enhanced elegant glass effect for search filters with blue theme */
+/* Enhanced elegant glass effect for search filters with lighter blue theme */
 .elegant-glass-effect {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(37, 99, 235, 0.03));
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(59, 130, 246, 0.03));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(59, 130, 246, 0.15);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.15);
+  box-shadow: 0 8px 32px rgba(96, 165, 250, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Modern search card with clean design */

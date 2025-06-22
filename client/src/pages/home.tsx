@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles, Home as HomeIcon, TreePine, ShoppingCart, Key } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SearchFilters from "@/components/search-filters";
@@ -10,16 +11,52 @@ import ContactForm from "@/components/contact-form";
 import EntrustmentForm from "@/components/entrustment-form";
 import PropertyRequestForm from "@/components/property-request-form";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { apiRequest } from "@/lib/queryClient";
 import type { Property } from "@shared/schema";
 import type { SearchFilters as SearchFiltersType } from "@/lib/types";
 
 export default function Home() {
   const [, setLocation] = useLocation();
+  const [activeTab, setActiveTab] = useState("properties");
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
 
   const { data: featuredProperties = [], isLoading } = useQuery<Property[]>({
     queryKey: ["/api/properties/featured"],
   });
+
+  const { data: allProperties = [] } = useQuery<Property[]>({
+    queryKey: ["/api/properties"],
+  });
+
+  // Filter properties by category and region
+  const getFilteredProperties = (category: string) => {
+    let filtered = allProperties;
+    
+    if (category === "land") {
+      filtered = allProperties.filter(p => p.propertyType === "land");
+    } else if (category === "buy") {
+      filtered = allProperties.filter(p => p.available === true);
+    } else if (category === "renting") {
+      filtered = allProperties.filter(p => p.available === false);
+    }
+    
+    if (selectedRegion) {
+      filtered = filtered.filter(p => p.location.toLowerCase().includes(selectedRegion.toLowerCase()));
+    }
+    
+    return filtered;
+  };
+
+  // Athens regions for filter
+  const athensRegions = [
+    "Alimos", "Glyfada", "Voula", "Vouliagmeni", "Varkiza", "Saronida",
+    "Kifisia", "Marousi", "Chalandri", "Psychiko", "Filothei",
+    "Kolonaki", "Exarchia", "Plaka", "Monastiraki", "Thiseio",
+    "Piraeus", "Faliro", "Kallithea", "Nea Smyrni", "Pagrati"
+  ];
 
   const searchMutation = useMutation({
     mutationFn: async (filters: SearchFiltersType) => {
