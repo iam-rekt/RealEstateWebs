@@ -26,26 +26,30 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white/95 backdrop-blur-lg shadow-lg border-b border-blue-100 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
+    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-2xl border-b border-gray-100/50 z-50 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-24">
+          <div className="flex items-center group">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-3xl font-extrabold text-blue-600 cursor-pointer tracking-tight leading-tight">Pin-point Real Estate</h1>
-                <p className="text-sm text-gray-700 font-medium">Alimos (Athens - South)</p>
+                <div className="cursor-pointer transition-transform duration-300 group-hover:scale-105">
+                  <h1 className="text-2xl lg:text-3xl font-black text-gray-900 tracking-tight">
+                    Pin-point <span className="text-blue-600">Estate</span>
+                  </h1>
+                  <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Athens • Premium Properties</p>
+                </div>
               </Link>
             </div>
           </div>
           
-          <nav className="hidden md:flex space-x-10">
+          <nav className="hidden md:flex items-center space-x-12">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href}>
                 <a 
-                  className={`text-lg font-semibold transition-all duration-300 tracking-wide ${
+                  className={`relative text-sm font-medium tracking-wide transition-all duration-500 group ${
                     location === item.href 
-                      ? "text-blue-600 border-b-2 border-blue-600 pb-1" 
-                      : "text-gray-700 hover:text-blue-600 hover:scale-105"
+                      ? "text-blue-600" 
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
                   onClick={(e) => {
                     if (item.href.startsWith("/#")) {
@@ -55,6 +59,11 @@ export default function Header() {
                   }}
                 >
                   {item.name}
+                  <span className={`absolute -bottom-2 left-0 h-0.5 bg-blue-600 transition-all duration-300 ${
+                    location === item.href 
+                      ? "w-full" 
+                      : "w-0 group-hover:w-full"
+                  }`}></span>
                 </a>
               </Link>
             ))}

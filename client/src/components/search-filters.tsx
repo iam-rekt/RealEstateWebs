@@ -54,8 +54,8 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
   };
 
   const containerClass = isHomePage 
-    ? "elegant-glass-effect rounded-3xl shadow-2xl p-8 lg:p-10 max-w-5xl mx-auto border border-white/30"
-    : "elegant-glass-effect p-6 rounded-2xl shadow-lg border border-white/20";
+    ? "modern-search-card rounded-2xl p-8 lg:p-10 max-w-6xl mx-auto"
+    : "modern-search-card p-6 rounded-xl";
 
   return (
     <Card className={containerClass}>
@@ -64,9 +64,9 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             {/* Search Header */}
             {isHomePage && (
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Find Your Perfect Property</h3>
-                <p className="text-gray-600 font-medium">Discover premium properties in Athens with our advanced search</p>
+              <div className="text-center mb-10">
+                <h3 className="text-3xl font-black text-gray-900 mb-3 tracking-tight">Find Your Perfect Property</h3>
+                <p className="text-gray-600 font-medium text-lg">Discover premium properties in Athens with our intelligent search</p>
               </div>
             )}
             
@@ -87,7 +87,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                             type="number" 
                             placeholder="From €100,000" 
                             {...field}
-                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm"
+                            className="modern-input"
                           />
                         </FormControl>
                       </FormItem>
