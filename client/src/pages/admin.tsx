@@ -629,6 +629,157 @@ export default function Admin() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Edit Property Dialog */}
+              <Dialog open={!!editingProperty} onOpenChange={(open) => !open && setEditingProperty(null)}>
+                <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Edit Property</DialogTitle>
+                    <DialogDescription>
+                      Update property information
+                    </DialogDescription>
+                  </DialogHeader>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="edit-title">Title</Label>
+                        <Input
+                          id="edit-title"
+                          value={formData.title}
+                          onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-price">Price</Label>
+                        <Input
+                          id="edit-price"
+                          value={formData.price}
+                          onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+                          required
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="edit-description">Description</Label>
+                      <Textarea
+                        id="edit-description"
+                        value={formData.description}
+                        onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                        required
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <Label htmlFor="edit-size">Size (m²)</Label>
+                        <Input
+                          id="edit-size"
+                          type="number"
+                          value={formData.size}
+                          onChange={(e) => setFormData(prev => ({ ...prev, size: e.target.value }))}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-bedrooms">Bedrooms</Label>
+                        <Input
+                          id="edit-bedrooms"
+                          type="number"
+                          value={formData.bedrooms}
+                          onChange={(e) => setFormData(prev => ({ ...prev, bedrooms: e.target.value }))}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-bathrooms">Bathrooms</Label>
+                        <Input
+                          id="edit-bathrooms"
+                          type="number"
+                          value={formData.bathrooms}
+                          onChange={(e) => setFormData(prev => ({ ...prev, bathrooms: e.target.value }))}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="edit-propertyType">Property Type</Label>
+                        <Select value={formData.propertyType} onValueChange={(value) => setFormData(prev => ({ ...prev, propertyType: value }))}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="apartment">Apartment</SelectItem>
+                            <SelectItem value="house">House</SelectItem>
+                            <SelectItem value="villa">Villa</SelectItem>
+                            <SelectItem value="studio">Studio</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-location">Location</Label>
+                        <Input
+                          id="edit-location"
+                          value={formData.location}
+                          onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="edit-address">Address</Label>
+                      <Input
+                        id="edit-address"
+                        value={formData.address}
+                        onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="edit-imageUrl">Image URL</Label>
+                      <Input
+                        id="edit-imageUrl"
+                        value={formData.imageUrl}
+                        onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
+                        required
+                      />
+                    </div>
+
+                    <div className="flex items-center space-x-6">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="edit-featured"
+                          checked={formData.featured}
+                          onCheckedChange={(checked) => setFormData(prev => ({ ...prev, featured: !!checked }))}
+                        />
+                        <Label htmlFor="edit-featured">Featured Property</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="edit-available"
+                          checked={formData.available}
+                          onCheckedChange={(checked) => setFormData(prev => ({ ...prev, available: !!checked }))}
+                        />
+                        <Label htmlFor="edit-available">Available</Label>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end space-x-2">
+                      <Button type="button" variant="outline" onClick={() => setEditingProperty(null)}>
+                        Cancel
+                      </Button>
+                      <Button type="submit" disabled={updatePropertyMutation.isPending}>
+                        {updatePropertyMutation.isPending ? "Updating..." : "Update Property"}
+                      </Button>
+                    </div>
+                  </form>
+                </DialogContent>
+              </Dialog>
             </TabsContent>
 
             {/* Contacts Tab */}
