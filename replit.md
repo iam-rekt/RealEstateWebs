@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a modern real estate application built for the Athens market, specifically serving Alimos (Athens - South). The application provides property listings, search functionality, and contact management features for both buyers and property owners.
+This is a modern real estate application built for the Jordan market, specifically serving Amman and surrounding areas. The application provides property listings, search functionality, and contact management features for both buyers and property owners.
 
 ## System Architecture
 
@@ -139,6 +139,13 @@ Changelog:
   * Implemented glass morphism effects with backdrop blur and rounded corners
   * Added real-time property count display and clear filters functionality
   * Created empty states with relevant icons for better user experience
+- June 22, 2025. Completed location change from Athens to Jordan and repositioned statistics
+  * Updated all location references from Athens, Greece to Amman, Jordan
+  * Changed phone numbers from Greek (+30) to Jordanian (+962) format
+  * Updated About section to reference Amman metropolitan area
+  * Moved statistics section (500+ properties, 1200+ clients, 15+ years, 98% success) to bottom of page
+  * Updated header tagline from "Athens • Premium Properties" to "Amman • Premium Properties"
+  * Maintained all Jordan area filtering functionality (Abdoun, Sweifieh, etc.)
 ```
 
 ## User Preferences
