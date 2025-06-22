@@ -88,12 +88,12 @@ export default function Home() {
     return filtered;
   };
 
-  // Athens regions for filter
-  const athensRegions = [
-    "Alimos", "Glyfada", "Voula", "Vouliagmeni", "Varkiza", "Saronida",
-    "Kifisia", "Marousi", "Chalandri", "Psychiko", "Filothei",
-    "Kolonaki", "Exarchia", "Plaka", "Monastiraki", "Thiseio",
-    "Piraeus", "Faliro", "Kallithea", "Nea Smyrni", "Pagrati"
+  // Amman areas for filter
+  const ammanAreas = [
+    "Abdoun", "Sweifieh", "Dabouq", "Deir Ghbar", "Um Uthaina", "Khalda",
+    "Tla'a Al-Ali", "Shmeisani", "Jabal Amman", "Jabal Al-Weibdeh", "Luweibdeh",
+    "Al-Rabiah", "Marj Al-Hamam", "Airport Road", "Sports City", "Al-Kursi",
+    "Tabarbour", "Mecca Street", "Gardens", "University Street", "Al-Jubeiha"
   ];
 
   const searchMutation = useMutation({
@@ -135,26 +135,21 @@ export default function Home() {
               <span className="text-yellow-300 font-black">Real Estate</span>
             </h1>
             <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto drop-shadow font-medium leading-relaxed">
-              Discover exceptional real estate opportunities in Greece's capital with our curated collection of premium properties
+              Discover exceptional real estate opportunities in Jordan's capital with our curated collection of premium properties
             </p>
           </div>
           
-          <div className="elegant-glass-effect rounded-2xl p-8 hover-lift animate-scale-in max-w-4xl mx-auto">
+          <div className="elegant-glass-effect rounded-2xl p-12 hover-lift animate-scale-in max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="mb-6">
-                <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent tracking-tight">
+              <div className="mb-8">
+                <h1 className="text-7xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent tracking-tight drop-shadow-sm">
                   Haddadin
                 </h1>
-                <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto mt-3 rounded-full"></div>
+                <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto mt-4 rounded-full shadow-lg"></div>
               </div>
-              <Button 
-                onClick={() => document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' })}
-                size="lg"
-                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Explore Properties
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <p className="text-lg text-gray-700 font-medium leading-relaxed">
+                Premium Real Estate Services in Amman
+              </p>
             </div>
           </div>
         </div>
@@ -228,7 +223,7 @@ export default function Home() {
               </TabsTrigger>
               <TabsTrigger value="regions" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white rounded-xl transition-all duration-300 font-medium">
                 <MapPin className="w-4 h-4" />
-                By Region
+                By Area
               </TabsTrigger>
             </TabsList>
 
@@ -287,8 +282,8 @@ export default function Home() {
                     className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all duration-200 bg-white"
                   >
                     <option value="">All Areas</option>
-                    {athensRegions.map((region) => (
-                      <option key={region} value={region}>{region}</option>
+                    {ammanAreas.map((area) => (
+                      <option key={area} value={area}>{area}</option>
                     ))}
                   </select>
                 </div>
@@ -401,17 +396,17 @@ export default function Home() {
 
             <TabsContent value="regions" className="space-y-6">
               <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 mb-8 shadow-lg border border-blue-100/50">
-                <h4 className="text-xl font-bold text-gray-900 mb-6">Explore by Athens Region</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-6">Explore by Amman Area</h4>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                  {athensRegions.map((region) => (
+                  {ammanAreas.map((area) => (
                     <Button
-                      key={region}
-                      variant={selectedRegion === region ? "default" : "outline"}
+                      key={area}
+                      variant={selectedRegion === area ? "default" : "outline"}
                       size="sm"
-                      onClick={() => setSelectedRegion(region)}
+                      onClick={() => setSelectedRegion(area)}
                       className="justify-start hover:bg-blue-50 transition-all duration-200"
                     >
-                      {region}
+                      {area}
                     </Button>
                   ))}
                 </div>
@@ -443,8 +438,8 @@ export default function Home() {
                 ) : (
                   <div className="col-span-full text-center py-16">
                     <MapPin className="w-16 h-16 text-blue-300 mx-auto mb-4" />
-                    <h4 className="text-xl font-semibold text-gray-700 mb-2">Select a Region</h4>
-                    <p className="text-gray-500">Choose an Athens area above to browse properties in that location</p>
+                    <h4 className="text-xl font-semibold text-gray-700 mb-2">Select an Area</h4>
+                    <p className="text-gray-500">Choose an Amman area above to browse properties in that location</p>
                   </div>
                 )}
               </div>
