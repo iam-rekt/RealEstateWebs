@@ -33,13 +33,12 @@ export default function Header() {
             <div className="flex-shrink-0">
               <Link href="/">
                 <div className="cursor-pointer transition-transform duration-300 group-hover:scale-105 flex items-center space-x-4">
-                  <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-xl shadow-lg">
-                    <span className="text-xl font-bold tracking-tight">Haddadin</span>
-                  </div>
+                  <img 
+                    src="/attached_assets/hadprp.png" 
+                    alt="Haddadin Real Estate" 
+                    className="h-12 w-auto object-contain"
+                  />
                   <div>
-                    <h1 className="text-2xl lg:text-3xl font-black text-gray-900 tracking-tight">
-                      Tariq <span className="text-blue-600">Haddadin</span>
-                    </h1>
                     <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Amman • Premium Properties</p>
                   </div>
                 </div>

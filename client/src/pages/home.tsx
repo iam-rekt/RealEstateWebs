@@ -157,11 +157,47 @@ export default function Home() {
 
 
 
-      {/* Property Categories and Regions */}
-      <section id="properties" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+      {/* Features Section */}
+      <section className="py-12 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Haddadin Real Estate</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Experience premium real estate services with our comprehensive approach to property buying, selling, and investment.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
+              <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <Search className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Advanced Search</h3>
+              <p className="text-gray-600 text-sm">Find your perfect property with our powerful search filters and location-based recommendations.</p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
+              <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Expert Guidance</h3>
+              <p className="text-gray-600 text-sm">Our experienced team provides personalized consultation throughout your real estate journey.</p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
+              <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <Award className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Proven Success</h3>
+              <p className="text-gray-600 text-sm">With 15+ years of experience and 98% success rate, we deliver exceptional results.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Property Categories and Regions */}
+      <section id="properties" className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Explore Properties
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
@@ -170,38 +206,38 @@ export default function Home() {
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 mb-8 bg-white/90 backdrop-blur-md border border-blue-200/50 rounded-2xl p-2 shadow-lg">
-              <TabsTrigger value="all" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white rounded-xl transition-all duration-300 font-medium">
+            <TabsList className="grid w-full grid-cols-5 mb-6 bg-white rounded-xl p-1 shadow-sm border border-sky-200">
+              <TabsTrigger value="all" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-2 px-3">
                 <Star className="w-4 h-4" />
-                All Properties
+                All
               </TabsTrigger>
-              <TabsTrigger value="featured" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white rounded-xl transition-all duration-300 font-medium">
+              <TabsTrigger value="featured" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-2 px-3">
                 <Sparkles className="w-4 h-4" />
                 Featured
               </TabsTrigger>
-              <TabsTrigger value="buy" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white rounded-xl transition-all duration-300 font-medium">
+              <TabsTrigger value="buy" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-2 px-3">
                 <ShoppingCart className="w-4 h-4" />
                 For Sale
               </TabsTrigger>
-              <TabsTrigger value="renting" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white rounded-xl transition-all duration-300 font-medium">
+              <TabsTrigger value="renting" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-2 px-3">
                 <Key className="w-4 h-4" />
                 For Rent
               </TabsTrigger>
-              <TabsTrigger value="regions" className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white rounded-xl transition-all duration-300 font-medium">
+              <TabsTrigger value="regions" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-sm py-2 px-3">
                 <MapPin className="w-4 h-4" />
                 By Area
               </TabsTrigger>
             </TabsList>
 
             {/* Modern Filter Bar */}
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 mb-8 shadow-xl border border-blue-100/60">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Property Type</label>
+            <div className="bg-white rounded-lg p-4 mb-6 shadow-sm border border-sky-100">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Property Type</label>
                   <select 
                     value={propertyType} 
                     onChange={(e) => setPropertyType(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white text-gray-700 font-medium text-base shadow-sm hover:border-gray-300"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
                   >
                     <option value="">All Types</option>
                     <option value="apartment">Apartment</option>
