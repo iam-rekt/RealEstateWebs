@@ -247,12 +247,12 @@ export default function Home() {
                   </select>
                 </div>
                 
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Price Range</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Price Range</label>
                   <select 
                     value={priceRange} 
                     onChange={(e) => setPriceRange(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white text-gray-700 font-medium text-base shadow-sm hover:border-gray-300"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
                   >
                     <option value="">All Prices</option>
                     <option value="0-300000">Up to €300,000</option>
@@ -261,12 +261,12 @@ export default function Home() {
                   </select>
                 </div>
                 
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Bedrooms</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Bedrooms</label>
                   <select 
                     value={bedrooms} 
                     onChange={(e) => setBedrooms(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white text-gray-700 font-medium text-base shadow-sm hover:border-gray-300"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
                   >
                     <option value="">Any</option>
                     <option value="1">1+ Bedroom</option>
@@ -276,12 +276,12 @@ export default function Home() {
                   </select>
                 </div>
                 
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Location</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Location</label>
                   <select 
                     value={selectedRegion} 
                     onChange={(e) => setSelectedRegion(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white text-gray-700 font-medium text-base shadow-sm hover:border-gray-300"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
                   >
                     <option value="">All Areas</option>
                     {ammanAreas.map((area) => (
@@ -294,7 +294,7 @@ export default function Home() {
               {/* Filter Results Summary */}
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
+                  <Badge variant="secondary" className="bg-sky-50 text-sky-700 border-sky-200 text-sm">
                     {getFilteredProperties(activeTab).length} properties found
                   </Badge>
                   {(propertyType || priceRange || bedrooms || selectedRegion) && (
@@ -307,7 +307,7 @@ export default function Home() {
                         setBedrooms("");
                         setSelectedRegion("");
                       }}
-                      className="bg-white hover:bg-red-50 border-red-200 text-red-600 hover:text-red-700 font-medium px-4 py-2 rounded-lg shadow-sm transition-all duration-200 hover:border-red-300"
+                      className="bg-white hover:bg-red-50 border-red-200 text-red-600 hover:text-red-700 text-sm px-3 py-1.5 rounded-md transition-all duration-200"
                     >
                       Clear Filters
                     </Button>

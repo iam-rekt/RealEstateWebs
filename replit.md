@@ -146,6 +146,14 @@ Changelog:
   * Moved statistics section (500+ properties, 1200+ clients, 15+ years, 98% success) to bottom of page
   * Updated header tagline from "Athens • Premium Properties" to "Amman • Premium Properties"
   * Maintained all Jordan area filtering functionality (Abdoun, Sweifieh, etc.)
+- June 22, 2025. Enhanced design with lighter blue theme and features section
+  * Updated entire color scheme to lighter blue (sky-400/sky-500) for more elegant appearance
+  * Added "Why Choose Haddadin Real Estate" features section above explore properties
+  * Created three feature cards: Advanced Search, Expert Guidance, and Proven Success
+  * Made explore properties section more compact and clean with improved styling
+  * Updated all filter dropdowns with smaller, cleaner design and sky blue accents
+  * Enhanced tab styling with lighter blue gradients and better spacing
+  * Improved filter results badge and clear filters button with consistent theming
 ```
 
 ## User Preferences
