@@ -160,6 +160,7 @@ Changelog:
   * Removed "Why Choose Haddadin Real Estate" features section as requested
   * Fixed logo display issues by using proper import statements instead of direct file paths
   * Optimized tab button sizing with smaller text and icons to fit perfectly in container
+  * Increased logo sizes in home page - hero section logo to h-32 and search card logo to h-24 for better design proportion
 ```
 
 ## User Preferences

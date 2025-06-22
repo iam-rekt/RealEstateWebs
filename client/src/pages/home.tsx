@@ -131,11 +131,11 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12 animate-fade-in-up">
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-8">
               <img 
                 src={hadprpLogo} 
                 alt="Haddadin Real Estate" 
-                className="h-20 w-auto object-contain drop-shadow-lg"
+                className="h-32 w-auto object-contain drop-shadow-2xl"
               />
             </div>
             <h1 className="text-3xl lg:text-5xl font-extrabold mb-6 drop-shadow-lg leading-tight tracking-tight">
@@ -152,7 +152,7 @@ export default function Home() {
                 <img 
                   src={hadprpLogo} 
                   alt="Haddadin Real Estate" 
-                  className="h-16 w-auto object-contain mx-auto"
+                  className="h-24 w-auto object-contain mx-auto"
                 />
                 <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto mt-4 rounded-full shadow-lg"></div>
               </div>
