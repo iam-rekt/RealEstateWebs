@@ -154,6 +154,9 @@ Changelog:
   * Updated all filter dropdowns with smaller, cleaner design and sky blue accents
   * Enhanced tab styling with lighter blue gradients and better spacing
   * Improved filter results badge and clear filters button with consistent theming
+  * Fixed tab container sizing issue - increased padding so buttons fit properly within container
+  * Replaced all "Haddadin" text branding with hadprp.png logo throughout the website
+  * Updated hero section and search card to display logo images instead of text
 ```
 
 ## User Preferences
