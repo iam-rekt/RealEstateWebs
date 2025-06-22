@@ -143,48 +143,198 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Properties */}
+      {/* Property Categories and Regions */}
       <section id="properties" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
-              Featured Properties
-              <Sparkles className="inline-block w-8 h-8 ml-3 text-yellow-500" />
+              Explore Properties
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium leading-relaxed">
-              Discover exceptional properties in prime Athens locations, carefully curated for discerning buyers
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Browse properties by category or explore different regions of Athens
             </p>
           </div>
-          
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                  <Skeleton className="w-full h-64" />
-                  <div className="p-6 space-y-4">
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-4 w-1/2" />
-                    <div className="flex justify-between">
-                      <Skeleton className="h-4 w-16" />
-                      <Skeleton className="h-4 w-16" />
-                      <Skeleton className="h-4 w-16" />
+
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-5 mb-8 bg-white/80 backdrop-blur-sm border border-blue-200/50">
+              <TabsTrigger value="properties" className="flex items-center gap-2 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">
+                <HomeIcon className="w-4 h-4" />
+                Properties
+              </TabsTrigger>
+              <TabsTrigger value="land" className="flex items-center gap-2 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">
+                <TreePine className="w-4 h-4" />
+                Land
+              </TabsTrigger>
+              <TabsTrigger value="buy" className="flex items-center gap-2 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">
+                <ShoppingCart className="w-4 h-4" />
+                Buy
+              </TabsTrigger>
+              <TabsTrigger value="renting" className="flex items-center gap-2 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">
+                <Key className="w-4 h-4" />
+                Renting
+              </TabsTrigger>
+              <TabsTrigger value="regions" className="flex items-center gap-2 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">
+                <MapPin className="w-4 h-4" />
+                Regions
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="properties" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">All Properties</h3>
+                <p className="text-gray-600">Discover our complete collection of properties</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {isLoading ? (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="space-y-4">
+                      <Skeleton className="h-48 w-full" />
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-4 w-1/2" />
                     </div>
-                    <Skeleton className="h-10 w-full" />
-                  </div>
+                  ))
+                ) : (
+                  getFilteredProperties("properties").slice(0, 6).map((property: any) => (
+                    <PropertyCard 
+                      key={property.id} 
+                      property={property} 
+                      onViewDetails={handleViewDetails}
+                    />
+                  ))
+                )}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="land" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Land Plots</h3>
+                <p className="text-gray-600">Premium land plots for development opportunities</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {getFilteredProperties("land").slice(0, 6).map((property: any) => (
+                  <PropertyCard 
+                    key={property.id} 
+                    property={property} 
+                    onViewDetails={handleViewDetails}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="buy" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Properties for Sale</h3>
+                <p className="text-gray-600">Find your perfect home to purchase</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {getFilteredProperties("buy").slice(0, 6).map((property: any) => (
+                  <PropertyCard 
+                    key={property.id} 
+                    property={property} 
+                    onViewDetails={handleViewDetails}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="renting" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Properties for Rent</h3>
+                <p className="text-gray-600">Explore rental properties in prime locations</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {getFilteredProperties("renting").slice(0, 6).map((property: any) => (
+                  <PropertyCard 
+                    key={property.id} 
+                    property={property} 
+                    onViewDetails={handleViewDetails}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="regions" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Athens Regions</h3>
+                <p className="text-gray-600">Explore properties by location across Athens</p>
+              </div>
+              
+              {/* Region Filter */}
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-blue-100 mb-8">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Select Region</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                  <Button
+                    variant={selectedRegion === "" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedRegion("")}
+                    className="justify-start"
+                  >
+                    All Regions
+                  </Button>
+                  {athensRegions.map((region) => (
+                    <Button
+                      key={region}
+                      variant={selectedRegion === region ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSelectedRegion(region)}
+                      className="justify-start"
+                    >
+                      {region}
+                    </Button>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredProperties.map((property) => (
-                <PropertyCard
-                  key={property.id}
-                  property={property}
-                  onViewDetails={handleViewDetails}
-                />
-              ))}
-            </div>
-          )}
+              </div>
+
+              {/* Properties in Selected Region */}
+              <div className="space-y-4">
+                {selectedRegion && (
+                  <div className="flex items-center gap-2 mb-4">
+                    <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                      <MapPin className="w-3 h-3 mr-1" />
+                      {selectedRegion}
+                    </Badge>
+                    <span className="text-gray-600">
+                      {getFilteredProperties("properties").length} properties found
+                    </span>
+                  </div>
+                )}
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {getFilteredProperties("properties").slice(0, 6).map((property: any) => (
+                    <PropertyCard 
+                      key={property.id} 
+                      property={property} 
+                      onViewDetails={handleViewDetails}
+                    />
+                  ))}
+                </div>
+
+                {getFilteredProperties("properties").length === 0 && (
+                  <div className="text-center py-12">
+                    <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <h4 className="text-lg font-semibold text-gray-600 mb-2">
+                      No properties found in {selectedRegion || "this region"}
+                    </h4>
+                    <p className="text-gray-500">
+                      Try selecting a different region or browse all properties
+                    </p>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+          </Tabs>
+
+          {/* View All Properties Button */}
+          <div className="text-center mt-12">
+            <Button 
+              onClick={() => setLocation("/properties")}
+              size="lg"
+              className="bg-gradient-primary hover:bg-blue-600 text-white px-8 py-3"
+            >
+              View All Properties
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </section>
 

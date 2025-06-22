@@ -121,6 +121,14 @@ Changelog:
   * Implemented sophisticated input field styling with consistent appearance
   * Added proper padding to accommodate fixed header layout
   * Enhanced overall visual hierarchy and professional aesthetics
+- June 22, 2025. Added property category tabs and regions functionality
+  * Implemented 5 main tabs: Properties, Land, Buy, Renting, and Regions
+  * Added filtering system for property categories (land plots, for sale, for rent)
+  * Created Athens regions filter with 21 major areas (Alimos, Glyfada, Kifisia, etc.)
+  * Updated blue theme to lighter shade for better accessibility
+  * Enhanced tab interface with icons and active states
+  * Added property count display for region filtering
+  * Implemented responsive grid layout for all property categories
 ```
 
 ## User Preferences
