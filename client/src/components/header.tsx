@@ -40,7 +40,7 @@ export default function Header() {
                     <h1 className="text-2xl lg:text-3xl font-black text-gray-900 tracking-tight">
                       Tariq <span className="text-blue-600">Haddadin</span>
                     </h1>
-                    <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Athens • Premium Properties</p>
+                    <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Amman • Premium Properties</p>
                   </div>
                 </div>
               </Link>

@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h5 className="text-2xl font-bold mb-4">Tariq Haddadin Real Estate</h5>
             <p className="text-gray-300 mb-4">
-              Your trusted partner for real estate in Athens. We specialize in connecting buyers and investors with exceptional properties throughout the Athens metropolitan area.
+              Your trusted partner for real estate in Amman. We specialize in connecting buyers and investors with exceptional properties throughout the Amman metropolitan area.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">
@@ -69,9 +69,9 @@ export default function Footer() {
           <div>
             <h6 className="font-semibold mb-4">Contact Info</h6>
             <ul className="space-y-2 text-gray-300">
-              <li>Alimos, Athens - South</li>
-              <li>Greece</li>
-              <li>+30 210 XXX XXXX</li>
+              <li>Amman, Jordan</li>
+              <li>Jordan</li>
+              <li>+962 6 XXX XXXX</li>
               <li>info@tariqhaddadin.gr</li>
             </ul>
           </div>

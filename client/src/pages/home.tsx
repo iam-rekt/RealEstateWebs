@@ -199,7 +199,7 @@ export default function Home() {
               Explore Properties
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Browse properties by category or explore different regions of Athens
+              Browse properties by category or explore different areas of Amman
             </p>
           </div>
 
@@ -495,10 +495,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-3xl font-bold text-text-primary mb-6">About Pin-point Real Estate</h3>
+              <h3 className="text-3xl font-bold text-text-primary mb-6">About Tariq Haddadin Real Estate</h3>
               <p className="text-gray-600 text-lg mb-6">
-                Located in the heart of Alimos, South Athens, we specialize in connecting buyers and investors 
-                with exceptional properties throughout the Athens metropolitan area.
+                Located in the heart of Amman, Jordan, we specialize in connecting buyers and investors 
+                with exceptional properties throughout the Amman metropolitan area.
               </p>
               <p className="text-gray-600 mb-6">
                 With years of local market expertise and a commitment to personalized service, we guide our 
@@ -549,7 +549,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Office Location</h4>
-                  <p className="text-gray-600">Alimos, Athens - South<br />Greece</p>
+                  <p className="text-gray-600">Amman, Jordan<br />Jordan</p>
                 </div>
               </div>
               
