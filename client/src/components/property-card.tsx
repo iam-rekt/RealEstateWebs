@@ -38,21 +38,21 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
         {/* Gradient overlay on hover */}
         <div className={`absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
         
-        {/* Featured badge with animation */}
+        {/* Featured badge */}
         {property.featured && (
-          <Badge className="absolute top-4 left-4 bg-gradient-primary text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse-glow">
+          <Badge className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
             <Star className="w-4 h-4 mr-1" />
             Featured
           </Badge>
         )}
         
-        {/* Heart button with animation */}
+        {/* Heart button */}
         <button 
           onClick={(e) => {
             e.stopPropagation();
             setIsLiked(!isLiked);
           }}
-          className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all duration-200 hover-glow"
+          className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all duration-200"
         >
           <Heart className={`w-5 h-5 transition-colors duration-200 ${isLiked ? 'text-red-500 fill-current' : 'text-gray-600 hover:text-red-500'}`} />
         </button>
@@ -74,12 +74,12 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
           <h4 className="text-xl font-semibold text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors duration-200">
             {property.title}
           </h4>
-          <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent ml-2 animate-pulse-glow">
+          <span className="text-2xl font-bold text-blue-600 ml-2">
             {formatPrice(property.price)}
           </span>
         </div>
         
-        <p className="text-gray-600 mb-3 flex items-center hover-glow">
+        <p className="text-gray-600 mb-3 flex items-center">
           <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
           </svg>
@@ -87,15 +87,15 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
         </p>
         
         <div className="flex justify-between text-sm text-gray-600 mb-4">
-          <span className="flex items-center glass-effect-dark rounded-full px-3 py-1 animate-fade-in-up">
+          <span className="flex items-center bg-gray-100 rounded-full px-3 py-1">
             <Bed className="w-4 h-4 mr-1 text-blue-500" />
             {getBedroomText(property.bedrooms)}
           </span>
-          <span className="flex items-center glass-effect-dark rounded-full px-3 py-1 animate-fade-in-up" style={{animationDelay: "0.1s"}}>
+          <span className="flex items-center bg-gray-100 rounded-full px-3 py-1">
             <Bath className="w-4 h-4 mr-1 text-blue-500" />
             {property.bathrooms} bath{property.bathrooms > 1 ? 's' : ''}
           </span>
-          <span className="flex items-center glass-effect-dark rounded-full px-3 py-1 animate-fade-in-up" style={{animationDelay: "0.2s"}}>
+          <span className="flex items-center bg-gray-100 rounded-full px-3 py-1">
             <Ruler className="w-4 h-4 mr-1 text-blue-500" />
             {property.size} sq.m.
           </span>
@@ -103,7 +103,7 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
         
         <Button 
           onClick={() => onViewDetails(property.id)}
-          className="w-full bg-gradient-primary hover:bg-gradient-secondary text-white font-semibold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover-glow animate-pulse-glow"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
         >
           View Details
         </Button>

@@ -66,7 +66,7 @@ export default function Home() {
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
               Search properties to buy and invest in{" "}
-              <span className="text-yellow-300 animate-pulse-glow">Athens</span>
+              <span className="text-yellow-300">Athens</span>
             </h2>
             <p className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow">
               Discover your perfect property in the heart of Greece with our comprehensive real estate platform
