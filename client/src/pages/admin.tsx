@@ -36,7 +36,9 @@ export default function Admin() {
   // Logout mutation
   const logoutMutation = useMutation({
     mutationFn: async () => {
-      return await apiRequest("/api/admin/logout", { method: "POST" });
+      const response = await fetch("/api/admin/logout", { method: "POST" });
+      if (!response.ok) throw new Error("Logout failed");
+      return response.json();
     },
     onSuccess: () => {
       queryClient.clear();
@@ -78,7 +80,9 @@ export default function Admin() {
   const createDeleteMutation = (endpoint: string, queryKey: string[]) => {
     return useMutation({
       mutationFn: async (id: number) => {
-        return await apiRequest(`${endpoint}/${id}`, { method: "DELETE" });
+        const response = await fetch(`${endpoint}/${id}`, { method: "DELETE" });
+        if (!response.ok) throw new Error("Delete failed");
+        return response.json();
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey });
