@@ -120,45 +120,71 @@ export default function Home() {
     <div className="min-h-screen bg-white pt-24">
       <Header />
       
-      {/* Hero Section with enhanced effects */}
-      <section className="bg-gradient-hero text-white py-16 lg:py-24 relative overflow-hidden">
-        {/* Subtle geometric background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+      {/* Hero Section - Clean Modern Design */}
+      <section className="bg-white text-slate-800 py-20 lg:py-32 relative overflow-hidden">
+        {/* Geometric Background Elements */}
+        <div className="absolute inset-0">
+          {/* Large subtle circles */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50 rounded-full -translate-y-48 translate-x-48 opacity-60"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-sky-50 rounded-full translate-y-40 -translate-x-40 opacity-40"></div>
+          
+          {/* Grid pattern */}
+          <div className="absolute inset-0 opacity-[0.02]">
+            <div className="w-full h-full" style={{
+              backgroundImage: `linear-gradient(#1e40af 1px, transparent 1px), linear-gradient(90deg, #1e40af 1px, transparent 1px)`,
+              backgroundSize: '40px 40px'
+            }}></div>
+          </div>
+          
+          {/* Floating geometric shapes */}
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-200 rotate-45 opacity-30 animate-float"></div>
+          <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-sky-300 rounded-full opacity-40 animate-float" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/3 left-1/3 w-6 h-6 border-2 border-blue-300 rotate-12 opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 animate-fade-in-up">
-            <div className="flex justify-center mb-8">
+          <div className="text-center animate-fade-in-up">
+            {/* Logo */}
+            <div className="mb-12">
               <img 
                 src={hadprpLogo} 
                 alt="Haddadin Real Estate" 
-                className="h-48 w-auto object-contain drop-shadow-2xl"
+                className="h-32 w-auto object-contain mx-auto"
               />
             </div>
-            <h1 className="text-3xl lg:text-5xl font-extrabold mb-6 drop-shadow-lg leading-tight tracking-tight">
-              <span className="text-yellow-300 font-black">Premium Real Estate Services</span>
+            
+            {/* Clean Typography */}
+            <h1 className="text-4xl lg:text-6xl font-light mb-6 tracking-tight">
+              <span className="text-slate-900 font-extralight">Premium</span>
+              <br />
+              <span className="text-blue-600 font-medium">Real Estate</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto drop-shadow font-medium leading-relaxed">
-              Discover exceptional real estate opportunities in Jordan's capital with our curated collection of premium properties
+            
+            <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
+            
+            <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
+              Discover exceptional properties in <span className="text-blue-600 font-medium">Amman</span> with expert guidance and personalized service
             </p>
           </div>
           
-          <div className="elegant-glass-effect rounded-2xl p-12 hover-lift animate-scale-in max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="mb-8">
-                <img 
-                  src={hadprpLogo} 
-                  alt="Haddadin Real Estate" 
-                  className="h-24 w-auto object-contain mx-auto"
-                />
-                <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto mt-4 rounded-full shadow-lg"></div>
+          {/* Clean Search Card */}
+          <div className="mt-16 max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-8 lg:p-12 hover:shadow-xl transition-all duration-300">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-4">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-light text-slate-800 mb-2">Find Your Property</h3>
+                <p className="text-slate-600 font-light">Start your search with our advanced filtering system</p>
               </div>
-              <p className="text-lg text-gray-700 font-medium leading-relaxed">
-                Premium Real Estate Services in Amman
-              </p>
+              
+              <div className="flex justify-center">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-medium transition-colors duration-200 shadow-md hover:shadow-lg">
+                  Explore Properties
+                </button>
+              </div>
             </div>
           </div>
         </div>
