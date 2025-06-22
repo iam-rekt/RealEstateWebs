@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { Check, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SearchFilters from "@/components/search-filters";
@@ -44,27 +44,98 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section */}
-      <section className="gradient-hero text-white py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              Search properties to buy and invest in Athens
+      {/* Hero Section with enhanced effects */}
+      <section className="bg-gradient-hero text-white py-16 lg:py-24 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 animate-float">
+            <Building className="w-16 h-16 text-white" />
+          </div>
+          <div className="absolute top-40 right-20 animate-float" style={{animationDelay: "1s"}}>
+            <Star className="w-12 h-12 text-white" />
+          </div>
+          <div className="absolute bottom-20 left-1/4 animate-float" style={{animationDelay: "2s"}}>
+            <MapPin className="w-14 h-14 text-white" />
+          </div>
+          <div className="absolute top-1/2 right-1/4 animate-float" style={{animationDelay: "3s"}}>
+            <Sparkles className="w-10 h-10 text-white" />
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 animate-fade-in-up">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
+              Search properties to buy and invest in{" "}
+              <span className="text-yellow-300 animate-pulse-glow">Athens</span>
             </h2>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow">
               Discover your perfect property in the heart of Greece with our comprehensive real estate platform
             </p>
           </div>
           
-          <SearchFilters onSearch={handleSearch} isHomePage={true} />
+          <div className="glass-effect rounded-xl p-6 hover-lift animate-scale-in">
+            <SearchFilters onSearch={handleSearch} isHomePage={true} />
+          </div>
+        </div>
+        
+        {/* Decorative wave */}
+        <svg 
+          className="absolute bottom-0 left-0 w-full h-16" 
+          viewBox="0 0 1440 120" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" 
+            fill="white" 
+          />
+        </svg>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center animate-fade-in-up hover-lift">
+              <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float">
+                <Building className="w-8 h-8" />
+              </div>
+              <h4 className="text-3xl font-bold text-gray-900 mb-2">500+</h4>
+              <p className="text-gray-600">Properties Listed</p>
+            </div>
+            <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.1s"}}>
+              <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "1s"}}>
+                <Users className="w-8 h-8" />
+              </div>
+              <h4 className="text-3xl font-bold text-gray-900 mb-2">1200+</h4>
+              <p className="text-gray-600">Happy Clients</p>
+            </div>
+            <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.2s"}}>
+              <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "2s"}}>
+                <Award className="w-8 h-8" />
+              </div>
+              <h4 className="text-3xl font-bold text-gray-900 mb-2">15+</h4>
+              <p className="text-gray-600">Years Experience</p>
+            </div>
+            <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.3s"}}>
+              <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "3s"}}>
+                <TrendingUp className="w-8 h-8" />
+              </div>
+              <h4 className="text-3xl font-bold text-gray-900 mb-2">98%</h4>
+              <p className="text-gray-600">Success Rate</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Featured Properties */}
-      <section id="properties" className="py-16 bg-neutral">
+      <section id="properties" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-text-primary mb-4">Featured Properties</h3>
+          <div className="text-center mb-12 animate-fade-in-up">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Featured Properties
+              <Sparkles className="inline-block w-8 h-8 ml-2 text-yellow-500 animate-pulse-glow" />
+            </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Discover exceptional properties in prime Athens locations
             </p>
