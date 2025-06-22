@@ -135,7 +135,7 @@ export default function Home() {
               <img 
                 src={hadprpLogo} 
                 alt="Haddadin Real Estate" 
-                className="h-32 w-auto object-contain drop-shadow-2xl"
+                className="h-48 w-auto object-contain drop-shadow-2xl"
               />
             </div>
             <h1 className="text-3xl lg:text-5xl font-extrabold mb-6 drop-shadow-lg leading-tight tracking-tight">

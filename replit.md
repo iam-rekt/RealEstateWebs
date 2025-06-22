@@ -161,6 +161,7 @@ Changelog:
   * Fixed logo display issues by using proper import statements instead of direct file paths
   * Optimized tab button sizing with smaller text and icons to fit perfectly in container
   * Increased logo sizes in home page - hero section logo to h-32 and search card logo to h-24 for better design proportion
+  * Enhanced hero section with even larger logo (h-48) and updated to lighter blue gradient background
 ```
 
 ## User Preferences
