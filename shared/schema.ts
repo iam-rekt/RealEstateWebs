@@ -2,6 +2,15 @@ import { pgTable, text, serial, integer, boolean, decimal, timestamp } from "dri
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// Admin users table
+export const admins = pgTable("admins", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const properties = pgTable("properties", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -95,6 +104,13 @@ export const insertPropertyRequestSchema = createInsertSchema(propertyRequests).
   createdAt: true,
 });
 
+export const insertAdminSchema = createInsertSchema(admins).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type Admin = typeof admins.$inferSelect;
+export type InsertAdmin = z.infer<typeof insertAdminSchema>;
 export type Property = typeof properties.$inferSelect;
 export type InsertProperty = z.infer<typeof insertPropertySchema>;
 export type Contact = typeof contacts.$inferSelect;
