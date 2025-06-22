@@ -26,26 +26,26 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white/95 backdrop-blur-lg shadow-lg border-b border-blue-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-primary cursor-pointer">Pin-point Real Estate</h1>
-                <p className="text-sm text-gray-600">Alimos (Athens - South)</p>
+                <h1 className="text-3xl font-extrabold text-blue-600 cursor-pointer tracking-tight leading-tight">Pin-point Real Estate</h1>
+                <p className="text-sm text-gray-700 font-medium">Alimos (Athens - South)</p>
               </Link>
             </div>
           </div>
           
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-10">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href}>
                 <a 
-                  className={`transition-colors duration-200 ${
+                  className={`text-lg font-semibold transition-all duration-300 tracking-wide ${
                     location === item.href 
-                      ? "text-primary font-medium" 
-                      : "text-gray-700 hover:text-primary"
+                      ? "text-blue-600 border-b-2 border-blue-600 pb-1" 
+                      : "text-gray-700 hover:text-blue-600 hover:scale-105"
                   }`}
                   onClick={(e) => {
                     if (item.href.startsWith("/#")) {
@@ -68,14 +68,14 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <div className="flex flex-col space-y-4 mt-8">
+                <div className="flex flex-col space-y-6 mt-8">
                   {navigation.map((item) => (
                     <Link key={item.name} href={item.href}>
                       <a 
-                        className={`block px-3 py-2 text-lg transition-colors duration-200 ${
+                        className={`block px-4 py-3 text-xl font-semibold rounded-xl transition-all duration-300 tracking-wide ${
                           location === item.href 
-                            ? "text-primary font-medium" 
-                            : "text-gray-700 hover:text-primary"
+                            ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600" 
+                            : "text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:scale-105"
                         }`}
                         onClick={(e) => {
                           if (item.href.startsWith("/#")) {
