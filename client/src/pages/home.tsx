@@ -64,12 +64,12 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
-              Search properties to buy and invest in{" "}
-              <span className="text-yellow-300">Athens</span>
-            </h2>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto drop-shadow">
-              Discover your perfect property in the heart of Greece with our comprehensive real estate platform
+            <h1 className="text-4xl lg:text-6xl font-extrabold mb-6 drop-shadow-lg leading-tight tracking-tight">
+              Find Premium Properties in{" "}
+              <span className="text-yellow-300 font-black">Athens</span>
+            </h1>
+            <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto drop-shadow font-medium leading-relaxed">
+              Discover exceptional real estate opportunities in Greece's capital with our curated collection of premium properties
             </p>
           </div>
           
@@ -100,29 +100,29 @@ export default function Home() {
               <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float">
                 <Building className="w-8 h-8" />
               </div>
-              <h4 className="text-3xl font-bold text-gray-900 mb-2">500+</h4>
-              <p className="text-gray-600">Properties Listed</p>
+              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">500+</h4>
+              <p className="text-gray-700 font-medium text-lg">Properties Listed</p>
             </div>
             <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.1s"}}>
               <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "1s"}}>
                 <Users className="w-8 h-8" />
               </div>
-              <h4 className="text-3xl font-bold text-gray-900 mb-2">1200+</h4>
-              <p className="text-gray-600">Happy Clients</p>
+              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">1200+</h4>
+              <p className="text-gray-700 font-medium text-lg">Happy Clients</p>
             </div>
             <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.2s"}}>
               <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "2s"}}>
                 <Award className="w-8 h-8" />
               </div>
-              <h4 className="text-3xl font-bold text-gray-900 mb-2">15+</h4>
-              <p className="text-gray-600">Years Experience</p>
+              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">15+</h4>
+              <p className="text-gray-700 font-medium text-lg">Years Experience</p>
             </div>
             <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.3s"}}>
               <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "3s"}}>
                 <TrendingUp className="w-8 h-8" />
               </div>
-              <h4 className="text-3xl font-bold text-gray-900 mb-2">98%</h4>
-              <p className="text-gray-600">Success Rate</p>
+              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">98%</h4>
+              <p className="text-gray-700 font-medium text-lg">Success Rate</p>
             </div>
           </div>
         </div>
@@ -132,12 +132,12 @@ export default function Home() {
       <section id="properties" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight leading-tight">
               Featured Properties
-              <Sparkles className="inline-block w-8 h-8 ml-2 text-yellow-500 animate-pulse-glow" />
-            </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover exceptional properties in prime Athens locations
+              <Sparkles className="inline-block w-8 h-8 ml-3 text-yellow-500" />
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium leading-relaxed">
+              Discover exceptional properties in prime Athens locations, carefully curated for discerning buyers
             </p>
           </div>
           

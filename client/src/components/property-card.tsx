@@ -70,32 +70,32 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
       </div>
       
       <div className="p-6">
-        <div className="flex justify-between items-start mb-2">
-          <h4 className="text-xl font-semibold text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors duration-200">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-xl font-bold text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors duration-200 tracking-tight leading-tight">
             {property.title}
-          </h4>
-          <span className="text-2xl font-bold text-blue-600 ml-2">
+          </h3>
+          <span className="text-2xl font-extrabold text-blue-600 ml-3 tracking-tight">
             {formatPrice(property.price)}
           </span>
         </div>
         
-        <p className="text-gray-600 mb-3 flex items-center">
-          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+        <p className="text-gray-700 mb-4 flex items-center font-medium">
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
           </svg>
           {property.location}
         </p>
         
-        <div className="flex justify-between text-sm text-gray-600 mb-4">
-          <span className="flex items-center bg-gray-100 rounded-full px-3 py-1">
+        <div className="flex justify-between text-sm text-gray-700 mb-6">
+          <span className="flex items-center bg-gray-100 rounded-full px-3 py-2 font-medium">
             <Bed className="w-4 h-4 mr-1 text-blue-500" />
             {getBedroomText(property.bedrooms)}
           </span>
-          <span className="flex items-center bg-gray-100 rounded-full px-3 py-1">
+          <span className="flex items-center bg-gray-100 rounded-full px-3 py-2 font-medium">
             <Bath className="w-4 h-4 mr-1 text-blue-500" />
             {property.bathrooms} bath{property.bathrooms > 1 ? 's' : ''}
           </span>
-          <span className="flex items-center bg-gray-100 rounded-full px-3 py-1">
+          <span className="flex items-center bg-gray-100 rounded-full px-3 py-2 font-medium">
             <Ruler className="w-4 h-4 mr-1 text-blue-500" />
             {property.size} sq.m.
           </span>
@@ -103,7 +103,7 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
         
         <Button 
           onClick={() => onViewDetails(property.id)}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-base tracking-wide"
         >
           View Details
         </Button>
