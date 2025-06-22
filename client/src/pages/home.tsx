@@ -131,8 +131,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12 animate-fade-in-up">
             <h1 className="text-4xl lg:text-6xl font-extrabold mb-6 drop-shadow-lg leading-tight tracking-tight">
-              Find Premium Properties in{" "}
-              <span className="text-yellow-300 font-black">Athens</span>
+              Tariq Haddadin{" "}
+              <span className="text-yellow-300 font-black">Real Estate</span>
             </h1>
             <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto drop-shadow font-medium leading-relaxed">
               Discover exceptional real estate opportunities in Greece's capital with our curated collection of premium properties
@@ -141,14 +141,18 @@ export default function Home() {
           
           <div className="elegant-glass-effect rounded-2xl p-8 hover-lift animate-scale-in max-w-4xl mx-auto">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Find Your Perfect Property</h3>
-              <p className="text-gray-600 mb-6">Explore our curated collection using the categories below</p>
+              <div className="mb-6">
+                <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent tracking-tight">
+                  Haddadin
+                </h1>
+                <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto mt-3 rounded-full"></div>
+              </div>
               <Button 
                 onClick={() => document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' })}
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Browse Properties
+                Explore Properties
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>

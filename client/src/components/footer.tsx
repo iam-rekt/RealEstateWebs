@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h5 className="text-2xl font-bold mb-4">Pin-point Real Estate</h5>
+            <h5 className="text-2xl font-bold mb-4">Tariq Haddadin Real Estate</h5>
             <p className="text-gray-300 mb-4">
               Your trusted partner for real estate in Athens. We specialize in connecting buyers and investors with exceptional properties throughout the Athens metropolitan area.
             </p>
@@ -72,7 +72,7 @@ export default function Footer() {
               <li>Alimos, Athens - South</li>
               <li>Greece</li>
               <li>+30 210 XXX XXXX</li>
-              <li>info@pin-point.gr</li>
+              <li>info@tariqhaddadin.gr</li>
             </ul>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function Footer() {
         <hr className="border-gray-600 my-8" />
         
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-300 text-sm">&copy; 2024 Pin-point Real Estate. All rights reserved.</p>
+          <p className="text-gray-300 text-sm">&copy; 2024 Tariq Haddadin Real Estate. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-300 hover:text-white text-sm transition-colors duration-200">
               Privacy Policy
