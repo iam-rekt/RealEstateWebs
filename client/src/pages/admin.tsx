@@ -5,21 +5,58 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText } from "lucide-react";
 import { format } from "date-fns";
-import type { Property, Contact, Newsletter, Entrustment, PropertyRequest } from "@shared/schema";
+import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty } from "@shared/schema";
 
 interface AdminAuth {
   authenticated: boolean;
   admin?: { id: number; username: string };
 }
 
+interface PropertyFormData {
+  title: string;
+  description: string;
+  price: string;
+  size: string;
+  bedrooms: string;
+  bathrooms: string;
+  propertyType: string;
+  location: string;
+  address: string;
+  imageUrl: string;
+  featured: boolean;
+  available: boolean;
+}
+
 export default function Admin() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [editingProperty, setEditingProperty] = useState<Property | null>(null);
+  const [formData, setFormData] = useState<PropertyFormData>({
+    title: "",
+    description: "",
+    price: "",
+    size: "",
+    bedrooms: "",
+    bathrooms: "",
+    propertyType: "",
+    location: "",
+    address: "",
+    imageUrl: "",
+    featured: false,
+    available: true,
+  });
 
   // Check authentication
   const { data: auth, isLoading: authLoading } = useQuery<AdminAuth>({
@@ -112,6 +149,141 @@ export default function Admin() {
   const deleteNewsletter = createDeleteMutation("/api/admin/newsletters", ["/api/admin/newsletters"]);
   const deleteEntrustment = createDeleteMutation("/api/admin/entrustments", ["/api/admin/entrustments"]);
   const deletePropertyRequest = createDeleteMutation("/api/admin/property-requests", ["/api/admin/property-requests"]);
+
+  // Create property mutation
+  const createPropertyMutation = useMutation({
+    mutationFn: async (data: PropertyFormData) => {
+      const propertyData = {
+        title: data.title,
+        description: data.description,
+        price: data.price,
+        size: parseInt(data.size),
+        bedrooms: parseInt(data.bedrooms),
+        bathrooms: parseInt(data.bathrooms),
+        propertyType: data.propertyType,
+        location: data.location,
+        address: data.address,
+        imageUrl: data.imageUrl,
+        featured: data.featured,
+        available: data.available,
+      };
+      const response = await fetch("/api/admin/properties", {
+        method: "POST",
+        body: JSON.stringify(propertyData),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) throw new Error("Failed to create property");
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/properties"] });
+      setIsCreateDialogOpen(false);
+      resetForm();
+      toast({
+        title: "Property created",
+        description: "Property has been added successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to create property",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Update property mutation
+  const updatePropertyMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: number; data: PropertyFormData }) => {
+      const propertyData = {
+        title: data.title,
+        description: data.description,
+        price: data.price,
+        size: parseInt(data.size),
+        bedrooms: parseInt(data.bedrooms),
+        bathrooms: parseInt(data.bathrooms),
+        propertyType: data.propertyType,
+        location: data.location,
+        address: data.address,
+        imageUrl: data.imageUrl,
+        featured: data.featured,
+        available: data.available,
+      };
+      const response = await fetch(`/api/admin/properties/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(propertyData),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) throw new Error("Failed to update property");
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/properties"] });
+      setEditingProperty(null);
+      resetForm();
+      toast({
+        title: "Property updated",
+        description: "Property has been updated successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update property",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      description: "",
+      price: "",
+      size: "",
+      bedrooms: "",
+      bathrooms: "",
+      propertyType: "",
+      location: "",
+      address: "",
+      imageUrl: "",
+      featured: false,
+      available: true,
+    });
+  };
+
+  const handleCreateProperty = () => {
+    setIsCreateDialogOpen(true);
+    resetForm();
+  };
+
+  const handleEditProperty = (property: Property) => {
+    setEditingProperty(property);
+    setFormData({
+      title: property.title,
+      description: property.description,
+      price: property.price,
+      size: property.size.toString(),
+      bedrooms: property.bedrooms.toString(),
+      bathrooms: property.bathrooms.toString(),
+      propertyType: property.propertyType,
+      location: property.location,
+      address: property.address,
+      imageUrl: property.imageUrl,
+      featured: property.featured || false,
+      available: property.available !== false,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editingProperty) {
+      updatePropertyMutation.mutate({ id: editingProperty.id, data: formData });
+    } else {
+      createPropertyMutation.mutate(formData);
+    }
+  };
 
   if (authLoading) {
     return (
@@ -253,10 +425,163 @@ export default function Admin() {
                       <CardTitle>Properties Management</CardTitle>
                       <CardDescription>Manage all property listings</CardDescription>
                     </div>
-                    <Button onClick={() => setLocation("/admin/properties/new")}>
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Property
-                    </Button>
+                    <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button onClick={handleCreateProperty}>
+                          <Plus className="h-4 w-4 mr-2" />
+                          Add Property
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle>Create New Property</DialogTitle>
+                          <DialogDescription>
+                            Add a new property to the listings
+                          </DialogDescription>
+                        </DialogHeader>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="title">Title</Label>
+                              <Input
+                                id="title"
+                                value={formData.title}
+                                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="price">Price</Label>
+                              <Input
+                                id="price"
+                                value={formData.price}
+                                onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+                                placeholder="€500,000"
+                                required
+                              />
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <Label htmlFor="description">Description</Label>
+                            <Textarea
+                              id="description"
+                              value={formData.description}
+                              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                              required
+                            />
+                          </div>
+
+                          <div className="grid grid-cols-3 gap-4">
+                            <div>
+                              <Label htmlFor="size">Size (m²)</Label>
+                              <Input
+                                id="size"
+                                type="number"
+                                value={formData.size}
+                                onChange={(e) => setFormData(prev => ({ ...prev, size: e.target.value }))}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="bedrooms">Bedrooms</Label>
+                              <Input
+                                id="bedrooms"
+                                type="number"
+                                value={formData.bedrooms}
+                                onChange={(e) => setFormData(prev => ({ ...prev, bedrooms: e.target.value }))}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="bathrooms">Bathrooms</Label>
+                              <Input
+                                id="bathrooms"
+                                type="number"
+                                value={formData.bathrooms}
+                                onChange={(e) => setFormData(prev => ({ ...prev, bathrooms: e.target.value }))}
+                                required
+                              />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="propertyType">Property Type</Label>
+                              <Select value={formData.propertyType} onValueChange={(value) => setFormData(prev => ({ ...prev, propertyType: value }))}>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="apartment">Apartment</SelectItem>
+                                  <SelectItem value="house">House</SelectItem>
+                                  <SelectItem value="villa">Villa</SelectItem>
+                                  <SelectItem value="studio">Studio</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <div>
+                              <Label htmlFor="location">Location</Label>
+                              <Input
+                                id="location"
+                                value={formData.location}
+                                onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                                required
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <Label htmlFor="address">Address</Label>
+                            <Input
+                              id="address"
+                              value={formData.address}
+                              onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
+                              required
+                            />
+                          </div>
+
+                          <div>
+                            <Label htmlFor="imageUrl">Image URL</Label>
+                            <Input
+                              id="imageUrl"
+                              value={formData.imageUrl}
+                              onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
+                              placeholder="https://example.com/image.jpg"
+                              required
+                            />
+                          </div>
+
+                          <div className="flex items-center space-x-6">
+                            <div className="flex items-center space-x-2">
+                              <Checkbox
+                                id="featured"
+                                checked={formData.featured}
+                                onCheckedChange={(checked) => setFormData(prev => ({ ...prev, featured: !!checked }))}
+                              />
+                              <Label htmlFor="featured">Featured Property</Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Checkbox
+                                id="available"
+                                checked={formData.available}
+                                onCheckedChange={(checked) => setFormData(prev => ({ ...prev, available: !!checked }))}
+                              />
+                              <Label htmlFor="available">Available</Label>
+                            </div>
+                          </div>
+
+                          <div className="flex justify-end space-x-2">
+                            <Button type="button" variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                              Cancel
+                            </Button>
+                            <Button type="submit" disabled={createPropertyMutation.isPending}>
+                              {createPropertyMutation.isPending ? "Creating..." : "Create Property"}
+                            </Button>
+                          </div>
+                        </form>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -285,7 +610,7 @@ export default function Admin() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => setLocation(`/admin/properties/${property.id}/edit`)}
+                              onClick={() => handleEditProperty(property)}
                             >
                               <Edit className="h-4 w-4" />
                             </Button>
