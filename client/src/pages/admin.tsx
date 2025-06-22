@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText } from "lucide-react";
 import { format } from "date-fns";
+import type { Property, Contact, Newsletter, Entrustment, PropertyRequest } from "@shared/schema";
 
 interface AdminAuth {
   authenticated: boolean;
@@ -50,31 +51,36 @@ export default function Admin() {
     },
   });
 
-  // Fetch data
-  const { data: properties = [] } = useQuery({
+  // Fetch data with proper typing
+  const { data: propertiesData } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
     enabled: auth?.authenticated,
   });
+  const properties = propertiesData || [];
 
-  const { data: contacts = [] } = useQuery({
+  const { data: contactsData } = useQuery<Contact[]>({
     queryKey: ["/api/admin/contacts"],
     enabled: auth?.authenticated,
   });
+  const contacts = contactsData || [];
 
-  const { data: newsletters = [] } = useQuery({
+  const { data: newslettersData } = useQuery<Newsletter[]>({
     queryKey: ["/api/admin/newsletters"],
     enabled: auth?.authenticated,
   });
+  const newsletters = newslettersData || [];
 
-  const { data: entrustments = [] } = useQuery({
+  const { data: entrustmentsData } = useQuery<Entrustment[]>({
     queryKey: ["/api/admin/entrustments"],
     enabled: auth?.authenticated,
   });
+  const entrustments = entrustmentsData || [];
 
-  const { data: propertyRequests = [] } = useQuery({
+  const { data: propertyRequestsData } = useQuery<PropertyRequest[]>({
     queryKey: ["/api/admin/property-requests"],
     enabled: auth?.authenticated,
   });
+  const propertyRequests = propertyRequestsData || [];
 
   // Delete mutations
   const createDeleteMutation = (endpoint: string, queryKey: string[]) => {
