@@ -21,6 +21,7 @@ export default function AdminLogin() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
+        credentials: "include", // Include cookies in the request
       });
       
       if (!response.ok) {
