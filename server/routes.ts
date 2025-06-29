@@ -1,6 +1,9 @@
 import type { Express } from "express";
+import express from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { upload, processImage, cleanupOldImage } from "./upload";
+import path from "path";
 import { 
   insertContactSchema, 
   insertNewsletterSchema, 
@@ -74,6 +77,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ message: "Logout successful" });
     });
   });
+
+  // Serve static files from uploads directory
+  app.use('/uploads', (await import('express')).static(path.join(process.cwd(), 'public', 'uploads')));
+
+  // Image upload route
+  app.post("/api/admin/upload", isAdmin, upload.single('image'), processImage);
 
   // Check admin auth status
   app.get("/api/admin/auth", (req, res) => {
