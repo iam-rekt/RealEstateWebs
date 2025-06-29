@@ -366,6 +366,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Site Settings API routes
+  app.get("/api/site-settings", async (req, res) => {
+    try {
+      const settings = await storage.getAllSiteSettings();
+      const settingsObj = settings.reduce((acc, setting) => {
+        acc[setting.settingKey] = setting.settingValue;
+        return acc;
+      }, {} as Record<string, string>);
+      res.json(settingsObj);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch site settings" });
+    }
+  });
+
+  app.get("/api/admin/site-settings", isAdmin, async (req, res) => {
+    try {
+      const settings = await storage.getAllSiteSettings();
+      res.json(settings);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch site settings" });
+    }
+  });
+
+  app.post("/api/admin/site-settings", isAdmin, async (req, res) => {
+    try {
+      const { settings } = req.body;
+      
+      if (!settings || typeof settings !== 'object') {
+        return res.status(400).json({ message: "Invalid settings data" });
+      }
+
+      const updatedSettings = [];
+      for (const [key, value] of Object.entries(settings)) {
+        if (typeof value === 'string') {
+          const setting = await storage.updateSiteSetting(key, value);
+          updatedSettings.push(setting);
+        }
+      }
+
+      res.json({ 
+        message: "Site settings updated successfully", 
+        settings: updatedSettings 
+      });
+    } catch (error) {
+      console.error("Failed to update site settings:", error);
+      res.status(500).json({ message: "Failed to update site settings" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

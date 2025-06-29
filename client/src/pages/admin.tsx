@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText } from "lucide-react";
+import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText, Settings } from "lucide-react";
 import { format } from "date-fns";
 import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty } from "@shared/schema";
 import ImageUpload from "@/components/image-upload";
@@ -409,12 +409,16 @@ export default function Admin() {
 
           {/* Tabs */}
           <Tabs defaultValue="properties" className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="properties">Properties</TabsTrigger>
               <TabsTrigger value="contacts">Contacts</TabsTrigger>
               <TabsTrigger value="newsletters">Newsletters</TabsTrigger>
               <TabsTrigger value="entrustments">Entrustments</TabsTrigger>
               <TabsTrigger value="requests">Property Requests</TabsTrigger>
+              <TabsTrigger value="settings">
+                <Settings className="w-4 h-4 mr-1" />
+                Settings
+              </TabsTrigger>
             </TabsList>
 
             {/* Properties Tab */}
