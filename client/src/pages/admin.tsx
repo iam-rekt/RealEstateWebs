@@ -277,6 +277,249 @@ export default function Admin() {
     });
   };
 
+  // Settings Tab Component
+  const SettingsTab = () => {
+    const [settings, setSettings] = useState<Record<string, string>>({});
+    const [loading, setLoading] = useState(true);
+
+    // Fetch current settings
+    const { data: settingsData } = useQuery({
+      queryKey: ["/api/admin/site-settings"],
+      enabled: !!auth?.authenticated,
+    });
+
+    useEffect(() => {
+      if (settingsData && Array.isArray(settingsData)) {
+        const settingsMap = settingsData.reduce((acc: Record<string, string>, setting: any) => {
+          acc[setting.settingKey] = setting.settingValue;
+          return acc;
+        }, {});
+        setSettings(settingsMap);
+        setLoading(false);
+      }
+    }, [settingsData]);
+
+    const updateSettingsMutation = useMutation({
+      mutationFn: async (updatedSettings: Record<string, string>) => {
+        const response = await fetch("/api/admin/site-settings", {
+          method: "POST",
+          body: JSON.stringify({ settings: updatedSettings }),
+          headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to update settings");
+        }
+        return await response.json();
+      },
+      onSuccess: () => {
+        toast({
+          title: "Settings updated successfully",
+          description: "Site settings have been saved.",
+        });
+        queryClient.invalidateQueries({ queryKey: ["/api/admin/site-settings"] });
+      },
+      onError: (error) => {
+        toast({
+          title: "Failed to update settings",
+          description: "Please try again.",
+          variant: "destructive",
+        });
+      },
+    });
+
+    const handleSettingChange = (key: string, value: string) => {
+      setSettings(prev => ({ ...prev, [key]: value }));
+    };
+
+    const handleSettingsSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      updateSettingsMutation.mutate(settings);
+    };
+
+    if (loading) {
+      return (
+        <Card>
+          <CardContent className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Site Settings</CardTitle>
+            <CardDescription>
+              Manage footer content and contact information displayed on the website
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSettingsSubmit} className="space-y-6">
+              {/* Company Information */}
+              <div className="grid gap-4">
+                <h3 className="text-lg font-semibold">Company Information</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="company_name">Company Name</Label>
+                    <Input
+                      id="company_name"
+                      value={settings.footer_company_name || ""}
+                      onChange={(e) => handleSettingChange("footer_company_name", e.target.value)}
+                      placeholder="Company Name"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="tagline">Tagline</Label>
+                    <Input
+                      id="tagline"
+                      value={settings.footer_tagline || ""}
+                      onChange={(e) => handleSettingChange("footer_tagline", e.target.value)}
+                      placeholder="Premium Properties in Amman"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="description">Company Description</Label>
+                  <textarea
+                    id="description"
+                    value={settings.footer_description || ""}
+                    onChange={(e) => handleSettingChange("footer_description", e.target.value)}
+                    placeholder="Company description for footer"
+                    className="w-full min-h-20 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div className="grid gap-4">
+                <h3 className="text-lg font-semibold">Contact Information</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="address">Office Address</Label>
+                    <Input
+                      id="address"
+                      value={settings.footer_address || ""}
+                      onChange={(e) => handleSettingChange("footer_address", e.target.value)}
+                      placeholder="123 Rainbow Street, Amman, Jordan"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      value={settings.footer_phone || ""}
+                      onChange={(e) => handleSettingChange("footer_phone", e.target.value)}
+                      placeholder="+962 6 123 4567"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">Email Address</Label>
+                    <Input
+                      id="email"
+                      value={settings.footer_email || ""}
+                      onChange={(e) => handleSettingChange("footer_email", e.target.value)}
+                      placeholder="info@haddadinrealestate.com"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="website">Website</Label>
+                    <Input
+                      id="website"
+                      value={settings.footer_website || ""}
+                      onChange={(e) => handleSettingChange("footer_website", e.target.value)}
+                      placeholder="www.haddadinrealestate.com"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Media Links */}
+              <div className="grid gap-4">
+                <h3 className="text-lg font-semibold">Social Media Links</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label htmlFor="facebook">Facebook URL</Label>
+                    <Input
+                      id="facebook"
+                      value={settings.footer_social_facebook || ""}
+                      onChange={(e) => handleSettingChange("footer_social_facebook", e.target.value)}
+                      placeholder="https://facebook.com/company"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="instagram">Instagram URL</Label>
+                    <Input
+                      id="instagram"
+                      value={settings.footer_social_instagram || ""}
+                      onChange={(e) => handleSettingChange("footer_social_instagram", e.target.value)}
+                      placeholder="https://instagram.com/company"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="linkedin">LinkedIn URL</Label>
+                    <Input
+                      id="linkedin"
+                      value={settings.footer_social_linkedin || ""}
+                      onChange={(e) => handleSettingChange("footer_social_linkedin", e.target.value)}
+                      placeholder="https://linkedin.com/company"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Additional Contact Details */}
+              <div className="grid gap-4">
+                <h3 className="text-lg font-semibold">Additional Contact Details</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="mobile">Mobile Number</Label>
+                    <Input
+                      id="mobile"
+                      value={settings.contact_phone_mobile || ""}
+                      onChange={(e) => handleSettingChange("contact_phone_mobile", e.target.value)}
+                      placeholder="+962 79 123 4567"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="sales_email">Sales Email</Label>
+                    <Input
+                      id="sales_email"
+                      value={settings.contact_email_sales || ""}
+                      onChange={(e) => handleSettingChange("contact_email_sales", e.target.value)}
+                      placeholder="sales@haddadinrealestate.com"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="working_hours">Working Hours</Label>
+                  <textarea
+                    id="working_hours"
+                    value={settings.contact_working_hours || ""}
+                    onChange={(e) => handleSettingChange("contact_working_hours", e.target.value)}
+                    placeholder="Sunday - Thursday: 9:00 AM - 6:00 PM"
+                    className="w-full min-h-16 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <Button
+                  type="submit"
+                  disabled={updateSettingsMutation.isPending}
+                  className="min-w-32"
+                >
+                  {updateSettingsMutation.isPending ? "Saving..." : "Save Settings"}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingProperty) {
@@ -957,6 +1200,11 @@ export default function Admin() {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            {/* Settings Tab */}
+            <TabsContent value="settings">
+              <SettingsTab />
             </TabsContent>
           </Tabs>
         </div>

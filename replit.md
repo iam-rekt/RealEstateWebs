@@ -179,6 +179,13 @@ Changelog:
   * Added automatic image cleanup when properties are updated or deleted
   * Images stored locally in public/uploads with optimized compression and sizing
   * Updated admin panel branding from "Pin-point" to "Haddadin"
+- June 29, 2025. Admin settings management system
+  * Added site_settings database table for dynamic content management
+  * Created comprehensive Settings tab in admin dashboard with organized form sections
+  * Admin can now edit footer content, contact information, and social media links
+  * Settings include company information, contact details, working hours, and social links
+  * All footer and contact information is now dynamically managed through admin interface
+  * Added API endpoints for retrieving and updating site settings with proper authentication
 ```
 
 ## User Preferences
