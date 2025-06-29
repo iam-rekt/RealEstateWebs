@@ -17,7 +17,7 @@ export default function Footer() {
   });
 
   // Use settings data directly since it's already in the correct format
-  const settings: Record<string, string> = settingsData || {};
+  const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
 
   // Fallback values
   const companyName = settings.footer_company_name || "Tariq Haddadin Real Estate";

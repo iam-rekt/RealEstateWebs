@@ -97,7 +97,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/site-settings", async (req, res) => {
     try {
       const settings = await storage.getAllSiteSettings();
-      res.json(settings);
+      // Convert array of settings to flat object for easy frontend access
+      const flatSettings = settings.reduce((acc: Record<string, string>, setting) => {
+        acc[setting.settingKey] = setting.settingValue;
+        return acc;
+      }, {});
+      res.json(flatSettings);
     } catch (error) {
       console.error("Error fetching site settings:", error);
       res.status(500).json({ message: "Failed to fetch site settings" });
