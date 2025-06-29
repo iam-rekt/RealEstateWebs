@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, decimal, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, serial, integer, boolean, decimal, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -79,6 +79,13 @@ export const propertyRequests = pgTable("property_requests", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const siteSettings = pgTable("site_settings", {
+  id: serial("id").primaryKey(),
+  settingKey: varchar("setting_key", { length: 100 }).unique().notNull(),
+  settingValue: text("setting_value").notNull(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const insertPropertySchema = createInsertSchema(properties).omit({
   id: true,
   createdAt: true,
@@ -107,6 +114,10 @@ export const insertPropertyRequestSchema = createInsertSchema(propertyRequests).
 export const insertAdminSchema = createInsertSchema(admins).omit({
   id: true,
   createdAt: true,
+});
+
+export const insertSiteSettingsSchema = createInsertSchema(siteSettings).omit({
+  id: true,
 });
 
 export type Admin = typeof admins.$inferSelect;
