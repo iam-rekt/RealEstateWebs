@@ -132,6 +132,8 @@ export type Entrustment = typeof entrustments.$inferSelect;
 export type InsertEntrustment = z.infer<typeof insertEntrustmentSchema>;
 export type PropertyRequest = typeof propertyRequests.$inferSelect;
 export type InsertPropertyRequest = z.infer<typeof insertPropertyRequestSchema>;
+export type SiteSettings = typeof siteSettings.$inferSelect;
+export type InsertSiteSettings = z.infer<typeof insertSiteSettingsSchema>;
 
 // Search filters type
 export const searchFiltersSchema = z.object({

@@ -5,6 +5,7 @@ import {
   entrustments, 
   propertyRequests,
   admins,
+  siteSettings,
   type Property, 
   type InsertProperty,
   type Contact,
@@ -17,6 +18,8 @@ import {
   type InsertPropertyRequest,
   type Admin,
   type InsertAdmin,
+  type SiteSettings,
+  type InsertSiteSettings,
   type SearchFilters
 } from "@shared/schema";
 import { db } from "./db";
@@ -57,6 +60,11 @@ export interface IStorage {
   createAdmin(admin: InsertAdmin): Promise<Admin>;
   getAdminByUsername(username: string): Promise<Admin | undefined>;
   verifyAdmin(username: string, password: string): Promise<Admin | undefined>;
+  
+  // Site Settings
+  getSiteSetting(key: string): Promise<SiteSettings | undefined>;
+  getAllSiteSettings(): Promise<SiteSettings[]>;
+  updateSiteSetting(key: string, value: string): Promise<SiteSettings>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -221,6 +229,35 @@ export class DatabaseStorage implements IStorage {
     
     const isValid = await bcrypt.compare(password, admin.passwordHash);
     return isValid ? admin : undefined;
+  }
+
+  // Site Settings
+  async getSiteSetting(key: string): Promise<SiteSettings | undefined> {
+    const [setting] = await db.select().from(siteSettings).where(eq(siteSettings.settingKey, key));
+    return setting || undefined;
+  }
+
+  async getAllSiteSettings(): Promise<SiteSettings[]> {
+    return await db.select().from(siteSettings);
+  }
+
+  async updateSiteSetting(key: string, value: string): Promise<SiteSettings> {
+    const [setting] = await db
+      .insert(siteSettings)
+      .values({ 
+        settingKey: key, 
+        settingValue: value,
+        updatedAt: new Date()
+      })
+      .onConflictDoUpdate({
+        target: siteSettings.settingKey,
+        set: { 
+          settingValue: value,
+          updatedAt: new Date()
+        }
+      })
+      .returning();
+    return setting;
   }
 }
 
