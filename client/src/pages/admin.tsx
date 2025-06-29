@@ -60,10 +60,16 @@ export default function Admin() {
   });
 
   // Check authentication
-  const { data: auth, isLoading: authLoading } = useQuery<AdminAuth>({
+  const { data: auth, isLoading: authLoading, refetch: refetchAuth } = useQuery<AdminAuth>({
     queryKey: ["/api/admin/auth"],
     retry: false,
+    staleTime: 0, // Always refetch when component mounts
   });
+
+  // Refetch auth on component mount to ensure fresh data
+  useEffect(() => {
+    refetchAuth();
+  }, []);
 
   // Redirect if not authenticated
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +13,7 @@ export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const loginMutation = useMutation({
     mutationFn: async ({ username, password }: { username: string; password: string }) => {
@@ -30,11 +31,18 @@ export default function AdminLogin() {
       return response.json();
     },
     onSuccess: () => {
+      // Invalidate and refetch auth query to update authentication state
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/auth"] });
+      
       toast({
         title: "Login successful",
         description: "Welcome to the admin panel",
       });
-      setLocation("/admin");
+      
+      // Use window.location to ensure a full page refresh and proper auth state
+      setTimeout(() => {
+        window.location.href = "/admin";
+      }, 100);
     },
     onError: (error: any) => {
       toast({
