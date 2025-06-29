@@ -168,6 +168,10 @@ Changelog:
   * Implemented modern typography with light fonts and proper visual hierarchy
   * Created minimalist search card with clean shadows replacing glass effect styling
   * Enhanced professional appearance with better spacing and elegant design elements
+- June 23, 2025. Logo update with new Haddadin branding
+  * Replaced all hadprp.png logos with new Haddidinlogo_1751177753090.png throughout website
+  * Updated logo imports in header and home page components
+  * Maintained logo sizing and positioning for consistent branding
 ```
 
 ## User Preferences
