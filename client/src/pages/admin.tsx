@@ -16,6 +16,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText } from "lucide-react";
 import { format } from "date-fns";
 import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty } from "@shared/schema";
+import ImageUpload from "@/components/image-upload";
 
 interface AdminAuth {
   authenticated: boolean;
@@ -310,7 +311,7 @@ export default function Admin() {
               <Building className="h-8 w-8 text-blue-600 mr-3" />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  Pin-point Admin
+                  Haddadin Admin
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300">
                   Welcome back, {auth.admin?.username}
@@ -541,16 +542,12 @@ export default function Admin() {
                             />
                           </div>
 
-                          <div>
-                            <Label htmlFor="imageUrl">Image URL</Label>
-                            <Input
-                              id="imageUrl"
-                              value={formData.imageUrl}
-                              onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
-                              placeholder="https://example.com/image.jpg"
-                              required
-                            />
-                          </div>
+                          <ImageUpload
+                            value={formData.imageUrl}
+                            onChange={(imageUrl) => setFormData(prev => ({ ...prev, imageUrl }))}
+                            label="Property Image"
+                            required
+                          />
 
                           <div className="flex items-center space-x-6">
                             <div className="flex items-center space-x-2">
@@ -740,15 +737,12 @@ export default function Admin() {
                       />
                     </div>
 
-                    <div>
-                      <Label htmlFor="edit-imageUrl">Image URL</Label>
-                      <Input
-                        id="edit-imageUrl"
-                        value={formData.imageUrl}
-                        onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
-                        required
-                      />
-                    </div>
+                    <ImageUpload
+                      value={formData.imageUrl}
+                      onChange={(imageUrl) => setFormData(prev => ({ ...prev, imageUrl }))}
+                      label="Property Image"
+                      required
+                    />
 
                     <div className="flex items-center space-x-6">
                       <div className="flex items-center space-x-2">

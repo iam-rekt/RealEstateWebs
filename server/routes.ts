@@ -79,7 +79,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Serve static files from uploads directory
-  app.use('/uploads', (await import('express')).static(path.join(process.cwd(), 'public', 'uploads')));
+  app.use('/uploads', express.static(path.join(process.cwd(), 'public', 'uploads')));
 
   // Image upload route
   app.post("/api/admin/upload", isAdmin, upload.single('image'), processImage);
@@ -222,6 +222,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const id = parseInt(req.params.id);
       const propertyData = insertPropertySchema.partial().parse(req.body);
+      
+      // Get the old property to clean up old image if imageUrl is being changed
+      const oldProperty = await storage.getPropertyById(id);
+      if (oldProperty && propertyData.imageUrl && oldProperty.imageUrl !== propertyData.imageUrl) {
+        cleanupOldImage(oldProperty.imageUrl);
+      }
+      
       const property = await storage.updateProperty(id, propertyData);
       
       if (!property) {
@@ -240,6 +247,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.delete("/api/admin/properties/:id", isAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
+      
+      // Get the property to clean up its image before deletion
+      const property = await storage.getPropertyById(id);
+      if (property && property.imageUrl) {
+        cleanupOldImage(property.imageUrl);
+      }
+      
       const success = await storage.deleteProperty(id);
       
       if (!success) {
