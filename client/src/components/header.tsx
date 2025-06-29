@@ -50,7 +50,7 @@ export default function Header() {
                     className="h-12 w-auto object-contain"
                   />
                   <div>
-                    <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Amman • Premium Properties</p>
+                    <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Amman • {tagline}</p>
                   </div>
                 </div>
               </Link>

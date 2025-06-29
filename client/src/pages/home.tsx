@@ -45,7 +45,9 @@ export default function Home() {
   const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
   const contactAddress = settings.contact_office_address || "Amman, Jordan";
   const contactPhone = settings.contact_phone_primary || "+962 6 XXX XXXX";
+  const contactMobile = settings.contact_phone_mobile || "+962 79 XXX XXXX";
   const contactEmail = settings.contact_email_main || "info@haddadinrealestate.com";
+  const contactSalesEmail = settings.contact_email_sales || "sales@haddadinrealestate.com";
   const workingHours = settings.contact_working_hours || "Mon - Fri: 9:00 AM - 6:00 PM<br />Sat: 9:00 AM - 3:00 PM";
 
   // Enhanced filter function with multiple criteria
@@ -576,6 +578,7 @@ export default function Home() {
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Phone</h4>
                   <p className="text-gray-600">{contactPhone}</p>
+                  <p className="text-gray-600 text-sm mt-1">Mobile: {contactMobile}</p>
                 </div>
               </div>
               
@@ -586,6 +589,7 @@ export default function Home() {
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Email</h4>
                   <p className="text-gray-600">{contactEmail}</p>
+                  <p className="text-gray-600 text-sm mt-1">Sales: {contactSalesEmail}</p>
                 </div>
               </div>
               
