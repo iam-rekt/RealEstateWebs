@@ -172,6 +172,13 @@ Changelog:
   * Replaced all hadprp.png logos with new Haddidinlogo_1751177753090.png throughout website
   * Updated logo imports in header and home page components
   * Maintained logo sizing and positioning for consistent branding
+- June 23, 2025. Local file storage and image upload implementation
+  * Added multer and sharp packages for file upload and image processing
+  * Created upload middleware with automatic WebP conversion and multiple size generation
+  * Implemented ImageUpload component replacing URL input fields in admin
+  * Added automatic image cleanup when properties are updated or deleted
+  * Images stored locally in public/uploads with optimized compression and sizing
+  * Updated admin panel branding from "Pin-point" to "Haddadin"
 ```
 
 ## User Preferences
