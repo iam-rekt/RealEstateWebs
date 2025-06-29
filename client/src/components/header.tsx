@@ -3,11 +3,21 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useQuery } from "@tanstack/react-query";
 import hadprpLogo from "@assets/Haddidinlogo_1751177753090.png";
 
 export default function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Fetch site settings for dynamic tagline
+  const { data: settingsData } = useQuery({
+    queryKey: ["/api/site-settings"],
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+  });
+
+  const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
+  const tagline = settings.footer_tagline || "Premium Properties in Amman";
 
   const navigation = [
     { name: "Properties", href: "/properties" },

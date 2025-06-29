@@ -40,21 +40,15 @@ export default function Footer() {
               {companyDescription}
             </p>
             <div className="flex space-x-4">
-              {facebookUrl && facebookUrl !== "#" && (
-                <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  <Facebook className="h-6 w-6" />
-                </a>
-              )}
-              {instagramUrl && instagramUrl !== "#" && (
-                <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  <Instagram className="h-6 w-6" />
-                </a>
-              )}
-              {linkedinUrl && linkedinUrl !== "#" && (
-                <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  <Linkedin className="h-6 w-6" />
-                </a>
-              )}
+              <a href={facebookUrl || "#"} target={facebookUrl && facebookUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors duration-200">
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a href={instagramUrl || "#"} target={instagramUrl && instagramUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors duration-200">
+                <Instagram className="h-6 w-6" />
+              </a>
+              <a href={linkedinUrl || "#"} target={linkedinUrl && linkedinUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors duration-200">
+                <Linkedin className="h-6 w-6" />
+              </a>
             </div>
           </div>
           

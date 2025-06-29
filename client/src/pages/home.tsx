@@ -35,6 +35,19 @@ export default function Home() {
     queryKey: ["/api/properties"],
   });
 
+  // Fetch site settings for dynamic contact information
+  const { data: settingsData } = useQuery({
+    queryKey: ["/api/site-settings"],
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+  });
+
+  // Extract settings data
+  const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
+  const contactAddress = settings.contact_office_address || "Amman, Jordan";
+  const contactPhone = settings.contact_phone_primary || "+962 6 XXX XXXX";
+  const contactEmail = settings.contact_email_main || "info@haddadinrealestate.com";
+  const workingHours = settings.contact_working_hours || "Mon - Fri: 9:00 AM - 6:00 PM<br />Sat: 9:00 AM - 3:00 PM";
+
   // Enhanced filter function with multiple criteria
   const getFilteredProperties = (category: string) => {
     let filtered = allProperties;
@@ -552,7 +565,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Office Location</h4>
-                  <p className="text-gray-600">Amman, Jordan<br />Jordan</p>
+                  <p className="text-gray-600" dangerouslySetInnerHTML={{ __html: contactAddress }} />
                 </div>
               </div>
               
@@ -562,7 +575,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Phone</h4>
-                  <p className="text-gray-600">+962 6 XXX XXXX</p>
+                  <p className="text-gray-600">{contactPhone}</p>
                 </div>
               </div>
               
@@ -572,7 +585,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Email</h4>
-                  <p className="text-gray-600">info@tariqhaddadin.gr</p>
+                  <p className="text-gray-600">{contactEmail}</p>
                 </div>
               </div>
               
@@ -582,7 +595,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-text-primary mb-1">Business Hours</h4>
-                  <p className="text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM<br />Sat: 9:00 AM - 3:00 PM</p>
+                  <p className="text-gray-600" dangerouslySetInnerHTML={{ __html: workingHours }} />
                 </div>
               </div>
             </div>
