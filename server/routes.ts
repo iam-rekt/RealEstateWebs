@@ -93,6 +93,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Public endpoint for site settings (for footer and contact info)
+  app.get("/api/site-settings", async (req, res) => {
+    try {
+      const settings = await storage.getAllSiteSettings();
+      res.json(settings);
+    } catch (error) {
+      console.error("Error fetching site settings:", error);
+      res.status(500).json({ message: "Failed to fetch site settings" });
+    }
+  });
+
   // Properties routes
   app.get("/api/properties", async (req, res) => {
     try {
