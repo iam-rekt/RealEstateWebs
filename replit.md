@@ -1,201 +1,130 @@
-# Pin-point Real Estate Application
+# Haddadin Real Estate Website
 
 ## Overview
 
-This is a modern real estate application built for the Jordan market, specifically serving Amman and surrounding areas. The application provides property listings, search functionality, and contact management features for both buyers and property owners.
+This is a modern full-stack real estate website built for Haddadin Real Estate, featuring property listings, search functionality, and administrative capabilities. The application is designed as a demo-ready platform with in-memory storage for simplified deployment.
 
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: React 18 with TypeScript and Vite for fast development
-- **Routing**: Wouter for lightweight client-side routing
-- **State Management**: TanStack Query (React Query) for server state management
-- **UI Framework**: Custom design system built on Radix UI primitives
-- **Styling**: Tailwind CSS with CSS variables for theming
+- **Framework**: React 18 with TypeScript
+- **Routing**: Wouter for client-side routing
+- **State Management**: TanStack React Query for server state management
+- **Styling**: Tailwind CSS with custom animations and responsive design
+- **UI Components**: Radix UI primitives with shadcn/ui component library
+- **Forms**: React Hook Form with Zod validation
 
 ### Backend Architecture
-- **Runtime**: Node.js 20 with Express.js RESTful API
+- **Runtime**: Node.js with Express.js server
 - **Language**: TypeScript with ES modules
-- **Database**: PostgreSQL 16 with Drizzle ORM
-- **Session Management**: Connect-pg-simple for PostgreSQL-backed sessions
-- **Development**: Hot reload with Vite middleware integration
+- **Database**: In-memory storage (no external database required)
+- **ORM**: Drizzle ORM configured for potential PostgreSQL migration
+- **Authentication**: Express sessions with memory store for admin panel
+- **File Upload**: Multer with Sharp for image processing
 
-### Database Design
-The application uses a PostgreSQL database with the following main entities:
-- **Properties**: Core property listings with details like price, size, location, and amenities
-- **Contacts**: Customer inquiries and contact form submissions
-- **Newsletters**: Email subscription management
-- **Entrustments**: Property listing requests from owners
-- **Property Requests**: Buyer requirements and search criteria
+### Build System
+- **Bundler**: Vite for frontend development and building
+- **TypeScript**: Full TypeScript support across frontend and backend
+- **Development**: Hot module replacement and runtime error overlay
 
 ## Key Components
 
-### Property Management
-- Property listing with comprehensive search and filtering
-- Featured properties showcase
-- Detailed property views with image galleries
-- Property type categorization (apartment, house, villa, studio)
+### Property Management System
+- CRUD operations for properties with image upload
+- Featured properties functionality
+- Property search with multiple filters (price, size, type, location)
+- Property detail pages with related property suggestions
 
-### User Interaction
-- Advanced search filters (price, size, location, property type)
-- Contact forms for inquiries
+### Contact & Lead Management
+- Contact form submissions
 - Newsletter subscription system
-- Property entrustment forms for owners
-- Property request forms for buyers
+- Property entrustment requests (for sellers)
+- Custom property requests (for buyers)
 
-### UI Components
-- Responsive design with mobile-first approach
-- Modern component library with consistent styling
-- Toast notifications for user feedback
-- Form validation with Zod schemas
-- Loading states and error handling
+### Admin Panel
+- Secure admin authentication
+- Property management interface
+- Lead and inquiry management
+- Site settings configuration
+- Dashboard with analytics overview
+
+### User Interface
+- Responsive design optimized for mobile and desktop
+- Modern animations and hover effects
+- Accessible components following ARIA guidelines
+- Progressive enhancement approach
 
 ## Data Flow
 
-1. **Client Requests**: React components make API calls through TanStack Query
-2. **Server Processing**: Express routes handle requests and validate data
-3. **Database Operations**: Drizzle ORM manages PostgreSQL interactions
-4. **Response Handling**: Data flows back through the same path with proper error handling
+### Property Search Flow
+1. User applies search filters on homepage or properties page
+2. Frontend sends POST request to `/api/properties/search`
+3. Backend processes filters and returns matching properties
+4. Results displayed in grid or list view with sorting options
+
+### Admin Management Flow
+1. Admin logs in through `/admin/login` with session-based authentication
+2. Admin panel provides CRUD interfaces for all data entities
+3. Image uploads processed through Sharp for optimization
+4. All changes reflected immediately due to in-memory storage
+
+### Contact Submission Flow
+1. Forms validate input using Zod schemas
+2. Data submitted to respective API endpoints
+3. Success/error feedback provided via toast notifications
+4. Admin can view all submissions in admin panel
 
 ## External Dependencies
 
-### Core Libraries
-- **@neondatabase/serverless**: Serverless PostgreSQL connection
-- **drizzle-orm**: Type-safe database ORM
+### Core Dependencies
+- **@neondatabase/serverless**: Database connection (configured but not required)
+- **@radix-ui/***: Comprehensive UI component primitives
 - **@tanstack/react-query**: Server state management
-- **@hookform/resolvers**: Form validation integration
-- **zod**: Runtime type validation
+- **bcryptjs**: Password hashing for admin authentication
+- **express-session**: Session management
+- **multer & sharp**: File upload and image processing
 
-### UI Libraries
-- **@radix-ui**: Headless UI components for accessibility
-- **tailwindcss**: Utility-first CSS framework
-- **lucide-react**: Icon library
-- **class-variance-authority**: CSS class variant management
-
-### Development Tools
-- **vite**: Fast build tool and dev server
-- **tsx**: TypeScript execution for Node.js
-- **esbuild**: Fast JavaScript bundler for production
+### Development Dependencies
+- **Vite**: Development server and build tool
+- **TypeScript**: Type checking and compilation
+- **Tailwind CSS**: Utility-first CSS framework
+- **ESBuild**: Fast JavaScript bundler for production
 
 ## Deployment Strategy
 
-### Development Environment
-- Replit with Node.js 20 runtime
-- PostgreSQL 16 database provisioning
-- Hot reload development server on port 5000
+### Simplified No-Database Deployment
+The application uses in-memory storage making deployment extremely simple:
+- **Zero external dependencies** - no database setup required
+- **Instant deployment** - works on any hosting provider
+- **No monthly costs** - no database subscriptions needed
+- **Fresh data on restart** - perfect for demos
 
-### Production Build
-- Vite builds the client-side React application
-- esbuild bundles the server-side Express application
-- Static files served from dist/public directory
+### Recommended Platforms
+1. **Vercel** (Primary recommendation)
+   - Git integration with automatic deployments
+   - Only requires `SESSION_SECRET` environment variable
+   - Optimized for React applications
+
+2. **Alternative Platforms**
+   - Railway, Netlify, traditional hosting
+   - All work with the no-database architecture
 
 ### Environment Configuration
-- Database connection via DATABASE_URL environment variable
-- Autoscale deployment target for production
-- Port configuration for external access
+Required environment variables:
+```
+SESSION_SECRET=your-super-secure-random-string-here
+```
+
+Optional (for future database integration):
+```
+DATABASE_URL=postgresql://... (for Postgres migration)
+```
 
 ## Changelog
 
 ```
 Changelog:
-- June 22, 2025. Initial setup
-- June 22, 2025. Enhanced typography and professional design
-  * Improved all titles with consistent extrabold fonts and tight tracking
-  * Upgraded statistics section with larger, more prominent fonts
-  * Enhanced Featured Properties section with professional styling
-  * Standardized property card typography for better readability
-  * Removed floating stars from hero section for professional appearance
-  * Added elegant glass effect for search filters with enhanced blur
-  * Implemented consistent font weights and spacing throughout
-- June 22, 2025. Implemented blue theme and enhanced header
-  * Converted color scheme from purple to professional blue theme
-  * Updated search filter background with blue-tinted glass effect
-  * Enhanced header with backdrop blur and blue accents
-  * Improved navigation with hover effects and active states
-  * Added consistent blue gradient backgrounds throughout
-  * Updated mobile menu with modern styling and blue theme
-- June 22, 2025. Fixed visual issues and completed modern design
-  * Removed wavy SVG decorative elements for cleaner fullscreen appearance
-  * Redesigned header with fixed positioning and elegant typography
-  * Created modern search card design with clean shadows and hover effects
-  * Implemented sophisticated input field styling with consistent appearance
-  * Added proper padding to accommodate fixed header layout
-  * Enhanced overall visual hierarchy and professional aesthetics
-- June 22, 2025. Added property category tabs and regions functionality
-  * Implemented 5 main tabs: Properties, Land, Buy, Renting, and Regions
-  * Added filtering system for property categories (land plots, for sale, for rent)
-  * Created Athens regions filter with 21 major areas (Alimos, Glyfada, Kifisia, etc.)
-  * Updated blue theme to lighter shade for better accessibility
-  * Enhanced tab interface with icons and active states
-  * Added property count display for region filtering
-  * Implemented responsive grid layout for all property categories
-- June 22, 2025. Complete branding update and elegant interface redesign
-  * Replaced search filter component with sophisticated tabbed interface system
-  * Created modern filter bar with Property Type, Price Range, Bedrooms, Location dropdowns
-  * Updated all branding from "Pin-point" to "Tariq Haddadin" throughout application
-  * Added elegant "Haddadin" logo with gradient styling in header and hero section
-  * Removed "Find Your Perfect Property" and "Browse Properties" text as requested
-  * Enhanced tabs: All Properties, Featured, For Sale, For Rent, By Region
-  * Implemented glass morphism effects with backdrop blur and rounded corners
-  * Added real-time property count display and clear filters functionality
-  * Created empty states with relevant icons for better user experience
-- June 22, 2025. Completed location change from Athens to Jordan and repositioned statistics
-  * Updated all location references from Athens, Greece to Amman, Jordan
-  * Changed phone numbers from Greek (+30) to Jordanian (+962) format
-  * Updated About section to reference Amman metropolitan area
-  * Moved statistics section (500+ properties, 1200+ clients, 15+ years, 98% success) to bottom of page
-  * Updated header tagline from "Athens • Premium Properties" to "Amman • Premium Properties"
-  * Maintained all Jordan area filtering functionality (Abdoun, Sweifieh, etc.)
-- June 22, 2025. Enhanced design with lighter blue theme and features section
-  * Updated entire color scheme to lighter blue (sky-400/sky-500) for more elegant appearance
-  * Added "Why Choose Haddadin Real Estate" features section above explore properties
-  * Created three feature cards: Advanced Search, Expert Guidance, and Proven Success
-  * Made explore properties section more compact and clean with improved styling
-  * Updated all filter dropdowns with smaller, cleaner design and sky blue accents
-  * Enhanced tab styling with lighter blue gradients and better spacing
-  * Improved filter results badge and clear filters button with consistent theming
-  * Fixed tab container sizing issue - increased padding so buttons fit properly within container
-  * Replaced all "Haddadin" text branding with hadprp.png logo throughout the website
-  * Updated hero section and search card to display logo images instead of text
-  * Removed "Why Choose Haddadin Real Estate" features section as requested
-  * Fixed logo display issues by using proper import statements instead of direct file paths
-  * Optimized tab button sizing with smaller text and icons to fit perfectly in container
-  * Increased logo sizes in home page - hero section logo to h-32 and search card logo to h-24 for better design proportion
-  * Enhanced hero section with even larger logo (h-48) and updated to lighter blue gradient background
-- June 22, 2025. Complete hero section redesign with clean modern aesthetic
-  * Replaced blue gradient background with clean white design and subtle geometric elements
-  * Added floating circles, grid patterns, and animated geometric shapes using HTML5/CSS
-  * Implemented modern typography with light fonts and proper visual hierarchy
-  * Created minimalist search card with clean shadows replacing glass effect styling
-  * Enhanced professional appearance with better spacing and elegant design elements
-- June 23, 2025. Logo update with new Haddadin branding
-  * Replaced all hadprp.png logos with new Haddidinlogo_1751177753090.png throughout website
-  * Updated logo imports in header and home page components
-  * Maintained logo sizing and positioning for consistent branding
-- June 23, 2025. Local file storage and image upload implementation
-  * Added multer and sharp packages for file upload and image processing
-  * Created upload middleware with automatic WebP conversion and multiple size generation
-  * Implemented ImageUpload component replacing URL input fields in admin
-  * Added automatic image cleanup when properties are updated or deleted
-  * Images stored locally in public/uploads with optimized compression and sizing
-  * Updated admin panel branding from "Pin-point" to "Haddadin"
-- June 29, 2025. Admin settings management system
-  * Added site_settings database table for dynamic content management
-  * Created comprehensive Settings tab in admin dashboard with organized form sections
-  * Admin can now edit footer content, contact information, and social media links
-  * Settings include company information, contact details, working hours, and social links
-  * All footer and contact information is now dynamically managed through admin interface
-  * Added API endpoints for retrieving and updating site settings with proper authentication
-- June 30, 2025. Production deployment preparation and simplified storage
-  * Created vercel.json configuration for Vercel deployment with proper routing
-  * Added .env.example file documenting required environment variables
-  * Created comprehensive DEPLOYMENT.md guide covering multiple hosting options
-  * Configured build settings for serverless deployment
-  * Switched from PostgreSQL to in-memory storage for simplified deployment
-  * Completed MemStorage implementation with all required CRUD operations
-  * Updated session management to use MemoryStore instead of PostgreSQL
-  * Eliminated all database dependencies for zero-configuration deployment
-  * Website now deploys to any hosting provider with just one environment variable
+- June 30, 2025. Initial setup
 ```
 
 ## User Preferences

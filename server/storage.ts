@@ -22,7 +22,6 @@ import {
   type InsertSiteSettings,
   type SearchFilters
 } from "@shared/schema";
-import { db } from "./db";
 import { eq, desc, like, and, gte, lte } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 
