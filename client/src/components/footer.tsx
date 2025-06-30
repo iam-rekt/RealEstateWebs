@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="/properties">
-                  <a className="hover:text-white transition-colors duration-200">Properties</a>
+                  <span className="hover:text-white transition-colors duration-200 cursor-pointer">Properties</span>
                 </Link>
               </li>
               <li>
