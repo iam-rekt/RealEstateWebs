@@ -60,8 +60,8 @@ export default function Header() {
           <nav className="hidden md:flex items-center space-x-12">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href}>
-                <a 
-                  className={`relative text-sm font-medium tracking-wide transition-all duration-500 group ${
+                <span 
+                  className={`relative text-sm font-medium tracking-wide transition-all duration-500 group cursor-pointer ${
                     location === item.href 
                       ? "text-blue-600" 
                       : "text-gray-600 hover:text-gray-900"
@@ -79,7 +79,7 @@ export default function Header() {
                       ? "w-full" 
                       : "w-0 group-hover:w-full"
                   }`}></span>
-                </a>
+                </span>
               </Link>
             ))}
           </nav>
