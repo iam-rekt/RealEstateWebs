@@ -513,6 +513,105 @@ export class MemStorage implements IStorage {
     this.propertyRequests.set(id, propertyRequest);
     return propertyRequest;
   }
+
+  // Additional methods required by IStorage interface
+  async updateProperty(id: number, propertyData: Partial<InsertProperty>): Promise<Property | undefined> {
+    const existing = this.properties.get(id);
+    if (!existing) return undefined;
+
+    const updated: Property = {
+      ...existing,
+      ...propertyData,
+      id, // Ensure ID doesn't change
+      createdAt: existing.createdAt,
+    };
+    this.properties.set(id, updated);
+    return updated;
+  }
+
+  async deleteProperty(id: number): Promise<boolean> {
+    return this.properties.delete(id);
+  }
+
+  async getAllContacts(): Promise<Contact[]> {
+    return Array.from(this.contacts.values());
+  }
+
+  async deleteContact(id: number): Promise<boolean> {
+    return this.contacts.delete(id);
+  }
+
+  async getAllNewsletters(): Promise<Newsletter[]> {
+    return Array.from(this.newsletters.values());
+  }
+
+  async deleteNewsletter(id: number): Promise<boolean> {
+    return this.newsletters.delete(id);
+  }
+
+  async getAllEntrustments(): Promise<Entrustment[]> {
+    return Array.from(this.entrustments.values());
+  }
+
+  async deleteEntrustment(id: number): Promise<boolean> {
+    return this.entrustments.delete(id);
+  }
+
+  async getAllPropertyRequests(): Promise<PropertyRequest[]> {
+    return Array.from(this.propertyRequests.values());
+  }
+
+  async deletePropertyRequest(id: number): Promise<boolean> {
+    return this.propertyRequests.delete(id);
+  }
+
+  async createAdmin(admin: InsertAdmin): Promise<Admin> {
+    const id = this.currentAdminId++;
+    const newAdmin: Admin = {
+      ...admin,
+      id,
+      createdAt: new Date(),
+    };
+    this.admins.set(id, newAdmin);
+    return newAdmin;
+  }
+
+  async getAdminByUsername(username: string): Promise<Admin | undefined> {
+    return Array.from(this.admins.values()).find(admin => admin.username === username);
+  }
+
+  async verifyAdmin(username: string, password: string): Promise<Admin | undefined> {
+    const admin = await this.getAdminByUsername(username);
+    if (!admin) return undefined;
+
+    const bcrypt = await import('bcryptjs');
+    const isValid = await bcrypt.compare(password, admin.passwordHash);
+    return isValid ? admin : undefined;
+  }
+
+  // Site Settings - stored in memory as key-value pairs
+  private siteSettings = new Map<string, SiteSettings>();
+  private currentSiteSettingsId = 1;
+
+  async getSiteSetting(key: string): Promise<SiteSettings | undefined> {
+    return this.siteSettings.get(key);
+  }
+
+  async getAllSiteSettings(): Promise<SiteSettings[]> {
+    return Array.from(this.siteSettings.values());
+  }
+
+  async updateSiteSetting(key: string, value: string): Promise<SiteSettings> {
+    const existing = this.siteSettings.get(key);
+    const setting: SiteSettings = {
+      id: existing?.id || this.currentSiteSettingsId++,
+      settingKey: key,
+      settingValue: value,
+      updatedAt: new Date(),
+    };
+    this.siteSettings.set(key, setting);
+    return setting;
+  }
 }
 
 // Use in-memory storage instead of database for simple deployment

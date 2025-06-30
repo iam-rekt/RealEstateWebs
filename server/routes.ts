@@ -14,7 +14,7 @@ import {
 } from "@shared/schema";
 import { z } from "zod";
 import session from "express-session";
-import connectPg from "connect-pg-simple";
+import MemoryStore from "memorystore";
 
 // Extend session interface
 declare module 'express-session' {
@@ -32,12 +32,11 @@ const isAdmin = (req: any, res: any, next: any) => {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Setup session for admin auth
-  const pgStore = connectPg(session);
+  // Setup session for admin auth using memory store
+  const MemStore = MemoryStore(session);
   app.use(session({
-    store: new pgStore({
-      conString: process.env.DATABASE_URL,
-      createTableIfMissing: true,
+    store: new MemStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
     }),
     secret: process.env.SESSION_SECRET || 'admin-secret-key-change-in-production',
     resave: false,
