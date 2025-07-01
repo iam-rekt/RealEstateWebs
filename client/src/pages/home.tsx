@@ -240,19 +240,19 @@ export default function Home() {
             <TabsList className="grid w-full grid-cols-4 mb-6 bg-white rounded-xl p-3 shadow-sm border border-sky-200 min-h-[60px]" dir="rtl">
               <TabsTrigger value="all" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
                 <Star className="w-3 h-3" />
-                الكل
+                جميع الأراضي
               </TabsTrigger>
               <TabsTrigger value="featured" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
                 <Sparkles className="w-3 h-3" />
-                مميز
+                أراضي مميزة
               </TabsTrigger>
               <TabsTrigger value="land" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
                 <TreePine className="w-3 h-3" />
-                أراضي
+                أراضي سكنية
               </TabsTrigger>
-              <TabsTrigger value="apartment" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
-                <Building className="w-3 h-3" />
-                شقق
+              <TabsTrigger value="farm" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <Tractor className="w-3 h-3" />
+                أراضي زراعية
               </TabsTrigger>
             </TabsList>
 
@@ -266,11 +266,11 @@ export default function Home() {
                     onChange={(e) => setPropertyType(e.target.value)}
                     className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
-                    <option value="">جميع الأنواع</option>
-                    <option value="land">أرض</option>
-                    <option value="apartment">شقة</option>
-                    <option value="villa">فيلا</option>
-                    <option value="farm">مزرعة</option>
+                    <option value="">جميع أنواع الأراضي</option>
+                    <option value="land">أرض سكنية</option>
+                    <option value="farm">أرض زراعية</option>
+                    <option value="commercial">أرض تجارية</option>
+                    <option value="industrial">أرض صناعية</option>
                   </select>
                 </div>
                 

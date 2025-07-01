@@ -273,8 +273,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                   />
                 </div>
                 
-                {/* Location Filters - Jordan Specific - Only for Land Properties */}
-                {form.watch("propertyType") === "land" && (
+                {/* Location Filters - Jordan Specific - Always Show for Land Search */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 pt-6 border-t border-gray-200/50">
                   <div className="col-span-full mb-4">
                     <h4 className="text-lg font-semibold text-gray-800 mb-2">تفاصيل موقع الأرض</h4>
@@ -421,7 +420,6 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                     )}
                   />
                 </div>
-                )}
               </div>
             )}
             
