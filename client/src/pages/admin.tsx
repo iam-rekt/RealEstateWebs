@@ -563,7 +563,7 @@ export default function Admin() {
                   Haddadin Admin
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Welcome back, {auth.admin?.username}
+                  أهلاً وسهلاً، {auth.admin?.username}
                 </p>
               </div>
             </div>
@@ -696,64 +696,47 @@ export default function Admin() {
                         <form onSubmit={handleSubmit} className="space-y-4">
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <Label htmlFor="title">Title</Label>
+                              <Label htmlFor="title">عنوان الأرض</Label>
                               <Input
                                 id="title"
                                 value={formData.title}
                                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                                placeholder="مثال: أرض سكنية في عبدون"
                                 required
                               />
                             </div>
                             <div>
-                              <Label htmlFor="price">Price</Label>
+                              <Label htmlFor="price">السعر (د.أ)</Label>
                               <Input
                                 id="price"
                                 value={formData.price}
                                 onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-                                placeholder="€500,000"
+                                placeholder="500,000"
                                 required
                               />
                             </div>
                           </div>
                           
                           <div>
-                            <Label htmlFor="description">Description</Label>
+                            <Label htmlFor="description">وصف الأرض</Label>
                             <Textarea
                               id="description"
                               value={formData.description}
                               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                              placeholder="تفاصيل عن الأرض، الموقع، والمميزات"
                               required
                             />
                           </div>
 
-                          <div className="grid grid-cols-3 gap-4">
+                          <div className="grid grid-cols-1 gap-4">
                             <div>
-                              <Label htmlFor="size">Size (m²)</Label>
+                              <Label htmlFor="size">حجم الأرض (م²)</Label>
                               <Input
                                 id="size"
                                 type="number"
                                 value={formData.size}
                                 onChange={(e) => setFormData(prev => ({ ...prev, size: e.target.value }))}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor="bedrooms">Bedrooms</Label>
-                              <Input
-                                id="bedrooms"
-                                type="number"
-                                value={formData.bedrooms}
-                                onChange={(e) => setFormData(prev => ({ ...prev, bedrooms: e.target.value }))}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor="bathrooms">Bathrooms</Label>
-                              <Input
-                                id="bathrooms"
-                                type="number"
-                                value={formData.bathrooms}
-                                onChange={(e) => setFormData(prev => ({ ...prev, bathrooms: e.target.value }))}
+                                placeholder="مثال: 500"
                                 required
                               />
                             </div>
@@ -761,36 +744,38 @@ export default function Admin() {
 
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <Label htmlFor="propertyType">Property Type</Label>
+                              <Label htmlFor="propertyType">نوع الأرض</Label>
                               <Select value={formData.propertyType} onValueChange={(value) => setFormData(prev => ({ ...prev, propertyType: value }))}>
                                 <SelectTrigger>
-                                  <SelectValue placeholder="Select type" />
+                                  <SelectValue placeholder="اختر نوع الأرض" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  <SelectItem value="apartment">Apartment</SelectItem>
-                                  <SelectItem value="house">House</SelectItem>
-                                  <SelectItem value="villa">Villa</SelectItem>
-                                  <SelectItem value="studio">Studio</SelectItem>
+                                  <SelectItem value="land">أرض سكنية</SelectItem>
+                                  <SelectItem value="farm">أرض زراعية</SelectItem>
+                                  <SelectItem value="commercial">أرض تجارية</SelectItem>
+                                  <SelectItem value="industrial">أرض صناعية</SelectItem>
                                 </SelectContent>
                               </Select>
                             </div>
                             <div>
-                              <Label htmlFor="location">Location</Label>
+                              <Label htmlFor="location">الموقع</Label>
                               <Input
                                 id="location"
                                 value={formData.location}
                                 onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                                placeholder="مثال: عبدون، عمان"
                                 required
                               />
                             </div>
                           </div>
 
                           <div>
-                            <Label htmlFor="address">Address</Label>
+                            <Label htmlFor="address">العنوان التفصيلي</Label>
                             <Input
                               id="address"
                               value={formData.address}
                               onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
+                              placeholder="العنوان الكامل للأرض"
                               required
                             />
                           </div>
