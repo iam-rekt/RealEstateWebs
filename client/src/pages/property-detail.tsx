@@ -94,9 +94,10 @@ export default function PropertyDetail() {
   };
 
   const handleContactAboutProperty = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to footer contact information
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -205,10 +206,10 @@ export default function PropertyDetail() {
                     onClick={handleContactAboutProperty}
                     className="flex-1 bg-primary hover:bg-primary-dark text-white font-semibold py-3"
                   >
-                    Contact About This Property
+                    تواصل معنا
                   </Button>
                   <Button variant="outline" className="px-6">
-                    Schedule Viewing
+                    معلومات الاتصال
                   </Button>
                 </div>
               </div>
@@ -270,17 +271,7 @@ export default function PropertyDetail() {
               </section>
             )}
 
-            {/* Contact Section */}
-            <section id="contact" className="bg-neutral rounded-xl p-8">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-text-primary mb-2">Interested in this property?</h3>
-                <p className="text-gray-600">Get in touch with us for more information or to schedule a viewing</p>
-              </div>
-              
-              <div className="max-w-2xl mx-auto">
-                <ContactForm />
-              </div>
-            </section>
+
           </section>
         </>
       ) : null}
