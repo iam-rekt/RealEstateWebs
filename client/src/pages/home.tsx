@@ -33,20 +33,7 @@ export default function Home() {
     queryKey: ["/api/properties"],
   });
 
-  // Fetch site settings for dynamic contact information
-  const { data: settingsData } = useQuery({
-    queryKey: ["/api/site-settings"],
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-  });
 
-  // Extract settings data
-  const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
-  const contactAddress = settings.contact_office_address || "Amman, Jordan";
-  const contactPhone = settings.contact_phone_primary || "+962 6 XXX XXXX";
-  const contactMobile = settings.contact_phone_mobile || "+962 79 XXX XXXX";
-  const contactEmail = settings.contact_email_main || "info@haddadinrealestate.com";
-  const contactSalesEmail = settings.contact_email_sales || "sales@haddadinrealestate.com";
-  const workingHours = settings.contact_working_hours || "Mon - Fri: 9:00 AM - 6:00 PM<br />Sat: 9:00 AM - 3:00 PM";
 
   // Enhanced filter function with multiple criteria
   const getFilteredProperties = (category: string) => {
@@ -486,108 +473,6 @@ export default function Home() {
           </div>
           
           <div className="max-w-2xl mx-auto">
-            <ContactForm />
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-16 bg-neutral">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-bold text-text-primary mb-6">About Tariq Haddadin Real Estate</h3>
-              <p className="text-gray-600 text-lg mb-6">
-                Located in the heart of Amman, Jordan, we specialize in connecting buyers and investors 
-                with exceptional properties throughout the Amman metropolitan area.
-              </p>
-              <p className="text-gray-600 mb-6">
-                With years of local market expertise and a commitment to personalized service, we guide our 
-                clients through every step of their real estate journey.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <Check className="w-5 h-5 text-primary mr-3" />
-                  <span className="text-gray-700">Local market expertise</span>
-                </div>
-                <div className="flex items-center">
-                  <Check className="w-5 h-5 text-primary mr-3" />
-                  <span className="text-gray-700">Personalized service</span>
-                </div>
-                <div className="flex items-center">
-                  <Check className="w-5 h-5 text-primary mr-3" />
-                  <span className="text-gray-700">Comprehensive property portfolio</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <img 
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                alt="Modern office building in Athens" 
-                className="rounded-xl shadow-lg w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-text-primary mb-4">Contact Us</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Ready to find your dream property? Get in touch with our expert team
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div className="flex items-start">
-                <div className="bg-primary text-white w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-text-primary mb-1">Office Location</h4>
-                  <p className="text-gray-600" dangerouslySetInnerHTML={{ __html: contactAddress }} />
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="bg-primary text-white w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-text-primary mb-1">Phone</h4>
-                  <p className="text-gray-600">{contactPhone}</p>
-                  <p className="text-gray-600 text-sm mt-1">Mobile: {contactMobile}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="bg-primary text-white w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-text-primary mb-1">Email</h4>
-                  <p className="text-gray-600">{contactEmail}</p>
-                  <p className="text-gray-600 text-sm mt-1">Sales: {contactSalesEmail}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="bg-primary text-white w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-text-primary mb-1">Business Hours</h4>
-                  <p className="text-gray-600" dangerouslySetInnerHTML={{ __html: workingHours }} />
-                </div>
-              </div>
-            </div>
-            
-            {/* Contact Form */}
             <ContactForm />
           </div>
         </div>
