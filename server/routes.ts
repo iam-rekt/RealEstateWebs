@@ -79,6 +79,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Serve static files from uploads directory
   app.use('/uploads', express.static(path.join(process.cwd(), 'public', 'uploads')));
+  
+  // Serve static files from public directory (for logo, etc.)
+  app.use(express.static(path.join(process.cwd(), 'public')));
 
   // Image upload route
   app.post("/api/admin/upload", isAdmin, upload.single('image'), processImage);
