@@ -10,5 +10,3 @@ services:
         value: production
       - key: SESSION_SECRET
         generateValue: true
-    domains:
-      - rand-real-estate.onrender.com
