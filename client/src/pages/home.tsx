@@ -7,10 +7,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 import PropertyCard from "@/components/property-card";
-import NewsletterForm from "@/components/newsletter-form";
 import ContactForm from "@/components/contact-form";
-import EntrustmentForm from "@/components/entrustment-form";
-import PropertyRequestForm from "@/components/property-request-form";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -482,16 +479,14 @@ export default function Home() {
       <section id="services" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-text-primary mb-4">Our Services</h3>
+            <h3 className="text-3xl font-bold text-text-primary mb-4">خدماتنا</h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Comprehensive real estate services to meet all your property needs
+              خدمات عقارية شاملة لتلبية جميع احتياجاتك من الأراضي
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <NewsletterForm />
-            <EntrustmentForm />
-            <PropertyRequestForm />
+          <div className="max-w-2xl mx-auto">
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -608,28 +603,28 @@ export default function Home() {
                 <Building className="w-8 h-8" />
               </div>
               <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">500+</h4>
-              <p className="text-gray-700 font-medium text-lg">Properties Listed</p>
+              <p className="text-gray-700 font-medium text-lg">قطعة أرض مدرجة</p>
             </div>
             <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.1s"}}>
               <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "1s"}}>
                 <Users className="w-8 h-8" />
               </div>
               <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">1200+</h4>
-              <p className="text-gray-700 font-medium text-lg">Happy Clients</p>
+              <p className="text-gray-700 font-medium text-lg">عميل راضٍ</p>
             </div>
             <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.2s"}}>
               <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "2s"}}>
                 <Award className="w-8 h-8" />
               </div>
               <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">15+</h4>
-              <p className="text-gray-700 font-medium text-lg">Years Experience</p>
+              <p className="text-gray-700 font-medium text-lg">سنة خبرة</p>
             </div>
             <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.3s"}}>
               <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "3s"}}>
                 <TrendingUp className="w-8 h-8" />
               </div>
               <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">98%</h4>
-              <p className="text-gray-700 font-medium text-lg">Success Rate</p>
+              <p className="text-gray-700 font-medium text-lg">معدل النجاح</p>
             </div>
           </div>
         </div>
