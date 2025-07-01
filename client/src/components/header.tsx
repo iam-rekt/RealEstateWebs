@@ -17,13 +17,13 @@ export default function Header() {
   });
 
   const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
-  const tagline = settings.footer_tagline || "Premium Properties in Amman";
+  const tagline = settings.footer_tagline || "عقارات مميزة في عمان";
 
   const navigation = [
-    { name: "Properties", href: "/properties" },
-    { name: "Services", href: "/#services" },
-    { name: "About", href: "/#about" },
-    { name: "Contact", href: "/#contact" },
+    { name: "العقارات", href: "/properties" },
+    { name: "الخدمات", href: "/#services" },
+    { name: "من نحن", href: "/#about" },
+    { name: "اتصل بنا", href: "/#contact" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -46,12 +46,12 @@ export default function Header() {
                 <div className="cursor-pointer transition-transform duration-300 group-hover:scale-105 flex items-center space-x-4">
                   <img 
                     src="/logo.png" 
-                    alt="Rand Real Estate Development Company" 
+                    alt="شركة راند للتطوير العقاري" 
                     className="h-12 w-auto object-contain"
                   />
-                  <div>
-                    <h1 className="text-lg font-bold text-gray-800 tracking-wide">Rand Real Estate Development Company</h1>
-                    <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Amman • {tagline}</p>
+                  <div className="text-right">
+                    <h1 className="text-lg font-bold text-gray-800 tracking-wide">شركة راند للتطوير العقاري</h1>
+                    <p className="text-xs text-gray-500 font-medium">عمان • {tagline}</p>
                   </div>
                 </div>
               </Link>

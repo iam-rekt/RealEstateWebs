@@ -38,6 +38,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
       propertyType: "",
       bedrooms: "",
       bathrooms: "",
+      location: "",
     },
   });
 
@@ -64,17 +65,17 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             {/* Search Header */}
             {isHomePage && (
-              <div className="text-center mb-10">
-                <h3 className="text-3xl font-black text-gray-900 mb-3 tracking-tight">Find Your Perfect Property</h3>
-                <p className="text-gray-600 font-medium text-lg">Discover premium properties in Athens with our intelligent search</p>
+              <div className="text-center mb-10" dir="rtl">
+                <h3 className="text-3xl font-black text-gray-900 mb-3 tracking-tight">اعثر على العقار المثالي</h3>
+                <p className="text-gray-600 font-medium text-lg">اكتشف العقارات المميزة في عمان بأذكى نظام بحث</p>
               </div>
             )}
             
             {/* Basic Filters */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" dir="rtl">
               <div>
                 <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                  Price Range (€)
+                  نطاق السعر (دينار أردني)
                 </FormLabel>
                 <div className="flex space-x-3 items-center">
                   <FormField
@@ -85,15 +86,15 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                         <FormControl>
                           <Input 
                             type="number" 
-                            placeholder="From €100,000" 
+                            placeholder="من 50,000 د.أ" 
                             {...field}
-                            className="modern-input"
+                            className="modern-input text-right"
                           />
                         </FormControl>
                       </FormItem>
                     )}
                   />
-                  <span className="flex items-center text-gray-600 font-medium px-2">to</span>
+                  <span className="flex items-center text-gray-600 font-medium px-2">إلى</span>
                   <FormField
                     control={form.control}
                     name="maxPrice"
@@ -102,9 +103,9 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                         <FormControl>
                           <Input 
                             type="number" 
-                            placeholder="To €1,000,000" 
+                            placeholder="إلى 500,000 د.أ" 
                             {...field}
-                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm"
+                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
                           />
                         </FormControl>
                       </FormItem>
@@ -115,7 +116,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
               
               <div>
                 <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                  Property Size (sq.m.)
+                  مساحة العقار (متر مربع)
                 </FormLabel>
                 <div className="flex space-x-3 items-center">
                   <FormField
@@ -126,15 +127,15 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                         <FormControl>
                           <Input 
                             type="number" 
-                            placeholder="From 50 sq.m." 
+                            placeholder="من 50 م²" 
                             {...field}
-                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm"
+                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
                           />
                         </FormControl>
                       </FormItem>
                     )}
                   />
-                  <span className="flex items-center text-gray-600 font-medium px-2">to</span>
+                  <span className="flex items-center text-gray-600 font-medium px-2">إلى</span>
                   <FormField
                     control={form.control}
                     name="maxSize"
@@ -143,9 +144,9 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                         <FormControl>
                           <Input 
                             type="number" 
-                            placeholder="To 500 sq.m." 
+                            placeholder="إلى 500 م²" 
                             {...field}
-                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm"
+                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
                           />
                         </FormControl>
                       </FormItem>
