@@ -35,16 +35,16 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
     resolver: zodResolver(landSearchSchema),
     defaultValues: {
       propertyType: "land",
-      minPrice: "",
-      maxPrice: "",
-      minSize: "",
-      maxSize: "",
-      governorate: "",
-      directorate: "",
-      village: "",
-      basin: "",
-      neighborhood: "",
-      plotNumber: "",
+      minPrice: undefined,
+      maxPrice: undefined,
+      minSize: undefined,
+      maxSize: undefined,
+      governorate: undefined,
+      directorate: undefined,
+      village: undefined,
+      basin: undefined,
+      neighborhood: undefined,
+      plotNumber: undefined,
     },
   });
 
@@ -233,14 +233,13 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
                       <FormLabel className="block text-base font-semibold text-gray-800 mb-3">
                         المحافظة
                       </FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value || ""}>
                         <FormControl>
                           <SelectTrigger className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white text-right">
                             <SelectValue placeholder="إختر المحافظة" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="rounded-xl border-2 shadow-xl">
-                          <SelectItem value="">جميع المحافظات</SelectItem>
                           {jordanGovernorates.map((gov) => (
                             <SelectItem key={gov} value={gov}>{gov}</SelectItem>
                           ))}
@@ -259,14 +258,13 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
                       <FormLabel className="block text-base font-semibold text-gray-800 mb-3">
                         المديرية
                       </FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value || ""}>
                         <FormControl>
                           <SelectTrigger className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white text-right">
                             <SelectValue placeholder="إختر المديرية" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="rounded-xl border-2 shadow-xl">
-                          <SelectItem value="">جميع المديريات</SelectItem>
                           {ammanDirectorates.map((dir) => (
                             <SelectItem key={dir} value={dir}>{dir}</SelectItem>
                           ))}

@@ -190,33 +190,9 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Clean Search Card */}
-          <div className="mt-16 max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-8 lg:p-12 hover:shadow-xl transition-all duration-300">
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-4">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-light text-slate-800 mb-2">ابحث عن عقارك</h3>
-                <p className="text-slate-600 font-light">ابدأ بحثك بنظام الفلترة المتقدم لدينا</p>
-              </div>
-              
-              <div className="flex justify-center">
-                <button 
-                  onClick={() => {
-                    const propertiesSection = document.getElementById('properties');
-                    if (propertiesSection) {
-                      propertiesSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
-                >
-                  استكشف العقارات
-                </button>
-              </div>
-            </div>
+          {/* Land Search Filters Card */}
+          <div className="max-w-5xl mx-auto">
+            <LandSearchFilters onSearch={handleSearch} isHomePage={true} />
           </div>
         </div>
       </section>
@@ -426,7 +402,7 @@ export default function Home() {
 
             <TabsContent value="regions" className="space-y-6">
               <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 mb-8 shadow-lg border border-blue-100/50">
-                <h4 className="text-xl font-bold text-gray-900 mb-6">Explore by Amman Area</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-6">استكشاف حسب منطقة عمان</h4>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                   {ammanAreas.map((area) => (
                     <Button
@@ -449,7 +425,7 @@ export default function Home() {
                         {selectedRegion}
                       </Badge>
                       <span className="text-gray-600 font-medium">
-                        {getFilteredProperties("all").length} properties available
+                        {getFilteredProperties("all").length} قطعة أرض متاحة
                       </span>
                     </div>
                   </div>
@@ -468,8 +444,8 @@ export default function Home() {
                 ) : (
                   <div className="col-span-full text-center py-16">
                     <MapPin className="w-16 h-16 text-blue-300 mx-auto mb-4" />
-                    <h4 className="text-xl font-semibold text-gray-700 mb-2">Select an Area</h4>
-                    <p className="text-gray-500">Choose an Amman area above to browse properties in that location</p>
+                    <h4 className="text-xl font-semibold text-gray-700 mb-2">اختر منطقة</h4>
+                    <p className="text-gray-500">اختر منطقة من عمان أعلاه لتصفح الأراضي في ذلك الموقع</p>
                   </div>
                 )}
               </div>
