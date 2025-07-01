@@ -18,6 +18,13 @@ const searchSchema = z.object({
   propertyType: z.string().optional(),
   bedrooms: z.string().optional(),
   bathrooms: z.string().optional(),
+  location: z.string().optional(),
+  governorate: z.string().optional(),
+  directorate: z.string().optional(),
+  village: z.string().optional(),
+  basin: z.string().optional(),
+  neighborhood: z.string().optional(),
+  plotNumber: z.string().optional(),
 });
 
 interface SearchFiltersProps {
@@ -39,6 +46,12 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
       bedrooms: "",
       bathrooms: "",
       location: "",
+      governorate: "",
+      directorate: "",
+      village: "",
+      basin: "",
+      neighborhood: "",
+      plotNumber: "",
     },
   });
 
@@ -157,7 +170,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
             </div>
             
             {/* More Filters Toggle */}
-            <div className="text-center">
+            <div className="text-center" dir="rtl">
               <Button
                 type="button"
                 variant="ghost"
@@ -166,13 +179,13 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
               >
                 {showMoreFilters ? (
                   <>
-                    <Minus className="w-5 h-5 mr-2" />
-                    Show Less Options
+                    <Minus className="w-5 h-5 ml-2" />
+                    إظهار خيارات أقل
                   </>
                 ) : (
                   <>
-                    <Plus className="w-5 h-5 mr-2" />
-                    Advanced Search Options
+                    <Plus className="w-5 h-5 ml-2" />
+                    خيارات بحث متقدمة
                   </>
                 )}
               </Button>
@@ -180,7 +193,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
             
             {/* Additional Filters */}
             {showMoreFilters && (
-              <div className="space-y-6 pt-6 border-t border-gray-200/50">
+              <div className="space-y-6 pt-6 border-t border-gray-200/50" dir="rtl">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <FormField
                     control={form.control}
@@ -188,20 +201,20 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                          Property Type
+                          نوع العقار
                         </FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm">
-                              <SelectValue placeholder="Select property type" />
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="اختر نوع العقار" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="rounded-xl border-2 shadow-xl">
-                            <SelectItem value="">Any type</SelectItem>
-                            <SelectItem value="apartment">🏢 Apartment</SelectItem>
-                            <SelectItem value="house">🏠 House</SelectItem>
-                            <SelectItem value="villa">🏡 Villa</SelectItem>
-                            <SelectItem value="studio">🏠 Studio</SelectItem>
+                            <SelectItem value="">جميع الأنواع</SelectItem>
+                            <SelectItem value="land">أرض</SelectItem>
+                            <SelectItem value="apartment">شقة</SelectItem>
+                            <SelectItem value="villa">فيلا</SelectItem>
+                            <SelectItem value="farm">مزرعة</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormItem>
@@ -214,20 +227,20 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                          Bedrooms
+                          غرف النوم
                         </FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm">
-                              <SelectValue placeholder="Number of bedrooms" />
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="عدد غرف النوم" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="rounded-xl border-2 shadow-xl">
-                            <SelectItem value="">Any</SelectItem>
-                            <SelectItem value="1">1+ Bedroom</SelectItem>
-                            <SelectItem value="2">2+ Bedrooms</SelectItem>
-                            <SelectItem value="3">3+ Bedrooms</SelectItem>
-                            <SelectItem value="4">4+ Bedrooms</SelectItem>
+                            <SelectItem value="">أي عدد</SelectItem>
+                            <SelectItem value="1">غرفة نوم واحدة+</SelectItem>
+                            <SelectItem value="2">غرفتان نوم+</SelectItem>
+                            <SelectItem value="3">3 غرف نوم+</SelectItem>
+                            <SelectItem value="4">4 غرف نوم+</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormItem>
@@ -240,21 +253,165 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                          Bathrooms
+                          دورات المياه
                         </FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm">
-                              <SelectValue placeholder="Number of bathrooms" />
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="عدد دورات المياه" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="rounded-xl border-2 shadow-xl">
-                            <SelectItem value="">Any</SelectItem>
-                            <SelectItem value="1">1+ Bathroom</SelectItem>
-                            <SelectItem value="2">2+ Bathrooms</SelectItem>
-                            <SelectItem value="3">3+ Bathrooms</SelectItem>
+                            <SelectItem value="">أي عدد</SelectItem>
+                            <SelectItem value="1">دورة مياه واحدة+</SelectItem>
+                            <SelectItem value="2">دورتان مياه+</SelectItem>
+                            <SelectItem value="3">3 دورات مياه+</SelectItem>
                           </SelectContent>
                         </Select>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                {/* Location Filters - Jordan Specific */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                  <FormField
+                    control={form.control}
+                    name="governorate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          المحافظة
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="إختر المحافظة" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="rounded-xl border-2 shadow-xl">
+                            <SelectItem value="">جميع المحافظات</SelectItem>
+                            <SelectItem value="amman">عمان</SelectItem>
+                            <SelectItem value="zarqa">الزرقاء</SelectItem>
+                            <SelectItem value="irbid">إربد</SelectItem>
+                            <SelectItem value="balqa">البلقاء</SelectItem>
+                            <SelectItem value="madaba">مادبا</SelectItem>
+                            <SelectItem value="karak">الكرك</SelectItem>
+                            <SelectItem value="tafilah">الطفيلة</SelectItem>
+                            <SelectItem value="maan">معان</SelectItem>
+                            <SelectItem value="aqaba">العقبة</SelectItem>
+                            <SelectItem value="mafraq">المفرق</SelectItem>
+                            <SelectItem value="ajloun">عجلون</SelectItem>
+                            <SelectItem value="jerash">جرش</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="directorate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          المديرية
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="إختر المديرية" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="rounded-xl border-2 shadow-xl">
+                            <SelectItem value="">جميع المديريات</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="village"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          القرية
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="إختر القرية" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="rounded-xl border-2 shadow-xl">
+                            <SelectItem value="">جميع القرى</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="basin"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          الحوض
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="إختر الحوض" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="rounded-xl border-2 shadow-xl">
+                            <SelectItem value="">جميع الأحواض</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="neighborhood"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          الحي
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="إختر الحي" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="rounded-xl border-2 shadow-xl">
+                            <SelectItem value="">جميع الأحياء</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="plotNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          رقم القطعة
+                        </FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="إختر رقم القطعة" 
+                            {...field}
+                            className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
+                          />
+                        </FormControl>
                       </FormItem>
                     )}
                   />
@@ -263,13 +420,13 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
             )}
             
             {/* Search Button */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2" dir="rtl">
               <Button 
                 type="submit" 
                 className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-5 px-8 rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105 text-lg"
               >
-                <Search className="w-6 h-6 mr-3" />
-                Find Perfect Properties
+                <Search className="w-6 h-6 ml-3" />
+                البحث عن العقارات المثالية
               </Button>
               {isHomePage && (
                 <Button 
@@ -278,7 +435,7 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                   className="flex-1 bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700 hover:text-gray-900 font-semibold py-5 px-8 rounded-2xl transition-all duration-300 border-2 border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                   onClick={() => window.location.href = "/properties"}
                 >
-                  Browse All Properties
+                  تصفح جميع العقارات
                 </Button>
               )}
             </div>

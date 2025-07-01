@@ -7,6 +7,12 @@ export interface SearchFilters {
   bedrooms?: string;
   bathrooms?: string;
   location?: string;
+  governorate?: string;
+  directorate?: string;
+  village?: string;
+  basin?: string;
+  neighborhood?: string;
+  plotNumber?: string;
 }
 
 export interface PropertyCardProps {
