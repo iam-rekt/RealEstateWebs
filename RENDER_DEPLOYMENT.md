@@ -38,8 +38,10 @@ Render automatically sets:
 - `SESSION_SECRET=[auto-generated secure string]`
 
 ## Troubleshooting
-- **Build fails**: Check that `npm run build` works locally
+- **Build fails with "vite: not found"**: Fixed in render.yaml with `npx vite build`
 - **Site won't load**: Check the Render logs for errors
 - **Admin login issues**: Verify SESSION_SECRET is set in Render dashboard
+- **Deploy takes long**: First build installs all dependencies (normal)
+- **Static files not loading**: Custom production server handles this
 
 Your real estate website will be fully functional on Render with working admin panel!

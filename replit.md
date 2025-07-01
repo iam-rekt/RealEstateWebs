@@ -127,6 +127,12 @@ DATABASE_URL=postgresql://... (for Postgres migration)
 ```
 Changelog:
 - June 30, 2025. Initial setup
+- July 1, 2025. Fixed Render deployment issues:
+  - Added dynamic PORT configuration for hosting platforms
+  - Created custom production server to handle static file serving
+  - Fixed vite build command with npx for Render environment
+  - Resolved logo display and asset serving issues
+  - Updated deployment strategy from Vercel to Render due to serverless limitations
 ```
 
 ## User Preferences
