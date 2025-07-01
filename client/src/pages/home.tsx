@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { apiRequest } from "@/lib/queryClient";
 import type { Property } from "@shared/schema";
 import type { SearchFilters as SearchFiltersType } from "@/lib/types";
+import LandSearchFilters from "@/components/land-search-filters";
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -251,7 +252,7 @@ export default function Home() {
                 أراضي سكنية
               </TabsTrigger>
               <TabsTrigger value="farm" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
-                <Tractor className="w-3 h-3" />
+                <TreePine className="w-3 h-3" />
                 أراضي زراعية
               </TabsTrigger>
             </TabsList>
@@ -289,17 +290,17 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">غرف النوم</label>
+                  <label className="text-sm font-medium text-gray-700">المساحة (متر مربع)</label>
                   <select 
                     value={bedrooms} 
                     onChange={(e) => setBedrooms(e.target.value)}
                     className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
-                    <option value="">أي عدد</option>
-                    <option value="1">غرفة نوم واحدة+</option>
-                    <option value="2">غرفتان نوم+</option>
-                    <option value="3">3 غرف نوم+</option>
-                    <option value="4">4 غرف نوم+</option>
+                    <option value="">أي مساحة</option>
+                    <option value="300">300+ متر مربع</option>
+                    <option value="500">500+ متر مربع</option>
+                    <option value="1000">1000+ متر مربع</option>
+                    <option value="2000">2000+ متر مربع</option>
                   </select>
                 </div>
                 
