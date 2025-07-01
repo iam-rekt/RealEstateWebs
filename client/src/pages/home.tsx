@@ -448,17 +448,7 @@ export default function Home() {
             </TabsContent>
           </Tabs>
 
-          {/* View All Properties Button */}
-          <div className="text-center mt-12">
-            <Button 
-              onClick={() => setLocation("/properties")}
-              size="lg"
-              className="bg-gradient-primary hover:bg-blue-600 text-white px-8 py-3"
-            >
-              View All Properties
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
+
         </div>
       </section>
 
