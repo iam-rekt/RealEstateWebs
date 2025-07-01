@@ -50,6 +50,7 @@ export default function Header() {
                     className="h-12 w-auto object-contain"
                   />
                   <div>
+                    <h1 className="text-lg font-bold text-gray-800 tracking-wide">Rand Real Estate Development Company</h1>
                     <p className="text-xs text-gray-500 font-medium tracking-wider uppercase">Amman • {tagline}</p>
                   </div>
                 </div>

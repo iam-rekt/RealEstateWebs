@@ -169,11 +169,16 @@ export default function Home() {
             </div>
             
             {/* Clean Typography */}
-            <h1 className="text-4xl lg:text-6xl font-light mb-6 tracking-tight">
-              <span className="text-slate-900 font-extralight">Premium</span>
-              <br />
-              <span className="text-blue-600 font-medium">Real Estate</span>
-            </h1>
+            <div className="mb-8">
+              <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-4 tracking-wide">
+                Rand Real Estate Development Company
+              </h1>
+              <h2 className="text-4xl lg:text-6xl font-light tracking-tight">
+                <span className="text-slate-900 font-extralight">Premium</span>
+                <br />
+                <span className="text-blue-600 font-medium">Real Estate</span>
+              </h2>
+            </div>
             
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
             
