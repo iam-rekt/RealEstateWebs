@@ -289,28 +289,28 @@ export default function Home() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Bedrooms</label>
+                  <label className="text-sm font-medium text-gray-700">غرف النوم</label>
                   <select 
                     value={bedrooms} 
                     onChange={(e) => setBedrooms(e.target.value)}
-                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
-                    <option value="">Any</option>
-                    <option value="1">1+ Bedroom</option>
-                    <option value="2">2+ Bedrooms</option>
-                    <option value="3">3+ Bedrooms</option>
-                    <option value="4">4+ Bedrooms</option>
+                    <option value="">أي عدد</option>
+                    <option value="1">غرفة نوم واحدة+</option>
+                    <option value="2">غرفتان نوم+</option>
+                    <option value="3">3 غرف نوم+</option>
+                    <option value="4">4 غرف نوم+</option>
                   </select>
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Location</label>
+                  <label className="text-sm font-medium text-gray-700">الموقع</label>
                   <select 
                     value={selectedRegion} 
                     onChange={(e) => setSelectedRegion(e.target.value)}
-                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
-                    <option value="">All Areas</option>
+                    <option value="">جميع المناطق</option>
                     {ammanAreas.map((area) => (
                       <option key={area} value={area}>{area}</option>
                     ))}
@@ -322,7 +322,7 @@ export default function Home() {
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary" className="bg-sky-50 text-sky-700 border-sky-200 text-sm">
-                    {getFilteredProperties(activeTab).length} properties found
+                    {getFilteredProperties(activeTab).length} عقار متوفر
                   </Badge>
                   {(propertyType || priceRange || bedrooms || selectedRegion) && (
                     <Button 
@@ -336,7 +336,7 @@ export default function Home() {
                       }}
                       className="bg-white hover:bg-red-50 border-red-200 text-red-600 hover:text-red-700 text-sm px-3 py-1.5 rounded-md transition-all duration-200"
                     >
-                      Clear Filters
+                      مسح الفلاتر
                     </Button>
                   )}
                 </div>
