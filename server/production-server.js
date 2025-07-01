@@ -18,7 +18,7 @@ async function startProductionServer() {
   app.use(express.urlencoded({ extended: false }));
   
   // Import and register API routes
-  const { registerRoutes } = await import('./routes.js');
+  const { registerRoutes } = await import('./routes.ts');
   await registerRoutes(app);
   
   // Serve static files from dist (frontend build)
