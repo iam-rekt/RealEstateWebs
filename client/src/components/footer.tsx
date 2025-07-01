@@ -97,6 +97,11 @@ export default function Footer() {
               <li>الجوال: +962 77 5566030</li>
               <li>ص.ب: 37 عمان 11831 الأردن</li>
               <li>المدير العام: فؤاد حدادين</li>
+              <li className="mt-3 pt-2 border-t border-gray-600">
+                <strong>أوقات العمل:</strong><br />
+                الأحد إلى الخميس<br />
+                9:30 صباحاً - 5:00 مساءً
+              </li>
             </ul>
           </div>
         </div>
