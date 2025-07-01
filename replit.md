@@ -100,14 +100,16 @@ The application uses in-memory storage making deployment extremely simple:
 - **Fresh data on restart** - perfect for demos
 
 ### Recommended Platforms
-1. **Vercel** (Primary recommendation)
-   - Git integration with automatic deployments
-   - Only requires `SESSION_SECRET` environment variable
-   - Optimized for React applications
+1. **Render** (Primary recommendation)
+   - Perfect for full-stack Express applications
+   - Automatic deployment with render.yaml configuration
+   - Free tier with persistent server instances
+   - Proper session and in-memory storage support
 
 2. **Alternative Platforms**
-   - Railway, Netlify, traditional hosting
+   - Railway, traditional VPS hosting
    - All work with the no-database architecture
+   - Note: Vercel serverless incompatible with current architecture
 
 ### Environment Configuration
 Required environment variables:

@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: rand-real-estate
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+    domains:
+      - rand-real-estate.onrender.com
