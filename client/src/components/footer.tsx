@@ -20,8 +20,8 @@ export default function Footer() {
   const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
 
   // Fallback values
-  const companyName = settings.footer_company_name || "شركة راند للتطوير العقاري";
-  const companyDescription = settings.footer_description || "شريكك الموثوق في العقارات في عمان. نتخصص في ربط المشترين والمستثمرين بالعقارات الاستثنائية في جميع أنحاء منطقة عمان الكبرى.";
+  const companyName = settings.footer_company_name || "شركات رند للاستثمار العقاري وتطويره";
+  const companyDescription = settings.footer_description || "شريكك الموثوق في الأراضي في عمان. نتخصص في ربط المشترين والمستثمرين بالأراضي الاستثنائية في جميع أنحاء منطقة عمان الكبرى.";
   const address = settings.footer_address || "عمان، الأردن";
   const phone = settings.footer_phone || "+962 6 XXX XXXX";
   const email = settings.footer_email || "info@randrealestate.com";
@@ -90,10 +90,13 @@ export default function Footer() {
           <div>
             <h6 className="font-semibold mb-4">معلومات الاتصال</h6>
             <ul className="space-y-2 text-gray-300">
-              <li>{address}</li>
-              <li>الهاتف: {phone}</li>
-              <li>البريد الإلكتروني: {email}</li>
-              {website && <li>الموقع: {website}</li>}
+              <li>الصويفية - مجمع فرح التجاري - الطابق الثاني</li>
+              <li>الهاتف: +962 6 5826440</li>
+              <li>الفاكس: +962 6 5826408</li>
+              <li>الجوال: +962 79 5566030</li>
+              <li>الجوال: +962 77 5566030</li>
+              <li>ص.ب: 37 عمان 11831 الأردن</li>
+              <li>المدير العام: فؤاد حدادين</li>
             </ul>
           </div>
         </div>
