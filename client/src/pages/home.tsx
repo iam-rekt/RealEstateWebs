@@ -170,20 +170,22 @@ export default function Home() {
             
             {/* Clean Typography */}
             <div className="mb-8">
-              <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-4 tracking-wide">
-                Rand Real Estate Development Company
-              </h1>
-              <h2 className="text-4xl lg:text-6xl font-light tracking-tight">
-                <span className="text-slate-900 font-extralight">Premium</span>
+              <h1 className="text-2xl lg:text-4xl font-bold text-gray-800 mb-6 tracking-wide leading-tight">
+                <span className="text-blue-600">Rand Real Estate</span>
                 <br />
-                <span className="text-blue-600 font-medium">Real Estate</span>
+                <span className="text-gray-700">Development Company</span>
+              </h1>
+              <h2 className="text-3xl lg:text-5xl font-light tracking-tight leading-tight">
+                <span className="text-gray-700 font-light">Premium</span>
+                <br />
+                <span className="text-blue-500 font-medium">Real Estate</span>
               </h2>
             </div>
             
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
             
-            <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
-              Discover exceptional properties in <span className="text-blue-600 font-medium">Amman</span> with expert guidance and personalized service
+            <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+              Discover exceptional properties in <span className="text-blue-500 font-medium">Amman</span> with expert guidance and personalized service
             </p>
           </div>
           
@@ -201,7 +203,15 @@ export default function Home() {
               </div>
               
               <div className="flex justify-center">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-medium transition-colors duration-200 shadow-md hover:shadow-lg">
+                <button 
+                  onClick={() => {
+                    const propertiesSection = document.getElementById('properties');
+                    if (propertiesSection) {
+                      propertiesSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+                >
                   Explore Properties
                 </button>
               </div>
