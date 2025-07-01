@@ -468,42 +468,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Statistics Section - Enhanced with dynamic effects */}
-      <section className="py-16 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 opacity-50"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center animate-fade-in-up hover-lift">
-              <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float">
-                <Building className="w-8 h-8" />
-              </div>
-              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">500+</h4>
-              <p className="text-gray-700 font-medium text-lg">قطعة أرض مدرجة</p>
-            </div>
-            <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.1s"}}>
-              <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "1s"}}>
-                <Users className="w-8 h-8" />
-              </div>
-              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">1200+</h4>
-              <p className="text-gray-700 font-medium text-lg">عميل راضٍ</p>
-            </div>
-            <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.2s"}}>
-              <div className="bg-gradient-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "2s"}}>
-                <Award className="w-8 h-8" />
-              </div>
-              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">15+</h4>
-              <p className="text-gray-700 font-medium text-lg">سنة خبرة</p>
-            </div>
-            <div className="text-center animate-fade-in-up hover-lift" style={{animationDelay: "0.3s"}}>
-              <div className="bg-gradient-secondary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: "3s"}}>
-                <TrendingUp className="w-8 h-8" />
-              </div>
-              <h4 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">98%</h4>
-              <p className="text-gray-700 font-medium text-lg">معدل النجاح</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       <Footer />
     </div>
