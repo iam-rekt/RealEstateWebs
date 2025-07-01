@@ -20,9 +20,10 @@
 
 ## What render.yaml Does
 - **Builds your app**: Runs `npm run build` to create production files
-- **Starts server**: Runs `npm start` to launch your Express server
+- **Starts server**: Runs `node server/production-server.js` (custom production server)
 - **Generates SESSION_SECRET**: Automatically creates a secure session secret
 - **Free hosting**: Uses Render's free tier
+- **Fixed static serving**: Custom server properly serves frontend and assets
 
 ## Admin Panel Features
 ✅ **Login persists** - Sessions work properly on Render
