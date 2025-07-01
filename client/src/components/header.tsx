@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useQuery } from "@tanstack/react-query";
-import hadprpLogo from "@assets/Haddidinlogo_1751177753090.png";
+// Logo will be loaded from public folder
 
 export default function Header() {
   const [location] = useLocation();
@@ -45,8 +45,8 @@ export default function Header() {
               <Link href="/">
                 <div className="cursor-pointer transition-transform duration-300 group-hover:scale-105 flex items-center space-x-4">
                   <img 
-                    src={hadprpLogo} 
-                    alt="Haddadin Real Estate" 
+                    src="/logo.png" 
+                    alt="Rand Real Estate Development Company" 
                     className="h-12 w-auto object-contain"
                   />
                   <div>

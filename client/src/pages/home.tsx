@@ -2,7 +2,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useState } from "react";
 import { Check, MapPin, Phone, Mail, Clock, Star, ArrowRight, Building, Users, Award, TrendingUp, Sparkles, Home as HomeIcon, TreePine, ShoppingCart, Key, X, Search } from "lucide-react";
-import hadprpLogo from "@assets/Haddidinlogo_1751177753090.png";
+// Logo will be loaded from public folder
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
@@ -162,8 +162,8 @@ export default function Home() {
             {/* Logo */}
             <div className="mb-12">
               <img 
-                src={hadprpLogo} 
-                alt="Haddadin Real Estate" 
+                src="/logo.png" 
+                alt="Rand Real Estate Development Company" 
                 className="h-32 w-auto object-contain mx-auto"
               />
             </div>
