@@ -12,12 +12,12 @@ import { apiRequest } from "@/lib/queryClient";
 import type { ContactFormData } from "@/lib/types";
 
 const contactSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Please enter a valid email address"),
+  firstName: z.string().min(1, "الاسم الأول مطلوب"),
+  lastName: z.string().min(1, "اسم العائلة مطلوب"),
+  email: z.string().email("يرجى إدخال بريد إلكتروني صحيح"),
   phone: z.string().optional(),
-  subject: z.string().min(1, "Please select a subject"),
-  message: z.string().min(10, "Message must be at least 10 characters long"),
+  subject: z.string().min(1, "يرجى اختيار موضوع"),
+  message: z.string().min(10, "الرسالة يجب أن تكون 10 أحرف على الأقل"),
 });
 
 export default function ContactForm() {
@@ -42,15 +42,15 @@ export default function ContactForm() {
     },
     onSuccess: () => {
       toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. We'll get back to you soon.",
+        title: "تم إرسال الرسالة!",
+        description: "شكراً لك على رسالتك. سنتواصل معك قريباً.",
       });
       form.reset();
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
+        title: "خطأ",
+        description: error.message || "فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.",
         variant: "destructive",
       });
     },
@@ -61,7 +61,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-neutral p-8 rounded-xl">
+    <div className="bg-neutral p-8 rounded-xl" dir="rtl">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -72,9 +72,9 @@ export default function ContactForm() {
                 <FormItem>
                   <FormControl>
                     <Input 
-                      placeholder="First Name" 
+                      placeholder="الاسم الأول" 
                       {...field}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                      className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-right"
                       disabled={contactMutation.isPending}
                     />
                   </FormControl>
@@ -88,9 +88,9 @@ export default function ContactForm() {
                 <FormItem>
                   <FormControl>
                     <Input 
-                      placeholder="Last Name" 
+                      placeholder="اسم العائلة" 
                       {...field}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                      className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-right"
                       disabled={contactMutation.isPending}
                     />
                   </FormControl>
@@ -107,9 +107,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Input 
                     type="email" 
-                    placeholder="Email Address" 
+                    placeholder="البريد الإلكتروني" 
                     {...field}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-right"
                     disabled={contactMutation.isPending}
                   />
                 </FormControl>
@@ -125,9 +125,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Input 
                     type="tel" 
-                    placeholder="Phone Number" 
+                    placeholder="رقم الهاتف" 
                     {...field}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-right"
                     disabled={contactMutation.isPending}
                   />
                 </FormControl>
@@ -142,16 +142,15 @@ export default function ContactForm() {
               <FormItem>
                 <Select onValueChange={field.onChange} value={field.value} disabled={contactMutation.isPending}>
                   <FormControl>
-                    <SelectTrigger className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
-                      <SelectValue placeholder="Select Subject" />
+                    <SelectTrigger className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-right">
+                      <SelectValue placeholder="اختر الموضوع" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="buying">Interested in Buying</SelectItem>
-                    <SelectItem value="selling">Interested in Selling</SelectItem>
-                    <SelectItem value="renting">Interested in Renting</SelectItem>
-                    <SelectItem value="investment">Investment Opportunities</SelectItem>
-                    <SelectItem value="general">General Inquiry</SelectItem>
+                    <SelectItem value="buying">مهتم بالشراء</SelectItem>
+                    <SelectItem value="selling">مهتم بالبيع</SelectItem>
+                    <SelectItem value="investment">فرص استثمارية</SelectItem>
+                    <SelectItem value="general">استفسار عام</SelectItem>
                   </SelectContent>
                 </Select>
               </FormItem>
@@ -166,9 +165,9 @@ export default function ContactForm() {
                 <FormControl>
                   <Textarea 
                     rows={4} 
-                    placeholder="Your Message" 
+                    placeholder="رسالتك" 
                     {...field}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary resize-none text-right"
                     disabled={contactMutation.isPending}
                   />
                 </FormControl>
@@ -181,7 +180,7 @@ export default function ContactForm() {
             disabled={contactMutation.isPending}
             className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-lg transition-colors duration-200"
           >
-            {contactMutation.isPending ? "Sending..." : "Send Message"}
+            {contactMutation.isPending ? "جاري الإرسال..." : "إرسال الرسالة"}
           </Button>
         </form>
       </Form>
