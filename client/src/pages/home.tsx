@@ -104,12 +104,12 @@ export default function Home() {
     return filtered;
   };
 
-  // Amman areas for filter
+  // مناطق عمان للفلترة
   const ammanAreas = [
-    "Abdoun", "Sweifieh", "Dabouq", "Deir Ghbar", "Um Uthaina", "Khalda",
-    "Tla'a Al-Ali", "Shmeisani", "Jabal Amman", "Jabal Al-Weibdeh", "Luweibdeh",
-    "Al-Rabiah", "Marj Al-Hamam", "Airport Road", "Sports City", "Al-Kursi",
-    "Tabarbour", "Mecca Street", "Gardens", "University Street", "Al-Jubeiha"
+    "عبدون", "صويفية", "دابوق", "دير غبار", "أم أذينة", "خلدا",
+    "تلاع العلي", "الشميساني", "جبل عمان", "جبل الويبدة", "اللويبدة",
+    "الرابية", "مرج الحمام", "شارع المطار", "المدينة الرياضية", "الكرسي",
+    "طبربور", "شارع مكة", "الجاردنز", "شارع الجامعة", "الجبيهة"
   ];
 
   const searchMutation = useMutation({
@@ -158,12 +158,12 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center animate-fade-in-up">
+          <div className="text-center animate-fade-in-up" dir="rtl">
             {/* Logo */}
             <div className="mb-12">
               <img 
                 src="/logo.png" 
-                alt="Rand Real Estate Development Company" 
+                alt="شركة راند للتطوير العقاري" 
                 className="h-32 w-auto object-contain mx-auto"
               />
             </div>
@@ -171,21 +171,21 @@ export default function Home() {
             {/* Clean Typography */}
             <div className="mb-8">
               <h1 className="text-2xl lg:text-4xl font-bold text-gray-800 mb-6 tracking-wide leading-tight">
-                <span className="text-blue-600">Rand Real Estate</span>
+                <span className="text-blue-600">شركة راند</span>
                 <br />
-                <span className="text-gray-700">Development Company</span>
+                <span className="text-gray-700">للتطوير العقاري</span>
               </h1>
               <h2 className="text-3xl lg:text-5xl font-light tracking-tight leading-tight">
-                <span className="text-gray-700 font-light">Premium</span>
+                <span className="text-gray-700 font-light">عقارات</span>
                 <br />
-                <span className="text-blue-500 font-medium">Real Estate</span>
+                <span className="text-blue-500 font-medium">مميزة</span>
               </h2>
             </div>
             
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
             
             <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
-              Discover exceptional properties in <span className="text-blue-500 font-medium">Amman</span> with expert guidance and personalized service
+              اكتشف العقارات الاستثنائية في <span className="text-blue-500 font-medium">عمان</span> مع إرشاد الخبراء وخدمة شخصية مميزة
             </p>
           </div>
           
@@ -198,8 +198,8 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                   </svg>
                 </div>
-                <h3 className="text-2xl font-light text-slate-800 mb-2">Find Your Property</h3>
-                <p className="text-slate-600 font-light">Start your search with our advanced filtering system</p>
+                <h3 className="text-2xl font-light text-slate-800 mb-2">ابحث عن عقارك</h3>
+                <p className="text-slate-600 font-light">ابدأ بحثك بنظام الفلترة المتقدم لدينا</p>
               </div>
               
               <div className="flex justify-center">
@@ -212,7 +212,7 @@ export default function Home() {
                   }}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
                 >
-                  Explore Properties
+                  استكشف العقارات
                 </button>
               </div>
             </div>
@@ -227,68 +227,64 @@ export default function Home() {
       {/* Property Categories and Regions */}
       <section id="properties" className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
+          <div className="text-center mb-8" dir="rtl">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Explore Properties
+              استكشف العقارات
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Browse properties by category or explore different areas of Amman
+              تصفح العقارات حسب الفئة أو استكشف مناطق مختلفة في عمان
             </p>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5 mb-6 bg-white rounded-xl p-3 shadow-sm border border-sky-200 min-h-[60px]">
+            <TabsList className="grid w-full grid-cols-4 mb-6 bg-white rounded-xl p-3 shadow-sm border border-sky-200 min-h-[60px]" dir="rtl">
               <TabsTrigger value="all" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
                 <Star className="w-3 h-3" />
-                All
+                الكل
               </TabsTrigger>
               <TabsTrigger value="featured" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
                 <Sparkles className="w-3 h-3" />
-                Featured
+                مميز
               </TabsTrigger>
-              <TabsTrigger value="buy" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
-                <ShoppingCart className="w-3 h-3" />
-                For Sale
+              <TabsTrigger value="land" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <TreePine className="w-3 h-3" />
+                أراضي
               </TabsTrigger>
-              <TabsTrigger value="renting" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
-                <Key className="w-3 h-3" />
-                For Rent
-              </TabsTrigger>
-              <TabsTrigger value="regions" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
-                <MapPin className="w-3 h-3" />
-                By Area
+              <TabsTrigger value="apartment" className="flex items-center justify-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-400 data-[state=active]:to-sky-500 data-[state=active]:text-white rounded-lg transition-all duration-300 font-medium text-xs py-2 px-2">
+                <Building className="w-3 h-3" />
+                شقق
               </TabsTrigger>
             </TabsList>
 
             {/* Modern Filter Bar */}
-            <div className="bg-white rounded-lg p-4 mb-6 shadow-sm border border-sky-100">
+            <div className="bg-white rounded-lg p-4 mb-6 shadow-sm border border-sky-100" dir="rtl">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Property Type</label>
+                  <label className="text-sm font-medium text-gray-700">نوع العقار</label>
                   <select 
                     value={propertyType} 
                     onChange={(e) => setPropertyType(e.target.value)}
-                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
-                    <option value="">All Types</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="house">House</option>
-                    <option value="villa">Villa</option>
-                    <option value="studio">Studio</option>
+                    <option value="">جميع الأنواع</option>
+                    <option value="land">أرض</option>
+                    <option value="apartment">شقة</option>
+                    <option value="villa">فيلا</option>
+                    <option value="farm">مزرعة</option>
                   </select>
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Price Range</label>
+                  <label className="text-sm font-medium text-gray-700">نطاق السعر</label>
                   <select 
                     value={priceRange} 
                     onChange={(e) => setPriceRange(e.target.value)}
-                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm"
+                    className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
-                    <option value="">All Prices</option>
-                    <option value="0-300000">Up to €300,000</option>
-                    <option value="300000-500000">€300,000 - €500,000</option>
-                    <option value="500000+">€500,000+</option>
+                    <option value="">جميع الأسعار</option>
+                    <option value="0-100000">حتى 100,000 د.أ</option>
+                    <option value="100000-300000">100,000 - 300,000 د.أ</option>
+                    <option value="300000+">300,000+ د.أ</option>
                   </select>
                 </div>
                 
