@@ -36,17 +36,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <h5 className="text-2xl font-bold mb-4">{companyName}</h5>
-            <p className="text-gray-100 mb-4">
+            <p className="text-gray-50 mb-4">
               {companyDescription}
             </p>
             <div className="flex space-x-4 space-x-reverse justify-end">
-              <a href={facebookUrl || "#"} target={facebookUrl && facebookUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-100 hover:text-white transition-colors duration-200">
+              <a href={facebookUrl || "#"} target={facebookUrl && facebookUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-50 hover:text-white transition-colors duration-200">
                 <Facebook className="h-6 w-6" />
               </a>
-              <a href={instagramUrl || "#"} target={instagramUrl && instagramUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-100 hover:text-white transition-colors duration-200">
+              <a href={instagramUrl || "#"} target={instagramUrl && instagramUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-50 hover:text-white transition-colors duration-200">
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href={linkedinUrl || "#"} target={linkedinUrl && linkedinUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-100 hover:text-white transition-colors duration-200">
+              <a href={linkedinUrl || "#"} target={linkedinUrl && linkedinUrl !== "#" ? "_blank" : "_self"} rel="noopener noreferrer" className="text-gray-50 hover:text-white transition-colors duration-200">
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>
@@ -54,7 +54,7 @@ export default function Footer() {
           
           <div>
             <h6 className="font-semibold mb-4">روابط سريعة</h6>
-            <ul className="space-y-2 text-gray-100">
+            <ul className="space-y-2 text-gray-50">
               <li>
                 <Link href="/properties">
                   <span className="hover:text-white transition-colors duration-200 cursor-pointer">العقارات</span>
@@ -89,7 +89,7 @@ export default function Footer() {
           
           <div>
             <h6 className="font-semibold mb-4">معلومات الاتصال</h6>
-            <ul className="space-y-2 text-gray-100">
+            <ul className="space-y-2 text-gray-50">
               <li>الصويفية - مجمع فرح التجاري - الطابق الثاني</li>
               <li>الهاتف: +962 6 5826440</li>
               <li>الفاكس: +962 6 5826408</li>
@@ -109,12 +109,12 @@ export default function Footer() {
         <hr className="border-gray-600 my-8" />
         
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-100 text-sm">&copy; 2024 {companyName}. جميع الحقوق محفوظة.</p>
+          <p className="text-gray-50 text-sm">&copy; 2024 {companyName}. جميع الحقوق محفوظة.</p>
           <div className="flex space-x-6 space-x-reverse mt-4 md:mt-0">
-            <a href="#" className="text-gray-100 hover:text-white text-sm transition-colors duration-200">
+            <a href="#" className="text-gray-50 hover:text-white text-sm transition-colors duration-200">
               سياسة الخصوصية
             </a>
-            <a href="#" className="text-gray-100 hover:text-white text-sm transition-colors duration-200">
+            <a href="#" className="text-gray-50 hover:text-white text-sm transition-colors duration-200">
               شروط الخدمة
             </a>
           </div>
