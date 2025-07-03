@@ -22,8 +22,6 @@ export default function Header() {
   const navigation = [
     { name: "العقارات", href: "/properties" },
     { name: "الخدمات", href: "/#services" },
-    { name: "من نحن", href: "/#about" },
-    { name: "اتصل بنا", href: "/#contact" },
   ];
 
   const handleNavClick = (href: string) => {
