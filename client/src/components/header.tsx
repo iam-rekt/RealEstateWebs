@@ -44,11 +44,11 @@ export default function Header() {
                 <div className="cursor-pointer transition-transform duration-300 group-hover:scale-105 flex items-center space-x-4">
                   <img 
                     src="/logo.png" 
-                    alt="شركة رند" 
+                    alt="شركة رند للاستثمار العقاري و تطويره" 
                     className="h-12 w-auto object-contain"
                   />
                   <div className="text-right">
-                    <h1 className="text-lg font-bold text-gray-800 tracking-wide">شركة رند</h1>
+                    <h1 className="text-lg font-bold text-gray-800 tracking-wide">شركة رند للاستثمار العقاري و تطويره</h1>
                     <p className="text-xs text-gray-500 font-medium">عمان • {tagline}</p>
                   </div>
                 </div>
