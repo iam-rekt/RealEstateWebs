@@ -148,7 +148,7 @@ export default function Home() {
             <div className="mb-12">
               <img 
                 src="/logo.png" 
-                alt="شركة راند للتطوير العقاري" 
+                alt="شركة رند" 
                 className="h-32 w-auto object-contain mx-auto"
               />
             </div>
@@ -156,15 +156,9 @@ export default function Home() {
             {/* Clean Typography */}
             <div className="mb-8">
               <h1 className="text-2xl lg:text-4xl font-bold text-gray-800 mb-6 tracking-wide leading-tight">
-                <span className="text-blue-600">شركة راند</span>
-                <br />
-                <span className="text-gray-700">للتطوير العقاري</span>
+                <span className="text-blue-600">شركة رند</span>
               </h1>
-              <h2 className="text-3xl lg:text-5xl font-light tracking-tight leading-tight">
-                <span className="text-gray-700 font-light">عقارات</span>
-                <br />
-                <span className="text-blue-500 font-medium">مميزة</span>
-              </h2>
+
             </div>
             
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
