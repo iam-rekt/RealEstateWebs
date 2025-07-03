@@ -144,28 +144,21 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center animate-fade-in-up" dir="rtl">
-            {/* Logo */}
-            <div className="mb-12">
-              <img 
-                src="/logo.png" 
-                alt="شركة رند" 
-                className="h-32 w-auto object-contain mx-auto"
-              />
-            </div>
-            
-            {/* Clean Typography */}
-            <div className="mb-8">
-              <h1 className="text-2xl lg:text-4xl font-bold text-gray-800 mb-6 tracking-wide leading-tight">
+            {/* Logo and Title Together */}
+            <div className="mb-8 flex flex-col items-center gap-6">
+              <h1 className="text-2xl lg:text-4xl font-bold text-gray-800 tracking-wide leading-tight flex items-center gap-4">
+                <img 
+                  src="/logo.png" 
+                  alt="شركة رند" 
+                  className="h-16 lg:h-20 w-auto object-contain"
+                />
                 <span className="text-blue-600">شركة رند</span>
               </h1>
-
             </div>
             
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
             
-            <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
-              اكتشف العقارات الاستثنائية في <span className="text-blue-500 font-medium">عمان</span> مع إرشاد الخبراء وخدمة شخصية مميزة
-            </p>
+
           </div>
           
           {/* Land Search Filters Card */}
