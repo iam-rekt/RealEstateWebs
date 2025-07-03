@@ -144,15 +144,15 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center animate-fade-in-up" dir="rtl">
-            {/* Logo and Title Together */}
-            <div className="mb-8 flex flex-col items-center gap-6">
-              <h1 className="text-2xl lg:text-4xl font-bold text-gray-800 tracking-wide leading-tight flex items-center gap-4">
-                <img 
-                  src="/logo.png" 
-                  alt="شركة رند" 
-                  className="h-16 lg:h-20 w-auto object-contain"
-                />
-                <span className="text-blue-600">شركة رند</span>
+            {/* Logo and Title */}
+            <div className="mb-8 flex flex-col items-center gap-3">
+              <img 
+                src="/logo.png" 
+                alt="شركة رند" 
+                className="h-20 lg:h-24 w-auto object-contain"
+              />
+              <h1 className="text-2xl lg:text-4xl font-bold text-blue-600 tracking-wide leading-tight">
+                شركة رند
               </h1>
             </div>
             
