@@ -28,8 +28,6 @@ interface PropertyFormData {
   description: string;
   price: string;
   size: string;
-  bedrooms: string;
-  bathrooms: string;
   propertyType: string;
   location: string;
   address: string;
@@ -49,8 +47,6 @@ export default function Admin() {
     description: "",
     price: "",
     size: "",
-    bedrooms: "",
-    bathrooms: "",
     propertyType: "",
     location: "",
     address: "",
@@ -165,8 +161,8 @@ export default function Admin() {
         description: data.description,
         price: data.price,
         size: parseInt(data.size),
-        bedrooms: parseInt(data.bedrooms),
-        bathrooms: parseInt(data.bathrooms),
+        bedrooms: 0, // Set to 0 for land properties
+        bathrooms: 0, // Set to 0 for land properties
         propertyType: data.propertyType,
         location: data.location,
         address: data.address,
@@ -208,8 +204,8 @@ export default function Admin() {
         description: data.description,
         price: data.price,
         size: parseInt(data.size),
-        bedrooms: parseInt(data.bedrooms),
-        bathrooms: parseInt(data.bathrooms),
+        bedrooms: 0, // Set to 0 for land properties
+        bathrooms: 0, // Set to 0 for land properties
         propertyType: data.propertyType,
         location: data.location,
         address: data.address,
@@ -249,8 +245,6 @@ export default function Admin() {
       description: "",
       price: "",
       size: "",
-      bedrooms: "",
-      bathrooms: "",
       propertyType: "",
       location: "",
       address: "",
@@ -272,8 +266,6 @@ export default function Admin() {
       description: property.description,
       price: property.price,
       size: property.size.toString(),
-      bedrooms: property.bedrooms.toString(),
-      bathrooms: property.bathrooms.toString(),
       propertyType: property.propertyType,
       location: property.location,
       address: property.address,
@@ -659,14 +651,14 @@ export default function Admin() {
           {/* Tabs */}
           <Tabs defaultValue="properties" className="w-full">
             <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="properties">Properties</TabsTrigger>
-              <TabsTrigger value="contacts">Contacts</TabsTrigger>
-              <TabsTrigger value="newsletters">Newsletters</TabsTrigger>
-              <TabsTrigger value="entrustments">Entrustments</TabsTrigger>
-              <TabsTrigger value="requests">Property Requests</TabsTrigger>
+              <TabsTrigger value="properties">الأراضي</TabsTrigger>
+              <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
+              <TabsTrigger value="newsletters">النشرة الإخبارية</TabsTrigger>
+              <TabsTrigger value="entrustments">الاستشارات</TabsTrigger>
+              <TabsTrigger value="requests">طلبات الأراضي</TabsTrigger>
               <TabsTrigger value="settings">
                 <Settings className="w-4 h-4 mr-1" />
-                Settings
+                الإعدادات
               </TabsTrigger>
             </TabsList>
 
@@ -676,21 +668,21 @@ export default function Admin() {
                 <CardHeader>
                   <div className="flex justify-between items-center">
                     <div>
-                      <CardTitle>Properties Management</CardTitle>
-                      <CardDescription>Manage all property listings</CardDescription>
+                      <CardTitle>إدارة الأراضي</CardTitle>
+                      <CardDescription>إدارة جميع قوائم الأراضي</CardDescription>
                     </div>
                     <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
                       <DialogTrigger asChild>
                         <Button onClick={handleCreateProperty}>
                           <Plus className="h-4 w-4 mr-2" />
-                          Add Property
+                          إضافة أرض
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                         <DialogHeader>
-                          <DialogTitle>Create New Property</DialogTitle>
+                          <DialogTitle>إضافة أرض جديدة</DialogTitle>
                           <DialogDescription>
-                            Add a new property to the listings
+                            إضافة أرض جديدة إلى القوائم
                           </DialogDescription>
                         </DialogHeader>
                         <form onSubmit={handleSubmit} className="space-y-4">
@@ -917,40 +909,21 @@ export default function Admin() {
                           required
                         />
                       </div>
-                      <div>
-                        <Label htmlFor="edit-bedrooms">Bedrooms</Label>
-                        <Input
-                          id="edit-bedrooms"
-                          type="number"
-                          value={formData.bedrooms}
-                          onChange={(e) => setFormData(prev => ({ ...prev, bedrooms: e.target.value }))}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="edit-bathrooms">Bathrooms</Label>
-                        <Input
-                          id="edit-bathrooms"
-                          type="number"
-                          value={formData.bathrooms}
-                          onChange={(e) => setFormData(prev => ({ ...prev, bathrooms: e.target.value }))}
-                          required
-                        />
-                      </div>
+
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="edit-propertyType">Property Type</Label>
+                        <Label htmlFor="edit-propertyType">نوع الأرض</Label>
                         <Select value={formData.propertyType} onValueChange={(value) => setFormData(prev => ({ ...prev, propertyType: value }))}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select type" />
+                            <SelectValue placeholder="اختر نوع الأرض" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="apartment">Apartment</SelectItem>
-                            <SelectItem value="house">House</SelectItem>
-                            <SelectItem value="villa">Villa</SelectItem>
-                            <SelectItem value="studio">Studio</SelectItem>
+                            <SelectItem value="land">أرض سكنية</SelectItem>
+                            <SelectItem value="farm">أرض زراعية</SelectItem>
+                            <SelectItem value="commercial">أرض تجارية</SelectItem>
+                            <SelectItem value="industrial">أرض صناعية</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>

@@ -21,8 +21,6 @@ const entrustmentSchema = z.object({
   propertyType: z.string().min(1, "Please select property type"),
   location: z.string().min(1, "Location is required"),
   size: z.string().optional(),
-  bedrooms: z.string().optional(),
-  bathrooms: z.string().optional(),
   description: z.string().min(10, "Description must be at least 10 characters long"),
   serviceType: z.string().min(1, "Please select service type"),
 });
@@ -30,7 +28,7 @@ const entrustmentSchema = z.object({
 export default function EntrustmentForm() {
   const { toast } = useToast();
   
-  const form = useForm<EntrustmentFormData & { size: string; bedrooms: string; bathrooms: string }>({
+  const form = useForm<EntrustmentFormData & { size: string }>({
     resolver: zodResolver(entrustmentSchema),
     defaultValues: {
       firstName: "",
@@ -40,8 +38,6 @@ export default function EntrustmentForm() {
       propertyType: "",
       location: "",
       size: "",
-      bedrooms: "",
-      bathrooms: "",
       description: "",
       serviceType: "",
     },

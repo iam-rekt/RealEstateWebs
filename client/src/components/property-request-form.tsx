@@ -24,8 +24,6 @@ const propertyRequestSchema = z.object({
   maxPrice: z.string().optional(),
   minSize: z.string().optional(),
   maxSize: z.string().optional(),
-  bedrooms: z.string().optional(),
-  bathrooms: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters long"),
 });
 
@@ -35,8 +33,6 @@ export default function PropertyRequestForm() {
   const form = useForm<PropertyRequestFormData & { 
     minSize: string; 
     maxSize: string; 
-    bedrooms: string; 
-    bathrooms: string; 
   }>({
     resolver: zodResolver(propertyRequestSchema),
     defaultValues: {
