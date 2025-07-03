@@ -20,7 +20,7 @@ export default function Footer() {
   const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
 
   // Fallback values
-  const companyName = settings.footer_company_name || "شركة رند";
+  const companyName = settings.footer_company_name || "شركة رند للاستثمار العقاري و تطويره";
   const companyDescription = settings.footer_description || "شريكك الموثوق في الأراضي في عمان. نتخصص في ربط المشترين والمستثمرين بالأراضي الاستثنائية في جميع أنحاء منطقة عمان الكبرى.";
   const address = settings.footer_address || "عمان، الأردن";
   const phone = settings.footer_phone || "+962 6 XXX XXXX";

@@ -148,11 +148,11 @@ export default function Home() {
             <div className="mb-8 flex flex-col items-center gap-3">
               <img 
                 src="/logo.png" 
-                alt="شركة رند" 
+                alt="شركة رند للاستثمار العقاري و تطويره" 
                 className="h-20 lg:h-24 w-auto object-contain"
               />
               <h1 className="text-2xl lg:text-4xl font-bold text-blue-600 tracking-wide leading-tight">
-                شركة رند
+                شركة رند للاستثمار العقاري و تطويره
               </h1>
             </div>
             
