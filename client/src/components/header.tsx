@@ -95,25 +95,25 @@ export default function Header() {
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <div className="flex flex-col space-y-6 mt-8">
                   {navigation.map((item) => (
-                    <Link key={item.name} href={item.href}>
-                      <a 
-                        className={`block px-4 py-3 text-xl font-semibold rounded-xl transition-all duration-300 tracking-wide ${
-                          location === item.href 
-                            ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600" 
-                            : "text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:scale-105"
-                        }`}
-                        onClick={(e) => {
-                          if (item.href.startsWith("/#")) {
-                            e.preventDefault();
-                            handleNavClick(item.href);
-                          } else {
-                            setMobileMenuOpen(false);
-                          }
-                        }}
-                      >
-                        {item.name}
-                      </a>
-                    </Link>
+                    <button
+                      key={item.name}
+                      className={`block px-4 py-3 text-xl font-semibold rounded-xl transition-all duration-300 tracking-wide text-right ${
+                        location === item.href 
+                          ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600" 
+                          : "text-gray-700 hover:text-blue-600 hover:bg-blue-50 hover:scale-105"
+                      }`}
+                      onClick={(e) => {
+                        if (item.href.startsWith("/#")) {
+                          e.preventDefault();
+                          handleNavClick(item.href);
+                        } else {
+                          setMobileMenuOpen(false);
+                          window.location.href = item.href;
+                        }
+                      }}
+                    >
+                      {item.name}
+                    </button>
                   ))}
                 </div>
               </SheetContent>
