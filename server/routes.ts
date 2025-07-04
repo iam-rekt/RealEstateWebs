@@ -105,7 +105,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   }));
 
   // Input validation middleware
-  const validateInput = (req: any, res: any, next: any) => {
+  const validateInput = (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ 
@@ -124,7 +124,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       body('password').isLength({ min: 1, max: 100 })
     ],
     validateInput,
-    async (req, res) => {
+    async (req: express.Request, res: express.Response) => {
       try {
         const { username, password } = req.body;
 

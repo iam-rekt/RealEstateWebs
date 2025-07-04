@@ -56,7 +56,7 @@ export default function MultipleImageUpload({
         const formData = new FormData();
         formData.append('image', file);
 
-        const response = await fetch('/api/upload', {
+        const response = await fetch('/api/admin/upload', {
           method: 'POST',
           body: formData,
         });
