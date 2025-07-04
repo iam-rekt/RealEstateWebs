@@ -320,6 +320,7 @@ export default function Admin() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/directorates"] });
       setDirectorateForm({ nameAr: "", nameEn: "", governorateId: "" });
+      setIsDirectorateDialogOpen(false);
       toast({
         title: "نجح الإضافة",
         description: "تم إضافة المديرية بنجاح",
@@ -1576,7 +1577,7 @@ export default function Admin() {
                         <CardTitle>المديريات</CardTitle>
                         <CardDescription>إدارة مديريات المحافظات</CardDescription>
                       </div>
-                      <Dialog>
+                      <Dialog open={isDirectorateDialogOpen} onOpenChange={setIsDirectorateDialogOpen}>
                         <DialogTrigger asChild>
                           <Button>
                             <Plus className="w-4 h-4 mr-2" />
@@ -1715,7 +1716,7 @@ function PropertyTypesTab() {
   // Create property type mutation
   const createMutation = useMutation({
     mutationFn: async (data: InsertPropertyType) => {
-      return await apiRequest("/api/admin/property-types", "POST", data);
+      return await apiRequest("POST", "/api/admin/property-types", data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/property-types"] });
@@ -1738,7 +1739,7 @@ function PropertyTypesTab() {
   // Update property type mutation
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: Partial<InsertPropertyType> }) => {
-      return await apiRequest(`/api/admin/property-types/${id}`, "PUT", data);
+      return await apiRequest("PUT", `/api/admin/property-types/${id}`, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/property-types"] });
@@ -1761,7 +1762,7 @@ function PropertyTypesTab() {
   // Delete property type mutation
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      return await apiRequest(`/api/admin/property-types/${id}`, "DELETE");
+      return await apiRequest("DELETE", `/api/admin/property-types/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/property-types"] });
