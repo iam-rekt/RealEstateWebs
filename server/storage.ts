@@ -182,6 +182,12 @@ export class MemStorage implements IStorage {
         location: "عبدون، عمان",
         address: "دوار عبدون، عمان",
         imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        governorateId: 1, // عمان
+        directorateId: 1, // عبدون
+        village: "عبدون",
+        basin: "حوض عبدون",
+        neighborhood: "حي الدوار الأول",
+        plotNumber: "201",
         featured: true,
         available: true,
         createdAt: new Date()
@@ -198,6 +204,12 @@ export class MemStorage implements IStorage {
         location: "الصويفية، عمان",
         address: "شارع الثقافة، الصويفية",
         imageUrl: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        governorateId: 1,
+        directorateId: 2,
+        village: "الصويفية",
+        basin: "حوض الصويفية",
+        neighborhood: "حي شارع الثقافة",
+        plotNumber: "105",
         featured: false,
         available: true,
         createdAt: new Date()
@@ -214,6 +226,12 @@ export class MemStorage implements IStorage {
         location: "جبل عمان، عمان",
         address: "شارع الرينبو، جبل عمان",
         imageUrl: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        governorateId: 1,
+        directorateId: 3,
+        village: null,
+        basin: null,
+        neighborhood: null,
+        plotNumber: null,
         featured: true,
         available: true,
         createdAt: new Date()
@@ -230,6 +248,12 @@ export class MemStorage implements IStorage {
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
         imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        governorateId: 1,
+        directorateId: 4,
+        village: null,
+        basin: null,
+        neighborhood: null,
+        plotNumber: null,
         featured: true,
         available: true,
         createdAt: new Date()
@@ -246,6 +270,12 @@ export class MemStorage implements IStorage {
         location: "جبل اللويبدة، عمان",
         address: "الدوار الأول، جبل اللويبدة",
         imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        governorateId: 1,
+        directorateId: 5,
+        village: null,
+        basin: null,
+        neighborhood: null,
+        plotNumber: null,
         featured: false,
         available: true,
         createdAt: new Date()
@@ -262,6 +292,12 @@ export class MemStorage implements IStorage {
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
         imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        governorateId: 1,
+        directorateId: 6,
+        village: null,
+        basin: null,
+        neighborhood: null,
+        plotNumber: null,
         featured: false,
         available: true,
         createdAt: new Date()
@@ -316,6 +352,12 @@ export class MemStorage implements IStorage {
     const property: Property = {
       id: this.currentPropertyId++,
       ...insertProperty,
+      governorateId: insertProperty.governorateId ?? null,
+      directorateId: insertProperty.directorateId ?? null,
+      village: insertProperty.village ?? null,
+      basin: insertProperty.basin ?? null,
+      neighborhood: insertProperty.neighborhood ?? null,
+      plotNumber: insertProperty.plotNumber ?? null,
       featured: insertProperty.featured ?? false,
       available: insertProperty.available ?? true,
       createdAt: new Date()
@@ -339,7 +381,7 @@ export class MemStorage implements IStorage {
 
   async subscribeNewsletter(insertNewsletter: InsertNewsletter): Promise<Newsletter> {
     // Check for existing email
-    for (const newsletter of this.newsletters.values()) {
+    for (const newsletter of Array.from(this.newsletters.values())) {
       if (newsletter.email === insertNewsletter.email) {
         throw new Error("Email already subscribed to newsletter");
       }
@@ -396,6 +438,12 @@ export class MemStorage implements IStorage {
     const updated: Property = {
       ...existing,
       ...propertyData,
+      governorateId: propertyData.governorateId !== undefined ? propertyData.governorateId : existing.governorateId,
+      directorateId: propertyData.directorateId !== undefined ? propertyData.directorateId : existing.directorateId,
+      village: propertyData.village !== undefined ? propertyData.village : existing.village,
+      basin: propertyData.basin !== undefined ? propertyData.basin : existing.basin,
+      neighborhood: propertyData.neighborhood !== undefined ? propertyData.neighborhood : existing.neighborhood,
+      plotNumber: propertyData.plotNumber !== undefined ? propertyData.plotNumber : existing.plotNumber,
     };
     
     this.properties.set(id, updated);
@@ -462,7 +510,7 @@ export class MemStorage implements IStorage {
   }
 
   async getAdminByUsername(username: string): Promise<Admin | undefined> {
-    for (const admin of this.admins.values()) {
+    for (const admin of Array.from(this.admins.values())) {
       if (admin.username === username) {
         return admin;
       }
@@ -583,7 +631,7 @@ export class MemStorage implements IStorage {
         id: this.currentDirectorateId++,
         governorateId: 1, // Amman
         nameAr: dir,
-        nameEn: undefined,
+        nameEn: null,
         createdAt: new Date()
       };
       this.directorates.set(directorate.id, directorate);
@@ -599,6 +647,7 @@ export class MemStorage implements IStorage {
     const newGovernorate: Governorate = {
       id: this.currentGovernorateId++,
       ...governorate,
+      nameEn: governorate.nameEn ?? null,
       createdAt: new Date()
     };
     this.governorates.set(newGovernorate.id, newGovernorate);
@@ -619,7 +668,7 @@ export class MemStorage implements IStorage {
 
   async deleteGovernorate(id: number): Promise<boolean> {
     // Also delete related directorates
-    for (const [dirId, directorate] of this.directorates.entries()) {
+    for (const [dirId, directorate] of Array.from(this.directorates.entries())) {
       if (directorate.governorateId === id) {
         this.directorates.delete(dirId);
       }
@@ -642,6 +691,8 @@ export class MemStorage implements IStorage {
     const newDirectorate: Directorate = {
       id: this.currentDirectorateId++,
       ...directorate,
+      nameEn: directorate.nameEn ?? null,
+      governorateId: directorate.governorateId ?? null,
       createdAt: new Date()
     };
     this.directorates.set(newDirectorate.id, newDirectorate);
@@ -699,6 +750,8 @@ export class MemStorage implements IStorage {
     const newPropertyType: PropertyType = {
       id: this.currentPropertyTypeId++,
       ...propertyType,
+      nameEn: propertyType.nameEn ?? null,
+      isActive: propertyType.isActive ?? true,
       createdAt: new Date()
     };
     this.propertyTypes.set(newPropertyType.id, newPropertyType);

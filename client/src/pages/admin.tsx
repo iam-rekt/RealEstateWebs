@@ -32,6 +32,12 @@ interface PropertyFormData {
   location: string;
   address: string;
   imageUrl: string;
+  governorateId: string;
+  directorateId: string;
+  village: string;
+  basin: string;
+  neighborhood: string;
+  plotNumber: string;
   featured: boolean;
   available: boolean;
 }
@@ -51,6 +57,12 @@ export default function Admin() {
     location: "",
     address: "",
     imageUrl: "",
+    governorateId: "",
+    directorateId: "",
+    village: "",
+    basin: "",
+    neighborhood: "",
+    plotNumber: "",
     featured: false,
     available: true,
   });
@@ -179,6 +191,12 @@ export default function Admin() {
         location: data.location,
         address: data.address,
         imageUrl: data.imageUrl,
+        governorateId: data.governorateId ? parseInt(data.governorateId) : null,
+        directorateId: data.directorateId ? parseInt(data.directorateId) : null,
+        village: data.village || null,
+        basin: data.basin || null,
+        neighborhood: data.neighborhood || null,
+        plotNumber: data.plotNumber || null,
         featured: data.featured,
         available: data.available,
       };
@@ -222,6 +240,12 @@ export default function Admin() {
         location: data.location,
         address: data.address,
         imageUrl: data.imageUrl,
+        governorateId: data.governorateId ? parseInt(data.governorateId) : null,
+        directorateId: data.directorateId ? parseInt(data.directorateId) : null,
+        village: data.village || null,
+        basin: data.basin || null,
+        neighborhood: data.neighborhood || null,
+        plotNumber: data.plotNumber || null,
         featured: data.featured,
         available: data.available,
       };
@@ -261,6 +285,12 @@ export default function Admin() {
       location: "",
       address: "",
       imageUrl: "",
+      governorateId: "",
+      directorateId: "",
+      village: "",
+      basin: "",
+      neighborhood: "",
+      plotNumber: "",
       featured: false,
       available: true,
     });
@@ -282,6 +312,12 @@ export default function Admin() {
       location: property.location,
       address: property.address,
       imageUrl: property.imageUrl,
+      governorateId: property.governorateId?.toString() || "",
+      directorateId: property.directorateId?.toString() || "",
+      village: property.village || "",
+      basin: property.basin || "",
+      neighborhood: property.neighborhood || "",
+      plotNumber: property.plotNumber || "",
       featured: property.featured || false,
       available: property.available !== false,
     });
@@ -841,6 +877,69 @@ export default function Admin() {
                             />
                           </div>
 
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="governorateId">المحافظة</Label>
+                              <Input
+                                id="governorateId"
+                                value={formData.governorateId}
+                                onChange={(e) => setFormData(prev => ({ ...prev, governorateId: e.target.value }))}
+                                placeholder="اختر المحافظة"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="directorateId">المديرية</Label>
+                              <Input
+                                id="directorateId"
+                                value={formData.directorateId}
+                                onChange={(e) => setFormData(prev => ({ ...prev, directorateId: e.target.value }))}
+                                placeholder="اختر المديرية"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="village">القرية</Label>
+                              <Input
+                                id="village"
+                                value={formData.village}
+                                onChange={(e) => setFormData(prev => ({ ...prev, village: e.target.value }))}
+                                placeholder="القرية"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="basin">الحوض</Label>
+                              <Input
+                                id="basin"
+                                value={formData.basin}
+                                onChange={(e) => setFormData(prev => ({ ...prev, basin: e.target.value }))}
+                                placeholder="الحوض"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="neighborhood">الحي</Label>
+                              <Input
+                                id="neighborhood"
+                                value={formData.neighborhood}
+                                onChange={(e) => setFormData(prev => ({ ...prev, neighborhood: e.target.value }))}
+                                placeholder="الحي"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="plotNumber">رقم القطعة</Label>
+                              <Input
+                                id="plotNumber"
+                                value={formData.plotNumber}
+                                onChange={(e) => setFormData(prev => ({ ...prev, plotNumber: e.target.value }))}
+                                placeholder="رقم القطعة"
+                              />
+                            </div>
+                          </div>
+
                           <ImageUpload
                             value={formData.imageUrl}
                             onChange={(imageUrl) => setFormData(prev => ({ ...prev, imageUrl }))}
@@ -1015,6 +1114,69 @@ export default function Admin() {
                         onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
                         required
                       />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="edit-governorateId">المحافظة</Label>
+                        <Input
+                          id="edit-governorateId"
+                          value={formData.governorateId}
+                          onChange={(e) => setFormData(prev => ({ ...prev, governorateId: e.target.value }))}
+                          placeholder="اختر المحافظة"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-directorateId">المديرية</Label>
+                        <Input
+                          id="edit-directorateId"
+                          value={formData.directorateId}
+                          onChange={(e) => setFormData(prev => ({ ...prev, directorateId: e.target.value }))}
+                          placeholder="اختر المديرية"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="edit-village">القرية</Label>
+                        <Input
+                          id="edit-village"
+                          value={formData.village}
+                          onChange={(e) => setFormData(prev => ({ ...prev, village: e.target.value }))}
+                          placeholder="القرية"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-basin">الحوض</Label>
+                        <Input
+                          id="edit-basin"
+                          value={formData.basin}
+                          onChange={(e) => setFormData(prev => ({ ...prev, basin: e.target.value }))}
+                          placeholder="الحوض"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="edit-neighborhood">الحي</Label>
+                        <Input
+                          id="edit-neighborhood"
+                          value={formData.neighborhood}
+                          onChange={(e) => setFormData(prev => ({ ...prev, neighborhood: e.target.value }))}
+                          placeholder="الحي"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-plotNumber">رقم القطعة</Label>
+                        <Input
+                          id="edit-plotNumber"
+                          value={formData.plotNumber}
+                          onChange={(e) => setFormData(prev => ({ ...prev, plotNumber: e.target.value }))}
+                          placeholder="رقم القطعة"
+                        />
+                      </div>
                     </div>
 
                     <ImageUpload

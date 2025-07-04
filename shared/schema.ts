@@ -23,6 +23,13 @@ export const properties = pgTable("properties", {
   location: text("location").notNull(),
   address: text("address").notNull(),
   imageUrl: text("image_url").notNull(),
+  // Jordan-specific location fields
+  governorateId: integer("governorate_id").references(() => governorates.id),
+  directorateId: integer("directorate_id").references(() => directorates.id),
+  village: text("village"),
+  basin: text("basin"),
+  neighborhood: text("neighborhood"),
+  plotNumber: text("plot_number"),
   featured: boolean("featured").default(false),
   available: boolean("available").default(true),
   createdAt: timestamp("created_at").defaultNow(),
