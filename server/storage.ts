@@ -258,8 +258,8 @@ export class MemStorage implements IStorage {
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
         images: [
-          "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800",
-          "https://images.pexels.com/photos/2909077/pexels-photo-2909077.jpeg?auto=compress&cs=tinysrgb&w=800"
+          "/uploads/land-property-2.svg",
+          "/uploads/land-property-3.svg"
         ],
         governorateId: 1,
         directorateId: 4,
@@ -283,8 +283,8 @@ export class MemStorage implements IStorage {
         location: "جبل اللويبدة، عمان",
         address: "الدوار الأول، جبل اللويبدة",
         images: [
-          "https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=800",
-          "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800"
+          "/uploads/land-property-3.svg",
+          "/uploads/land-property-1.svg"
         ],
         governorateId: 1,
         directorateId: 5,
@@ -308,8 +308,8 @@ export class MemStorage implements IStorage {
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
         images: [
-          "https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&w=800",
-          "https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=800"
+          "/uploads/land-property-1.svg",
+          "/uploads/land-property-2.svg"
         ],
         governorateId: 1,
         directorateId: 6,
@@ -371,7 +371,7 @@ export class MemStorage implements IStorage {
     const property: Property = {
       id: this.currentPropertyId++,
       ...insertProperty,
-      images: insertProperty.images || ["https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"],
+      images: insertProperty.images || ["/uploads/land-property-1.svg"],
       governorateId: insertProperty.governorateId ?? null,
       directorateId: insertProperty.directorateId ?? null,
       village: insertProperty.village ?? null,

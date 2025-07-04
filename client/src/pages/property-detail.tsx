@@ -151,13 +151,13 @@ export default function PropertyDetail() {
               <div className="relative">
                 <div className="relative mb-4">
                   <img 
-                    src={property.images?.[currentImageIndex] || property.images?.[0] || "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800"} 
+                    src={property.images?.[currentImageIndex] || property.images?.[0] || "/uploads/land-property-1.svg"} 
                     alt={property.title}
                     className="w-full h-96 object-cover rounded-xl shadow-lg"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      if (target.src !== "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800") {
-                        target.src = "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      if (target.src !== "/uploads/land-property-1.svg") {
+                        target.src = "/uploads/land-property-1.svg";
                       }
                     }}
                   />
@@ -213,8 +213,8 @@ export default function PropertyDetail() {
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            if (target.src !== "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800") {
-                              target.src = "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800";
+                            if (target.src !== "/uploads/land-property-1.svg") {
+                              target.src = "/uploads/land-property-1.svg";
                             }
                           }}
                         />
@@ -339,13 +339,13 @@ export default function PropertyDetail() {
                   {relatedProperties.map((relatedProperty) => (
                     <Card key={relatedProperty.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                       <img 
-                        src={relatedProperty.images?.[0] || "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800"} 
+                        src={relatedProperty.images?.[0] || "/uploads/land-property-1.svg"} 
                         alt={relatedProperty.title}
                         className="w-full h-48 object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          if (target.src !== "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800") {
-                            target.src = "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800";
+                          if (target.src !== "/uploads/land-property-1.svg") {
+                            target.src = "/uploads/land-property-1.svg";
                           }
                         }}
                       />
