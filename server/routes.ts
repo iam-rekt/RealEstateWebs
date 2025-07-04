@@ -17,6 +17,9 @@ import {
 import { z } from "zod";
 import session from "express-session";
 import MemoryStore from "memorystore";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import { body, validationResult } from "express-validator";
 
 // Extend session interface
 declare module 'express-session' {
@@ -34,6 +37,55 @@ const isAdmin = (req: any, res: any, next: any) => {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Trust proxy for rate limiting (required for production behind load balancers)
+  app.set('trust proxy', 1);
+  
+  // Security headers with Helmet
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "blob:"],
+        fontSrc: ["'self'", "data:"],
+        connectSrc: ["'self'"],
+        mediaSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        childSrc: ["'none'"],
+        workerSrc: ["'none'"],
+        frameSrc: ["'none'"],
+        formAction: ["'self'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true
+    }
+  }));
+
+  // Rate limiting
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+  app.use('/api/', limiter);
+
+  // Stricter rate limiting for sensitive endpoints
+  const strictLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: 'Too many login attempts, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+
   // Setup session for admin auth using memory store
   const MemStore = MemoryStore(session);
   app.use(session({
@@ -44,30 +96,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // Set to true in production with HTTPS
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+      secure: process.env.NODE_ENV === 'production', // HTTPS in production
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      httpOnly: true,
+      sameSite: 'strict'
     }
   }));
 
-  // Admin login route
-  app.post("/api/admin/login", async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      if (!username || !password) {
-        return res.status(400).json({ message: "Username and password required" });
-      }
-
-      const admin = await storage.verifyAdmin(username, password);
-      if (!admin) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-
-      req.session.admin = { id: admin.id, username: admin.username };
-      res.json({ message: "Login successful", admin: { id: admin.id, username: admin.username } });
-    } catch (error) {
-      res.status(500).json({ message: "Login failed" });
+  // Input validation middleware
+  const validateInput = (req: any, res: any, next: any) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ 
+        message: "Validation failed", 
+        errors: errors.array() 
+      });
     }
-  });
+    next();
+  };
+
+  // Admin login route with strict rate limiting and validation
+  app.post("/api/admin/login", 
+    strictLimiter,
+    [
+      body('username').trim().isLength({ min: 1, max: 50 }).escape(),
+      body('password').isLength({ min: 1, max: 100 })
+    ],
+    validateInput,
+    async (req, res) => {
+      try {
+        const { username, password } = req.body;
+
+        const admin = await storage.verifyAdmin(username, password);
+        if (!admin) {
+          return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        req.session.admin = { id: admin.id, username: admin.username };
+        res.json({ message: "Login successful", admin: { id: admin.id, username: admin.username } });
+      } catch (error) {
+        res.status(500).json({ message: "Login failed" });
+      }
+    });
 
   // Admin logout route
   app.post("/api/admin/logout", (req, res) => {
