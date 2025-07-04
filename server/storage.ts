@@ -182,9 +182,9 @@ export class MemStorage implements IStorage {
         location: "عبدون، عمان",
         address: "دوار عبدون، عمان",
         images: [
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "https://picsum.photos/800/600?random=1",
+          "https://picsum.photos/800/600?random=2",
+          "https://picsum.photos/800/600?random=3"
         ],
         governorateId: 1, // عمان
         directorateId: 1, // عبدون
@@ -208,8 +208,8 @@ export class MemStorage implements IStorage {
         location: "الصويفية، عمان",
         address: "شارع الثقافة، الصويفية",
         images: [
-          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "https://picsum.photos/800/600?random=4",
+          "https://picsum.photos/800/600?random=5"
         ],
         governorateId: 1,
         directorateId: 2,
@@ -232,7 +232,10 @@ export class MemStorage implements IStorage {
         propertyType: "farm",
         location: "جبل عمان، عمان",
         address: "شارع الرينبو، جبل عمان",
-        imageUrl: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        images: [
+          "https://picsum.photos/800/600?random=6",
+          "https://picsum.photos/800/600?random=7"
+        ],
         governorateId: 1,
         directorateId: 3,
         village: null,
@@ -255,8 +258,8 @@ export class MemStorage implements IStorage {
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
         images: [
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "https://picsum.photos/800/600?random=8",
+          "https://picsum.photos/800/600?random=9"
         ],
         governorateId: 1,
         directorateId: 4,
@@ -279,7 +282,10 @@ export class MemStorage implements IStorage {
         propertyType: "land",
         location: "جبل اللويبدة، عمان",
         address: "الدوار الأول، جبل اللويبدة",
-        imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        images: [
+          "https://picsum.photos/800/600?random=10",
+          "https://picsum.photos/800/600?random=11"
+        ],
         governorateId: 1,
         directorateId: 5,
         village: null,
@@ -302,8 +308,8 @@ export class MemStorage implements IStorage {
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
         images: [
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "https://picsum.photos/800/600?random=12",
+          "https://picsum.photos/800/600?random=13"
         ],
         governorateId: 1,
         directorateId: 6,
