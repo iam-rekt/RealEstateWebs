@@ -246,10 +246,58 @@ export default function PropertyDetail() {
               <div className="space-y-6">
                 <div>
                   <h1 className="text-3xl font-bold text-text-primary mb-2">{property.title}</h1>
-                  <p className="text-gray-600 flex items-center text-lg">
-                    <MapPin className="w-5 h-5 ml-2" />
-                    {property.location}
-                  </p>
+                  <div className="text-gray-600 space-y-2">
+                    <p className="flex items-center text-lg">
+                      <MapPin className="w-5 h-5 ml-2 flex-shrink-0" />
+                      {property.location}
+                    </p>
+                    
+                    {/* Jordan Location Information */}
+                    {((property as any).governorateName || (property as any).directorateName) && (
+                      <div className="flex flex-wrap gap-2 pr-7">
+                        {(property as any).governorateName && (
+                          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                            محافظة: {(property as any).governorateName}
+                          </span>
+                        )}
+                        {(property as any).directorateName && (
+                          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                            مديرية: {(property as any).directorateName}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Additional Location Details */}
+                    {(property.village || property.basin || property.neighborhood || property.plotNumber) && (
+                      <div className="grid grid-cols-2 gap-2 pr-7 text-sm">
+                        {property.village && (
+                          <div className="flex items-center">
+                            <span className="text-gray-500 font-medium">القرية:</span>
+                            <span className="mr-2">{property.village}</span>
+                          </div>
+                        )}
+                        {property.basin && (
+                          <div className="flex items-center">
+                            <span className="text-gray-500 font-medium">الحوض:</span>
+                            <span className="mr-2">{property.basin}</span>
+                          </div>
+                        )}
+                        {property.neighborhood && (
+                          <div className="flex items-center">
+                            <span className="text-gray-500 font-medium">الحي:</span>
+                            <span className="mr-2">{property.neighborhood}</span>
+                          </div>
+                        )}
+                        {property.plotNumber && (
+                          <div className="flex items-center">
+                            <span className="text-gray-500 font-medium">رقم القطعة:</span>
+                            <span className="mr-2">{property.plotNumber}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex items-center space-x-6 space-x-reverse text-gray-600">

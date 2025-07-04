@@ -328,20 +328,38 @@ export class MemStorage implements IStorage {
     }
   }
 
+  // Helper method to enrich properties with governorate and directorate names
+  private enrichPropertiesWithLocationNames(properties: Property[]): (Property & { governorateName?: string; directorateName?: string })[] {
+    return properties.map(property => {
+      const governorate = property.governorateId ? this.governorates.get(property.governorateId) : undefined;
+      const directorate = property.directorateId ? this.directorates.get(property.directorateId) : undefined;
+      
+      return {
+        ...property,
+        // Add computed fields for display
+        governorateName: governorate?.nameAr,
+        directorateName: directorate?.nameAr,
+      };
+    });
+  }
+
   async getAllProperties(): Promise<Property[]> {
-    return Array.from(this.properties.values()).sort((a, b) => 
+    const properties = Array.from(this.properties.values());
+    return this.enrichPropertiesWithLocationNames(properties).sort((a: any, b: any) => 
       new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
     );
   }
 
   async getPropertyById(id: number): Promise<Property | undefined> {
-    return this.properties.get(id);
+    const property = this.properties.get(id);
+    if (!property) return undefined;
+    return this.enrichPropertiesWithLocationNames([property])[0];
   }
 
   async searchProperties(filters: SearchFilters): Promise<Property[]> {
     const allProperties = Array.from(this.properties.values());
     
-    return allProperties.filter(property => {
+    const filteredProperties = allProperties.filter(property => {
       if (!property.available) return false;
       
       if (filters.minPrice && parseFloat(property.price) < parseFloat(filters.minPrice)) return false;
@@ -354,17 +372,20 @@ export class MemStorage implements IStorage {
       if (filters.location && !property.location.toLowerCase().includes(filters.location.toLowerCase())) return false;
       
       return true;
-    }).sort((a, b) => 
+    });
+
+    return this.enrichPropertiesWithLocationNames(filteredProperties).sort((a: any, b: any) => 
       new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
     );
   }
 
   async getFeaturedProperties(): Promise<Property[]> {
-    return Array.from(this.properties.values())
-      .filter(property => property.featured && property.available)
-      .sort((a, b) => 
-        new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
-      );
+    const featuredProperties = Array.from(this.properties.values())
+      .filter(property => property.featured && property.available);
+      
+    return this.enrichPropertiesWithLocationNames(featuredProperties).sort((a: any, b: any) => 
+      new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
+    );
   }
 
   async createProperty(insertProperty: InsertProperty): Promise<Property> {

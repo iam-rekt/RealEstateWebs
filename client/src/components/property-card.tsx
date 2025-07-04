@@ -61,9 +61,31 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
             <h3 className="font-bold text-xl text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
               {property.title}
             </h3>
-            <div className="flex items-center text-gray-600 mb-3">
-              <MapPin className="w-4 h-4 ml-2 text-blue-500" />
-              <span className="text-sm">{property.location}</span>
+            <div className="text-gray-600 mb-3 space-y-1">
+              <div className="flex items-center">
+                <MapPin className="w-4 h-4 ml-2 text-blue-500 flex-shrink-0" />
+                <span className="text-sm">{property.location}</span>
+              </div>
+              {(property as any).governorateName && (
+                <div className="flex flex-wrap gap-2 text-xs pr-6">
+                  <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded">
+                    محافظة: {(property as any).governorateName}
+                  </span>
+                  {(property as any).directorateName && (
+                    <span className="bg-green-50 text-green-700 px-2 py-1 rounded">
+                      مديرية: {(property as any).directorateName}
+                    </span>
+                  )}
+                </div>
+              )}
+              {((property as any).village || (property as any).basin || (property as any).neighborhood || (property as any).plotNumber) && (
+                <div className="flex flex-wrap gap-1 text-xs pr-6">
+                  {(property as any).village && <span className="text-gray-500">قرية: {(property as any).village}</span>}
+                  {(property as any).basin && <span className="text-gray-500">حوض: {(property as any).basin}</span>}
+                  {(property as any).neighborhood && <span className="text-gray-500">حي: {(property as any).neighborhood}</span>}
+                  {(property as any).plotNumber && <span className="text-gray-500">قطعة: {(property as any).plotNumber}</span>}
+                </div>
+              )}
             </div>
           </div>
 
