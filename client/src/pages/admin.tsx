@@ -880,21 +880,33 @@ export default function Admin() {
                           <div className="grid grid-cols-2 gap-4">
                             <div>
                               <Label htmlFor="governorateId">المحافظة</Label>
-                              <Input
-                                id="governorateId"
-                                value={formData.governorateId}
-                                onChange={(e) => setFormData(prev => ({ ...prev, governorateId: e.target.value }))}
-                                placeholder="اختر المحافظة"
-                              />
+                              <Select value={formData.governorateId} onValueChange={(value) => setFormData(prev => ({ ...prev, governorateId: value }))}>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="إختر المحافظة" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {governorates.map((gov: any) => (
+                                    <SelectItem key={gov.id} value={gov.id.toString()}>
+                                      {gov.nameAr}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                             </div>
                             <div>
                               <Label htmlFor="directorateId">المديرية</Label>
-                              <Input
-                                id="directorateId"
-                                value={formData.directorateId}
-                                onChange={(e) => setFormData(prev => ({ ...prev, directorateId: e.target.value }))}
-                                placeholder="اختر المديرية"
-                              />
+                              <Select value={formData.directorateId} onValueChange={(value) => setFormData(prev => ({ ...prev, directorateId: value }))}>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="إختر المديرية" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {directorates.map((dir: any) => (
+                                    <SelectItem key={dir.id} value={dir.id.toString()}>
+                                      {dir.nameAr}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                             </div>
                           </div>
 
@@ -1119,21 +1131,33 @@ export default function Admin() {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="edit-governorateId">المحافظة</Label>
-                        <Input
-                          id="edit-governorateId"
-                          value={formData.governorateId}
-                          onChange={(e) => setFormData(prev => ({ ...prev, governorateId: e.target.value }))}
-                          placeholder="اختر المحافظة"
-                        />
+                        <Select value={formData.governorateId} onValueChange={(value) => setFormData(prev => ({ ...prev, governorateId: value }))}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="إختر المحافظة" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {governorates.map((gov: any) => (
+                              <SelectItem key={gov.id} value={gov.id.toString()}>
+                                {gov.nameAr}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
                         <Label htmlFor="edit-directorateId">المديرية</Label>
-                        <Input
-                          id="edit-directorateId"
-                          value={formData.directorateId}
-                          onChange={(e) => setFormData(prev => ({ ...prev, directorateId: e.target.value }))}
-                          placeholder="اختر المديرية"
-                        />
+                        <Select value={formData.directorateId} onValueChange={(value) => setFormData(prev => ({ ...prev, directorateId: value }))}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="إختر المديرية" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {directorates.map((dir: any) => (
+                              <SelectItem key={dir.id} value={dir.id.toString()}>
+                                {dir.nameAr}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 
