@@ -163,6 +163,13 @@ Changelog:
   - Added Arabic labels for all contact form fields in admin panel
   - Integrated all footer data sources with default company information
   - Complete admin control over all website contact display elements
+- July 4, 2025. Complete Jordan-specific location system implementation:
+  - Added comprehensive Jordan location fields to property schema (governorateId, directorateId, village, basin, neighborhood, plotNumber)
+  - Enhanced admin panel with all Jordan location input fields for precise land categorization
+  - Replaced building-specific features (bedrooms/bathrooms) with land-specific details in property listings and detail pages
+  - Updated advanced search filters with Jordan location dropdowns connected to admin-managed data
+  - All location data now dynamically sourced from admin panel entries rather than hardcoded values
+  - Property detail pages now display relevant Jordan location information for land properties
 ```
 
 ## User Preferences

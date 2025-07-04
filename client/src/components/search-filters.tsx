@@ -17,8 +17,6 @@ const searchSchema = z.object({
   minSize: z.string().optional(),
   maxSize: z.string().optional(),
   propertyType: z.string().optional(),
-  bedrooms: z.string().optional(),
-  bathrooms: z.string().optional(),
   location: z.string().optional(),
   governorate: z.string().optional(),
   directorate: z.string().optional(),
@@ -39,6 +37,18 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
   // Fetch property types
   const { data: propertyTypes = [] } = useQuery({
     queryKey: ["/api/property-types"],
+    enabled: true
+  });
+
+  // Fetch governorates
+  const { data: governorates = [] } = useQuery({
+    queryKey: ["/api/admin/governorates"],
+    enabled: true
+  });
+
+  // Fetch directorates  
+  const { data: directorates = [] } = useQuery({
+    queryKey: ["/api/admin/directorates"],
     enabled: true
   });
   
@@ -231,64 +241,6 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                   
                   <FormField
                     control={form.control}
-                    name="bedrooms"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                          غرف النوم
-                        </FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
-                              <SelectValue placeholder="عدد غرف النوم" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="rounded-xl border-2 shadow-xl">
-                            <SelectItem value="">أي عدد</SelectItem>
-                            <SelectItem value="1">غرفة نوم واحدة+</SelectItem>
-                            <SelectItem value="2">غرفتان نوم+</SelectItem>
-                            <SelectItem value="3">3 غرف نوم+</SelectItem>
-                            <SelectItem value="4">4 غرف نوم+</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="bathrooms"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
-                          دورات المياه
-                        </FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
-                              <SelectValue placeholder="عدد دورات المياه" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="rounded-xl border-2 shadow-xl">
-                            <SelectItem value="">أي عدد</SelectItem>
-                            <SelectItem value="1">دورة مياه واحدة+</SelectItem>
-                            <SelectItem value="2">دورتان مياه+</SelectItem>
-                            <SelectItem value="3">3 دورات مياه+</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                
-                {/* Location Filters - Jordan Specific - Always Show for Land Search */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 pt-6 border-t border-gray-200/50">
-                  <div className="col-span-full mb-4">
-                    <h4 className="text-lg font-semibold text-gray-800 mb-2">تفاصيل موقع الأرض</h4>
-                    <p className="text-sm text-gray-600">حدد الموقع التفصيلي للأرض المطلوبة</p>
-                  </div>
-                  <FormField
-                    control={form.control}
                     name="governorate"
                     render={({ field }) => (
                       <FormItem>
@@ -303,20 +255,116 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                           </FormControl>
                           <SelectContent className="rounded-xl border-2 shadow-xl">
                             <SelectItem value="">جميع المحافظات</SelectItem>
-                            <SelectItem value="amman">عمان</SelectItem>
-                            <SelectItem value="zarqa">الزرقاء</SelectItem>
-                            <SelectItem value="irbid">إربد</SelectItem>
-                            <SelectItem value="balqa">البلقاء</SelectItem>
-                            <SelectItem value="madaba">مادبا</SelectItem>
-                            <SelectItem value="karak">الكرك</SelectItem>
-                            <SelectItem value="tafilah">الطفيلة</SelectItem>
-                            <SelectItem value="maan">معان</SelectItem>
-                            <SelectItem value="aqaba">العقبة</SelectItem>
-                            <SelectItem value="mafraq">المفرق</SelectItem>
-                            <SelectItem value="ajloun">عجلون</SelectItem>
-                            <SelectItem value="jerash">جرش</SelectItem>
+                            {governorates.map((gov: any) => (
+                              <SelectItem key={gov.id} value={gov.id.toString()}>
+                                {gov.nameAr}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="directorate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          المديرية
+                        </FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white/70 backdrop-blur-sm text-right">
+                              <SelectValue placeholder="إختر المديرية" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="rounded-xl border-2 shadow-xl">
+                            <SelectItem value="">جميع المديريات</SelectItem>
+                            {directorates.map((dir: any) => (
+                              <SelectItem key={dir.id} value={dir.id.toString()}>
+                                {dir.nameAr}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                {/* Jordan-specific Location Filters */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 pt-6 border-t border-gray-200/50">
+                  <div className="col-span-full mb-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">تفاصيل موقع الأرض</h4>
+                    <p className="text-sm text-gray-600">حدد الموقع التفصيلي للأرض المطلوبة</p>
+                  </div>
+                  
+                  <FormField
+                    control={form.control}
+                    name="village"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          القرية
+                        </FormLabel>
+                        <Input 
+                          placeholder="إختر القرية" 
+                          {...field}
+                          className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
+                        />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="basin"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          الحوض
+                        </FormLabel>
+                        <Input 
+                          placeholder="إختر الحوض" 
+                          {...field}
+                          className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
+                        />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="neighborhood"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          الحي
+                        </FormLabel>
+                        <Input 
+                          placeholder="إختر الحي" 
+                          {...field}
+                          className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
+                        />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="plotNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="block text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                          رقم القطعة
+                        </FormLabel>
+                        <Input 
+                          placeholder="رقم القطعة" 
+                          {...field}
+                          className="px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium placeholder:text-gray-400 placeholder:font-normal bg-white/70 backdrop-blur-sm text-right"
+                        />
                       </FormItem>
                     )}
                   />

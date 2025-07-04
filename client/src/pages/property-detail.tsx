@@ -71,10 +71,7 @@ export default function PropertyDetail() {
     }).format(numPrice) + ' د.أ';
   };
 
-  const getBedroomText = (bedrooms: number) => {
-    if (bedrooms === 0) return "استوديو";
-    return `${bedrooms} غرفة نوم`;
-  };
+
 
   const getPropertyTypeArabic = (type: string) => {
     switch (type.toLowerCase()) {
@@ -191,17 +188,20 @@ export default function PropertyDetail() {
 
                 <div className="flex items-center space-x-6 space-x-reverse text-gray-600">
                   <span className="flex items-center">
-                    <Bed className="w-5 h-5 ml-2" />
-                    {getBedroomText(property.bedrooms)}
-                  </span>
-                  <span className="flex items-center">
-                    <Bath className="w-5 h-5 ml-2" />
-                    {property.bathrooms} حمام
-                  </span>
-                  <span className="flex items-center">
                     <Ruler className="w-5 h-5 ml-2" />
                     {property.size} م²
                   </span>
+                  {property.governorateId && (
+                    <span className="flex items-center">
+                      <MapPin className="w-5 h-5 ml-2" />
+                      محافظة
+                    </span>
+                  )}
+                  {property.village && (
+                    <span className="flex items-center">
+                      قرية: {property.village}
+                    </span>
+                  )}
                 </div>
 
                 <div className="border-t pt-6">
@@ -237,14 +237,30 @@ export default function PropertyDetail() {
                     <span className="text-gray-600">المساحة</span>
                     <p className="font-medium">{property.size} م²</p>
                   </div>
-                  <div>
-                    <span className="text-gray-600">غرف النوم</span>
-                    <p className="font-medium">{getBedroomText(property.bedrooms)}</p>
-                  </div>
-                  <div>
-                    <span className="text-gray-600">الحمامات</span>
-                    <p className="font-medium">{property.bathrooms} حمام</p>
-                  </div>
+                  {property.village && (
+                    <div>
+                      <span className="text-gray-600">القرية</span>
+                      <p className="font-medium">{property.village}</p>
+                    </div>
+                  )}
+                  {property.basin && (
+                    <div>
+                      <span className="text-gray-600">الحوض</span>
+                      <p className="font-medium">{property.basin}</p>
+                    </div>
+                  )}
+                  {property.neighborhood && (
+                    <div>
+                      <span className="text-gray-600">الحي</span>
+                      <p className="font-medium">{property.neighborhood}</p>
+                    </div>
+                  )}
+                  {property.plotNumber && (
+                    <div>
+                      <span className="text-gray-600">رقم القطعة</span>
+                      <p className="font-medium">{property.plotNumber}</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
