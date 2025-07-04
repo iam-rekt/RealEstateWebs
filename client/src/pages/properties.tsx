@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 import { Grid, List } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import SearchFilters from "@/components/search-filters";
+import LandSearchFilters from "@/components/land-search-filters";
 import PropertyCard from "@/components/property-card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -80,17 +80,17 @@ export default function Properties() {
       <Header />
       
       {/* Page Header */}
-      <section className="bg-gray-50 py-8">
+      <section className="bg-gray-50 py-8" dir="rtl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-text-primary mb-2">Properties</h1>
-          <p className="text-gray-600">Find your perfect property in Athens</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">الأراضي</h1>
+          <p className="text-gray-600">اعثر على الأرض المثالية في الأردن</p>
         </div>
       </section>
 
       {/* Search Filters */}
       <section className="py-6 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SearchFilters onSearch={handleSearch} />
+          <LandSearchFilters onSearch={handleSearch} />
         </div>
       </section>
 
@@ -98,17 +98,17 @@ export default function Properties() {
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Filter and View Options */}
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 bg-white p-4 rounded-lg shadow-sm">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 bg-white p-4 rounded-lg shadow-sm" dir="rtl">
             <div className="flex items-center space-x-4 mb-4 sm:mb-0">
               <span className="text-gray-600">
-                {isLoading || searchMutation.isPending ? "Loading..." : `${sortedProperties.length} properties found`}
+                {isLoading || searchMutation.isPending ? "جاري التحميل..." : `تم العثور على ${sortedProperties.length} أرض`}
               </span>
             </div>
             
             <div className="flex items-center space-x-4">
               {/* View Toggle */}
               <div className="flex items-center space-x-2">
-                <span className="text-gray-600">View:</span>
+                <span className="text-gray-600">العرض:</span>
                 <Button
                   variant={viewMode === "grid" ? "default" : "outline"}
                   size="sm"
@@ -127,16 +127,16 @@ export default function Properties() {
               
               {/* Sort Options */}
               <div className="flex items-center space-x-2">
-                <span className="text-gray-600">Sort:</span>
+                <span className="text-gray-600">ترتيب:</span>
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-[140px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="newest">Newest</SelectItem>
-                    <SelectItem value="price-low">Price: Low to High</SelectItem>
-                    <SelectItem value="price-high">Price: High to Low</SelectItem>
-                    <SelectItem value="size">Size</SelectItem>
+                    <SelectItem value="newest">الأحدث</SelectItem>
+                    <SelectItem value="price-low">السعر: من الأقل للأعلى</SelectItem>
+                    <SelectItem value="price-high">السعر: من الأعلى للأقل</SelectItem>
+                    <SelectItem value="size">المساحة</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
