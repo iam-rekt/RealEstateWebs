@@ -406,40 +406,95 @@ export default function Admin() {
               <div className="grid gap-4">
                 <h3 className="text-lg font-semibold">Contact Information</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="address">Office Address</Label>
+                  <div className="col-span-2">
+                    <Label htmlFor="address">العنوان الكامل</Label>
                     <Input
                       id="address"
                       value={settings.footer_address || ""}
                       onChange={(e) => handleSettingChange("footer_address", e.target.value)}
-                      placeholder="123 Rainbow Street, Amman, Jordan"
+                      placeholder="الصويفية - مجمع فرح التجاري - الطابق الثاني"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">الهاتف</Label>
                     <Input
                       id="phone"
                       value={settings.footer_phone || ""}
                       onChange={(e) => handleSettingChange("footer_phone", e.target.value)}
-                      placeholder="+962 6 123 4567"
+                      placeholder="+962 6 5826440"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="fax">الفاكس</Label>
+                    <Input
+                      id="fax"
+                      value={settings.footer_fax || ""}
+                      onChange={(e) => handleSettingChange("footer_fax", e.target.value)}
+                      placeholder="+962 6 5826408"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="mobile1">الجوال الأول</Label>
+                    <Input
+                      id="mobile1"
+                      value={settings.footer_mobile1 || ""}
+                      onChange={(e) => handleSettingChange("footer_mobile1", e.target.value)}
+                      placeholder="+962 79 5566030"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="mobile2">الجوال الثاني</Label>
+                    <Input
+                      id="mobile2"
+                      value={settings.footer_mobile2 || ""}
+                      onChange={(e) => handleSettingChange("footer_mobile2", e.target.value)}
+                      placeholder="+962 77 5566030"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="po_box">صندوق البريد</Label>
+                    <Input
+                      id="po_box"
+                      value={settings.footer_po_box || ""}
+                      onChange={(e) => handleSettingChange("footer_po_box", e.target.value)}
+                      placeholder="ص.ب: 37 عمان 11831 الأردن"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="manager">المدير العام</Label>
+                    <Input
+                      id="manager"
+                      value={settings.footer_manager || ""}
+                      onChange={(e) => handleSettingChange("footer_manager", e.target.value)}
+                      placeholder="المدير العام: فؤاد حدادين"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">البريد الإلكتروني</Label>
                     <Input
                       id="email"
                       value={settings.footer_email || ""}
                       onChange={(e) => handleSettingChange("footer_email", e.target.value)}
-                      placeholder="info@haddadinrealestate.com"
+                      placeholder="info@randrealestate.com"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="website">Website</Label>
+                    <Label htmlFor="website">الموقع الإلكتروني</Label>
                     <Input
                       id="website"
                       value={settings.footer_website || ""}
                       onChange={(e) => handleSettingChange("footer_website", e.target.value)}
-                      placeholder="www.haddadinrealestate.com"
+                      placeholder="www.randrealestate.com"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <Label htmlFor="working_hours">أوقات العمل</Label>
+                    <textarea
+                      id="working_hours"
+                      value={settings.footer_working_hours || ""}
+                      onChange={(e) => handleSettingChange("footer_working_hours", e.target.value)}
+                      placeholder="الأحد إلى الخميس&#10;9:30 صباحاً - 5:00 مساءً"
+                      className="w-full min-h-20 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>

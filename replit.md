@@ -151,6 +151,18 @@ Changelog:
   - Added comprehensive SEO security and structured data
   - Created complete security audit report (SECURITY_AUDIT.md)
   - Achieved 95/100 security score with OWASP Top 10 2021 compliance
+- July 4, 2025. Complete Arabic localization and footer management:
+  - Fixed property detail pages to display Arabic content and JOD currency
+  - Connected footer contact information to admin panel site settings
+  - Added complete contact fields: address, phone, fax, mobile numbers, P.O. Box, manager, working hours
+  - All search filters now use dynamic property types from database
+  - Entire site consistently uses Arabic language with proper RTL display
+  - Footer information is now fully editable through admin panel
+- July 4, 2025. Enhanced admin panel contact management:
+  - Expanded site settings to include comprehensive contact information fields
+  - Added Arabic labels for all contact form fields in admin panel
+  - Integrated all footer data sources with default company information
+  - Complete admin control over all website contact display elements
 ```
 
 ## User Preferences

@@ -140,6 +140,7 @@ export class MemStorage implements IStorage {
     this.initializeAdmin();
     this.initializeJordanLocations();
     this.initializePropertyTypes();
+    this.initializeSiteSettings();
   }
 
   private async initializeAdmin() {
@@ -501,6 +502,38 @@ export class MemStorage implements IStorage {
     
     this.siteSettings.set(key, setting);
     return setting;
+  }
+
+  private initializeSiteSettings() {
+    const defaultSettings = [
+      { key: 'footer_company_name', value: 'شركة رند للاستثمار العقاري و تطويره' },
+      { key: 'footer_description', value: 'شريكك الموثوق في الأراضي في عمان. نتخصص في ربط المشترين والمستثمرين بالأراضي الاستثنائية في جميع أنحاء منطقة عمان الكبرى.' },
+      { key: 'footer_address', value: 'الصويفية - مجمع فرح التجاري - الطابق الثاني' },
+      { key: 'footer_phone', value: '+962 6 5826440' },
+      { key: 'footer_fax', value: '+962 6 5826408' },
+      { key: 'footer_mobile1', value: '+962 79 5566030' },
+      { key: 'footer_mobile2', value: '+962 77 5566030' },
+      { key: 'footer_po_box', value: 'ص.ب: 37 عمان 11831 الأردن' },
+      { key: 'footer_manager', value: 'المدير العام: فؤاد حدادين' },
+      { key: 'footer_working_hours', value: 'الأحد إلى الخميس\n9:30 صباحاً - 5:00 مساءً' },
+      { key: 'footer_email', value: 'info@randrealestate.com' },
+      { key: 'footer_website', value: 'www.randrealestate.com' },
+      { key: 'footer_social_facebook', value: '#' },
+      { key: 'footer_social_instagram', value: '#' },
+      { key: 'footer_social_linkedin', value: '#' }
+    ];
+
+    defaultSettings.forEach(setting => {
+      if (!this.siteSettings.has(setting.key)) {
+        const siteSetting: SiteSettings = {
+          id: this.currentSiteSettingsId++,
+          settingKey: setting.key,
+          settingValue: setting.value,
+          updatedAt: new Date()
+        };
+        this.siteSettings.set(setting.key, siteSetting);
+      }
+    });
   }
 
   // Initialize Jordan locations

@@ -22,8 +22,14 @@ export default function Footer() {
   // Fallback values
   const companyName = settings.footer_company_name || "شركة رند للاستثمار العقاري و تطويره";
   const companyDescription = settings.footer_description || "شريكك الموثوق في الأراضي في عمان. نتخصص في ربط المشترين والمستثمرين بالأراضي الاستثنائية في جميع أنحاء منطقة عمان الكبرى.";
-  const address = settings.footer_address || "عمان، الأردن";
-  const phone = settings.footer_phone || "+962 6 XXX XXXX";
+  const address = settings.footer_address || "الصويفية - مجمع فرح التجاري - الطابق الثاني";
+  const phone = settings.footer_phone || "+962 6 5826440";
+  const fax = settings.footer_fax || "+962 6 5826408";
+  const mobile1 = settings.footer_mobile1 || "+962 79 5566030";
+  const mobile2 = settings.footer_mobile2 || "+962 77 5566030";
+  const poBox = settings.footer_po_box || "ص.ب: 37 عمان 11831 الأردن";
+  const manager = settings.footer_manager || "المدير العام: فؤاد حدادين";
+  const workingHours = settings.footer_working_hours || "الأحد إلى الخميس\n9:30 صباحاً - 5:00 مساءً";
   const email = settings.footer_email || "info@randrealestate.com";
   const website = settings.footer_website || "www.randrealestate.com";
   const facebookUrl = settings.footer_social_facebook || "#";
@@ -90,17 +96,21 @@ export default function Footer() {
           <div>
             <h6 className="font-semibold mb-4 text-black">معلومات الاتصال</h6>
             <ul className="space-y-2 text-black">
-              <li>الصويفية - مجمع فرح التجاري - الطابق الثاني</li>
-              <li>الهاتف: +962 6 5826440</li>
-              <li>الفاكس: +962 6 5826408</li>
-              <li>الجوال: +962 79 5566030</li>
-              <li>الجوال: +962 77 5566030</li>
-              <li>ص.ب: 37 عمان 11831 الأردن</li>
-              <li>المدير العام: فؤاد حدادين</li>
+              <li>{address}</li>
+              <li>الهاتف: {phone}</li>
+              <li>الفاكس: {fax}</li>
+              <li>الجوال: {mobile1}</li>
+              <li>الجوال: {mobile2}</li>
+              <li>{poBox}</li>
+              <li>{manager}</li>
               <li className="mt-3 pt-2 border-t border-gray-500">
                 <strong>أوقات العمل:</strong><br />
-                الأحد إلى الخميس<br />
-                9:30 صباحاً - 5:00 مساءً
+                {workingHours.split('\n').map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index < workingHours.split('\n').length - 1 && <br />}
+                  </span>
+                ))}
               </li>
             </ul>
           </div>
