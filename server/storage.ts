@@ -182,9 +182,9 @@ export class MemStorage implements IStorage {
         location: "عبدون، عمان",
         address: "دوار عبدون، عمان",
         images: [
-          "https://via.placeholder.com/800x600/4a5568/ffffff?text=Property+Image+1",
-          "https://via.placeholder.com/800x600/2d3748/ffffff?text=Property+Image+2",
-          "https://via.placeholder.com/800x600/1a202c/ffffff?text=Property+Image+3"
+          "/uploads/property1-main.png",
+          "/uploads/property1-gallery1.png",
+          "/uploads/property1-gallery2.png"
         ],
         governorateId: 1, // عمان
         directorateId: 1, // عبدون
@@ -208,8 +208,8 @@ export class MemStorage implements IStorage {
         location: "الصويفية، عمان",
         address: "شارع الثقافة، الصويفية",
         images: [
-          "https://via.placeholder.com/800x600/68d391/ffffff?text=Farm+Image+1",
-          "https://via.placeholder.com/800x600/48bb78/ffffff?text=Farm+Image+2"
+          "/uploads/property2-main.png",
+          "/uploads/property2-gallery1.png"
         ],
         governorateId: 1,
         directorateId: 2,
@@ -233,8 +233,8 @@ export class MemStorage implements IStorage {
         location: "جبل عمان، عمان",
         address: "شارع الرينبو، جبل عمان",
         images: [
-          "https://via.placeholder.com/800x600/f56565/ffffff?text=Land+Image+1",
-          "https://via.placeholder.com/800x600/e53e3e/ffffff?text=Land+Image+2"
+          "/uploads/property3-main.png",
+          "/uploads/property3-gallery1.png"
         ],
         governorateId: 1,
         directorateId: 3,
@@ -258,8 +258,8 @@ export class MemStorage implements IStorage {
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
         images: [
-          "https://via.placeholder.com/800x600/63b3ed/ffffff?text=Commercial+Land+1",
-          "https://via.placeholder.com/800x600/4299e1/ffffff?text=Commercial+Land+2"
+          "/uploads/property4-main.png",
+          "/uploads/property4-gallery1.png"
         ],
         governorateId: 1,
         directorateId: 4,
@@ -283,8 +283,8 @@ export class MemStorage implements IStorage {
         location: "جبل اللويبدة، عمان",
         address: "الدوار الأول، جبل اللويبدة",
         images: [
-          "https://via.placeholder.com/800x600/9f7aea/ffffff?text=Historic+Land+1",
-          "https://via.placeholder.com/800x600/805ad5/ffffff?text=Historic+Land+2"
+          "/uploads/property5-main.png",
+          "/uploads/property1-gallery1.png"
         ],
         governorateId: 1,
         directorateId: 5,
@@ -308,8 +308,8 @@ export class MemStorage implements IStorage {
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
         images: [
-          "https://via.placeholder.com/800x600/f6ad55/ffffff?text=Modern+Plot+1",
-          "https://via.placeholder.com/800x600/ed8936/ffffff?text=Modern+Plot+2"
+          "/uploads/property6-main.png",
+          "/uploads/property2-gallery1.png"
         ],
         governorateId: 1,
         directorateId: 6,
