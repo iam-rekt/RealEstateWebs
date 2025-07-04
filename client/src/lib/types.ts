@@ -19,14 +19,18 @@ export interface PropertyCardProps {
   property: {
     id: number;
     title: string;
+    description: string;
     price: string;
     size: number;
     bedrooms: number;
     bathrooms: number;
     propertyType: string;
     location: string;
+    address: string;
     imageUrl: string;
-    featured?: boolean;
+    featured: boolean | null;
+    available: boolean | null;
+    createdAt: Date | null;
   };
   onViewDetails: (id: number) => void;
 }
