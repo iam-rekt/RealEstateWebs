@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams, useLocation } from "wouter";
-import { ArrowLeft, MapPin, Bed, Bath, Ruler, Heart, Share2, Calendar } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, MapPin, Bed, Bath, Ruler, Heart, Share2, Calendar, Phone, Mail, Clock, User } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ContactForm from "@/components/contact-form";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import type { Property } from "@shared/schema";
@@ -16,6 +18,7 @@ export default function PropertyDetail() {
   const params = useParams();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
   const propertyId = parseInt(params.id || "0");
 
   const { data: property, isLoading, error } = useQuery<Property>({
@@ -25,6 +28,11 @@ export default function PropertyDetail() {
 
   const { data: allProperties = [] } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
+  });
+
+  // Fetch site settings for contact information
+  const { data: siteSettings } = useQuery<Record<string, string>>({
+    queryKey: ["/api/site-settings"],
   });
 
   // Get related properties (same type, different from current)
@@ -220,9 +228,114 @@ export default function PropertyDetail() {
                   >
                     تواصل معنا
                   </Button>
-                  <Button variant="outline" className="px-6">
-                    معلومات الاتصال
-                  </Button>
+                  
+                  <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" className="px-6">
+                        معلومات الاتصال
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-md" dir="rtl">
+                      <DialogHeader>
+                        <DialogTitle className="text-xl font-bold text-center">معلومات الاتصال</DialogTitle>
+                      </DialogHeader>
+                      
+                      <div className="space-y-4 mt-4">
+                        {siteSettings && (
+                          <>
+                            {/* Company Name */}
+                            {siteSettings.footer_company_name && (
+                              <div className="text-center border-b pb-3">
+                                <h3 className="text-lg font-semibold text-blue-600">
+                                  {siteSettings.footer_company_name}
+                                </h3>
+                              </div>
+                            )}
+                            
+                            {/* Address */}
+                            {siteSettings.footer_address && (
+                              <div className="flex items-start space-x-3 space-x-reverse">
+                                <MapPin className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                                <div>
+                                  <p className="font-medium text-gray-900">العنوان</p>
+                                  <p className="text-gray-600 text-sm">{siteSettings.footer_address}</p>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Phone */}
+                            {siteSettings.footer_phone && (
+                              <div className="flex items-center space-x-3 space-x-reverse">
+                                <Phone className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                                <div>
+                                  <p className="font-medium text-gray-900">الهاتف</p>
+                                  <a href={`tel:${siteSettings.footer_phone}`} className="text-blue-600 hover:underline text-sm">
+                                    {siteSettings.footer_phone}
+                                  </a>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Mobile Numbers */}
+                            {(siteSettings.footer_mobile1 || siteSettings.footer_mobile2) && (
+                              <div className="flex items-start space-x-3 space-x-reverse">
+                                <Phone className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                                <div className="space-y-1">
+                                  <p className="font-medium text-gray-900">الجوال</p>
+                                  {siteSettings.footer_mobile1 && (
+                                    <a href={`tel:${siteSettings.footer_mobile1}`} className="block text-blue-600 hover:underline text-sm">
+                                      {siteSettings.footer_mobile1}
+                                    </a>
+                                  )}
+                                  {siteSettings.footer_mobile2 && (
+                                    <a href={`tel:${siteSettings.footer_mobile2}`} className="block text-blue-600 hover:underline text-sm">
+                                      {siteSettings.footer_mobile2}
+                                    </a>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Email */}
+                            {siteSettings.footer_email && (
+                              <div className="flex items-center space-x-3 space-x-reverse">
+                                <Mail className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                                <div>
+                                  <p className="font-medium text-gray-900">البريد الإلكتروني</p>
+                                  <a href={`mailto:${siteSettings.footer_email}`} className="text-blue-600 hover:underline text-sm">
+                                    {siteSettings.footer_email}
+                                  </a>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Manager */}
+                            {siteSettings.footer_manager && (
+                              <div className="flex items-center space-x-3 space-x-reverse">
+                                <User className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                                <div>
+                                  <p className="text-gray-600 text-sm">{siteSettings.footer_manager}</p>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Working Hours */}
+                            {siteSettings.footer_working_hours && (
+                              <div className="flex items-start space-x-3 space-x-reverse">
+                                <Clock className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                                <div>
+                                  <p className="font-medium text-gray-900">أوقات العمل</p>
+                                  <p className="text-gray-600 text-sm whitespace-pre-line">
+                                    {siteSettings.footer_working_hours}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </div>
