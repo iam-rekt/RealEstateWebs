@@ -327,7 +327,7 @@ export default function PropertyDetail() {
                   {relatedProperties.map((relatedProperty) => (
                     <Card key={relatedProperty.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                       <img 
-                        src={relatedProperty.imageUrl} 
+                        src={relatedProperty.images?.[0] || "/uploads/default-land.svg"} 
                         alt={relatedProperty.title}
                         className="w-full h-48 object-cover"
                       />
