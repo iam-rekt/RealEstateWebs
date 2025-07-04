@@ -22,7 +22,7 @@ export const properties = pgTable("properties", {
   propertyType: text("property_type").notNull(), // apartment, house, villa, studio
   location: text("location").notNull(),
   address: text("address").notNull(),
-  imageUrl: text("image_url").notNull(),
+  images: text("images").array().notNull().default(["https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"]),
   // Jordan-specific location fields
   governorateId: integer("governorate_id").references(() => governorates.id),
   directorateId: integer("directorate_id").references(() => directorates.id),

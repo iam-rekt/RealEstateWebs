@@ -314,10 +314,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const id = parseInt(req.params.id);
       const propertyData = insertPropertySchema.partial().parse(req.body);
       
-      // Get the old property to clean up old image if imageUrl is being changed
+      // Get the old property to clean up old images if images are being changed
       const oldProperty = await storage.getPropertyById(id);
-      if (oldProperty && propertyData.imageUrl && oldProperty.imageUrl !== propertyData.imageUrl) {
-        cleanupOldImage(oldProperty.imageUrl);
+      if (oldProperty && propertyData.images) {
+        // Clean up images that are no longer in the new array
+        const oldImages = oldProperty.images || [];
+        const newImages = propertyData.images || [];
+        oldImages.forEach(oldImage => {
+          if (!newImages.includes(oldImage)) {
+            cleanupOldImage(oldImage);
+          }
+        });
       }
       
       const property = await storage.updateProperty(id, propertyData);
@@ -339,10 +346,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const id = parseInt(req.params.id);
       
-      // Get the property to clean up its image before deletion
+      // Get the property to clean up its images before deletion
       const property = await storage.getPropertyById(id);
-      if (property && property.imageUrl) {
-        cleanupOldImage(property.imageUrl);
+      if (property && property.images) {
+        property.images.forEach(image => cleanupOldImage(image));
       }
       
       const success = await storage.deleteProperty(id);

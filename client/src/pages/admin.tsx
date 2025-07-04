@@ -16,7 +16,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText, Settings } from "lucide-react";
 import { format } from "date-fns";
 import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty, Governorate, Directorate, InsertGovernorate, InsertDirectorate, PropertyType, InsertPropertyType } from "@shared/schema";
-import ImageUpload from "@/components/image-upload";
+import MultipleImageUpload from "@/components/multiple-image-upload";
 
 interface AdminAuth {
   authenticated: boolean;
@@ -31,7 +31,7 @@ interface PropertyFormData {
   propertyType: string;
   location: string;
   address: string;
-  imageUrl: string;
+  images: string[];
   governorateId: string;
   directorateId: string;
   village: string;
@@ -190,7 +190,7 @@ export default function Admin() {
         propertyType: data.propertyType,
         location: data.location,
         address: data.address,
-        imageUrl: data.imageUrl,
+        images: data.images,
         governorateId: data.governorateId ? parseInt(data.governorateId) : null,
         directorateId: data.directorateId ? parseInt(data.directorateId) : null,
         village: data.village || null,
@@ -239,7 +239,7 @@ export default function Admin() {
         propertyType: data.propertyType,
         location: data.location,
         address: data.address,
-        imageUrl: data.imageUrl,
+        images: data.images,
         governorateId: data.governorateId ? parseInt(data.governorateId) : null,
         directorateId: data.directorateId ? parseInt(data.directorateId) : null,
         village: data.village || null,
@@ -284,7 +284,7 @@ export default function Admin() {
       propertyType: "",
       location: "",
       address: "",
-      imageUrl: "",
+      images: [] as string[],
       governorateId: "",
       directorateId: "",
       village: "",
@@ -311,7 +311,7 @@ export default function Admin() {
       propertyType: property.propertyType,
       location: property.location,
       address: property.address,
-      imageUrl: property.imageUrl,
+      images: property.images || [],
       governorateId: property.governorateId?.toString() || "",
       directorateId: property.directorateId?.toString() || "",
       village: property.village || "",
@@ -952,10 +952,10 @@ export default function Admin() {
                             </div>
                           </div>
 
-                          <ImageUpload
-                            value={formData.imageUrl}
-                            onChange={(imageUrl) => setFormData(prev => ({ ...prev, imageUrl }))}
-                            label="Property Image"
+                          <MultipleImageUpload
+                            value={formData.images}
+                            onChange={(images) => setFormData(prev => ({ ...prev, images }))}
+                            label="Property Images"
                             required
                           />
 
@@ -1203,10 +1203,10 @@ export default function Admin() {
                       </div>
                     </div>
 
-                    <ImageUpload
-                      value={formData.imageUrl}
-                      onChange={(imageUrl) => setFormData(prev => ({ ...prev, imageUrl }))}
-                      label="Property Image"
+                    <MultipleImageUpload
+                      value={formData.images}
+                      onChange={(images) => setFormData(prev => ({ ...prev, images }))}
+                      label="Property Images"
                       required
                     />
 

@@ -27,7 +27,7 @@ export interface PropertyCardProps {
     propertyType: string;
     location: string;
     address: string;
-    imageUrl: string;
+    images: string[];
     featured: boolean | null;
     available: boolean | null;
     createdAt: Date | null;

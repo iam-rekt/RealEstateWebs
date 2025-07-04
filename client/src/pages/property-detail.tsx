@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams, useLocation } from "wouter";
-import { ArrowLeft, MapPin, Bed, Bath, Ruler, Heart, Share2, Calendar } from "lucide-react";
+import { ArrowLeft, MapPin, Bed, Bath, Ruler, Heart, Share2, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ContactForm from "@/components/contact-form";
@@ -17,6 +18,7 @@ export default function PropertyDetail() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const propertyId = parseInt(params.id || "0");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { data: property, isLoading, error } = useQuery<Property>({
     queryKey: [`/api/properties/${propertyId}`],
@@ -145,18 +147,70 @@ export default function PropertyDetail() {
           {/* Property Details */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-              {/* Property Image */}
+              {/* Property Image Gallery */}
               <div className="relative">
-                <img 
-                  src={property.imageUrl} 
-                  alt={property.title}
-                  className="w-full h-96 object-cover rounded-xl shadow-lg"
-                />
-                {property.featured && (
-                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold px-3 py-1">
-                    مميزة
-                  </Badge>
+                <div className="relative mb-4">
+                  <img 
+                    src={property.images?.[currentImageIndex] || property.images?.[0] || "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"} 
+                    alt={property.title}
+                    className="w-full h-96 object-cover rounded-xl shadow-lg"
+                  />
+                  {property.featured && (
+                    <Badge className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold px-3 py-1">
+                      مميزة
+                    </Badge>
+                  )}
+                  
+                  {/* Image Navigation Arrows */}
+                  {property.images && property.images.length > 1 && (
+                    <>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                        onClick={() => setCurrentImageIndex(prev => 
+                          prev === 0 ? property.images!.length - 1 : prev - 1
+                        )}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                        onClick={() => setCurrentImageIndex(prev => 
+                          prev === property.images!.length - 1 ? 0 : prev + 1
+                        )}
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </Button>
+                    </>
+                  )}
+                </div>
+                
+                {/* Image Thumbnails */}
+                {property.images && property.images.length > 1 && (
+                  <div className="flex gap-2 overflow-x-auto pb-2">
+                    {property.images.map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          currentImageIndex === index 
+                            ? 'border-blue-500 ring-2 ring-blue-200' 
+                            : 'border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${property.title} - صورة ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
                 )}
+                
                 <div className="absolute top-4 left-4 flex space-x-2 space-x-reverse">
                   <Button
                     size="sm"

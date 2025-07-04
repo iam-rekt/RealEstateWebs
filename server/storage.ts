@@ -181,7 +181,11 @@ export class MemStorage implements IStorage {
         propertyType: "land",
         location: "عبدون، عمان",
         address: "دوار عبدون، عمان",
-        imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        images: [
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        ],
         governorateId: 1, // عمان
         directorateId: 1, // عبدون
         village: "عبدون",
@@ -203,7 +207,10 @@ export class MemStorage implements IStorage {
         propertyType: "farm",
         location: "الصويفية، عمان",
         address: "شارع الثقافة، الصويفية",
-        imageUrl: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        images: [
+          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        ],
         governorateId: 1,
         directorateId: 2,
         village: "الصويفية",
@@ -247,7 +254,10 @@ export class MemStorage implements IStorage {
         propertyType: "land",
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
-        imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        images: [
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        ],
         governorateId: 1,
         directorateId: 4,
         village: null,
@@ -291,7 +301,10 @@ export class MemStorage implements IStorage {
         propertyType: "land",
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
-        imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        images: [
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        ],
         governorateId: 1,
         directorateId: 6,
         village: null,
@@ -352,6 +365,7 @@ export class MemStorage implements IStorage {
     const property: Property = {
       id: this.currentPropertyId++,
       ...insertProperty,
+      images: insertProperty.images || ["https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"],
       governorateId: insertProperty.governorateId ?? null,
       directorateId: insertProperty.directorateId ?? null,
       village: insertProperty.village ?? null,
