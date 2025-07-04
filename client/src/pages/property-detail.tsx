@@ -34,12 +34,12 @@ export default function PropertyDetail() {
 
   if (isNaN(propertyId) || propertyId <= 0) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white" dir="rtl">
         <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Invalid Property ID</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">رقم العقار غير صحيح</h1>
           <Button onClick={() => setLocation("/properties")}>
-            Back to Properties
+            العودة إلى العقارات
           </Button>
         </div>
         <Footer />
@@ -49,13 +49,13 @@ export default function PropertyDetail() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white" dir="rtl">
         <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Property Not Found</h1>
-          <p className="text-gray-600 mb-6">The property you're looking for doesn't exist or has been removed.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">العقار غير موجود</h1>
+          <p className="text-gray-600 mb-6">العقار الذي تبحث عنه غير موجود أو تم حذفه.</p>
           <Button onClick={() => setLocation("/properties")}>
-            Back to Properties
+            العودة إلى العقارات
           </Button>
         </div>
         <Footer />
@@ -64,31 +64,43 @@ export default function PropertyDetail() {
   }
 
   const formatPrice = (price: string) => {
-    return new Intl.NumberFormat('en-EU', {
-      style: 'currency',
-      currency: 'EUR',
+    const numPrice = parseFloat(price);
+    return new Intl.NumberFormat('ar-JO', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    }).format(parseFloat(price));
+    }).format(numPrice) + ' د.أ';
   };
 
   const getBedroomText = (bedrooms: number) => {
-    if (bedrooms === 0) return "Studio";
-    return `${bedrooms} bedroom${bedrooms > 1 ? 's' : ''}`;
+    if (bedrooms === 0) return "استوديو";
+    return `${bedrooms} غرفة نوم`;
+  };
+
+  const getPropertyTypeArabic = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'residential': case 'سكنية': return 'سكنية';
+      case 'commercial': case 'تجارية': return 'تجارية';
+      case 'industrial': case 'صناعية': return 'صناعية';
+      case 'agricultural': case 'زراعية': return 'زراعية';
+      case 'services': case 'خدماتية': return 'خدماتية';
+      case 'mixed': case 'مختلطة': return 'مختلطة';
+      case 'land': case 'أرض': return 'أرض';
+      default: return type;
+    }
   };
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: property?.title,
-        text: `Check out this property: ${property?.title}`,
+        text: `شاهد هذا العقار: ${property?.title}`,
         url: window.location.href,
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast({
-        title: "Link copied!",
-        description: "Property link has been copied to your clipboard.",
+        title: "تم نسخ الرابط!",
+        description: "تم نسخ رابط العقار إلى الحافظة.",
       });
     }
   };
@@ -102,7 +114,7 @@ export default function PropertyDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" dir="rtl">
       <Header />
       
       {isLoading ? (
@@ -128,8 +140,8 @@ export default function PropertyDetail() {
               onClick={() => setLocation("/properties")}
               className="mb-6"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Properties
+              <ArrowLeft className="w-4 h-4 ml-2" />
+              العودة إلى العقارات
             </Button>
           </div>
 
@@ -144,11 +156,11 @@ export default function PropertyDetail() {
                   className="w-full h-96 object-cover rounded-xl shadow-lg"
                 />
                 {property.featured && (
-                  <Badge className="absolute top-4 left-4 bg-accent text-white px-3 py-1">
-                    Featured
+                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold px-3 py-1">
+                    مميزة
                   </Badge>
                 )}
-                <div className="absolute top-4 right-4 flex space-x-2">
+                <div className="absolute top-4 left-4 flex space-x-2 space-x-reverse">
                   <Button
                     size="sm"
                     variant="secondary"
@@ -172,23 +184,23 @@ export default function PropertyDetail() {
                 <div>
                   <h1 className="text-3xl font-bold text-text-primary mb-2">{property.title}</h1>
                   <p className="text-gray-600 flex items-center text-lg">
-                    <MapPin className="w-5 h-5 mr-2" />
+                    <MapPin className="w-5 h-5 ml-2" />
                     {property.location}
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-6 text-gray-600">
+                <div className="flex items-center space-x-6 space-x-reverse text-gray-600">
                   <span className="flex items-center">
-                    <Bed className="w-5 h-5 mr-2" />
+                    <Bed className="w-5 h-5 ml-2" />
                     {getBedroomText(property.bedrooms)}
                   </span>
                   <span className="flex items-center">
-                    <Bath className="w-5 h-5 mr-2" />
-                    {property.bathrooms} bathroom{property.bathrooms > 1 ? 's' : ''}
+                    <Bath className="w-5 h-5 ml-2" />
+                    {property.bathrooms} حمام
                   </span>
                   <span className="flex items-center">
-                    <Ruler className="w-5 h-5 mr-2" />
-                    {property.size} sq.m.
+                    <Ruler className="w-5 h-5 ml-2" />
+                    {property.size} م²
                   </span>
                 </div>
 
@@ -197,11 +209,11 @@ export default function PropertyDetail() {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Description</h3>
+                  <h3 className="text-xl font-semibold mb-3">الوصف</h3>
                   <p className="text-gray-700 leading-relaxed">{property.description}</p>
                 </div>
 
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 space-x-reverse">
                   <Button 
                     onClick={handleContactAboutProperty}
                     className="flex-1 bg-primary hover:bg-primary-dark text-white font-semibold py-3"
@@ -218,23 +230,23 @@ export default function PropertyDetail() {
             {/* Property Details Card */}
             <Card className="mb-12">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">Property Details</h3>
+                <h3 className="text-xl font-semibold mb-4">تفاصيل العقار</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
-                    <span className="text-gray-600">Type</span>
-                    <p className="font-medium capitalize">{property.propertyType}</p>
+                    <span className="text-gray-600">النوع</span>
+                    <p className="font-medium">{getPropertyTypeArabic(property.propertyType)}</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Size</span>
-                    <p className="font-medium">{property.size} sq.m.</p>
+                    <span className="text-gray-600">المساحة</span>
+                    <p className="font-medium">{property.size} م²</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Bedrooms</span>
+                    <span className="text-gray-600">غرف النوم</span>
                     <p className="font-medium">{getBedroomText(property.bedrooms)}</p>
                   </div>
                   <div>
-                    <span className="text-gray-600">Bathrooms</span>
-                    <p className="font-medium">{property.bathrooms}</p>
+                    <span className="text-gray-600">الحمامات</span>
+                    <p className="font-medium">{property.bathrooms} حمام</p>
                   </div>
                 </div>
               </CardContent>
@@ -243,7 +255,7 @@ export default function PropertyDetail() {
             {/* Related Properties */}
             {relatedProperties.length > 0 && (
               <section className="mb-12">
-                <h3 className="text-2xl font-bold text-text-primary mb-6">Similar Properties</h3>
+                <h3 className="text-2xl font-bold text-text-primary mb-6">عقارات مشابهة</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {relatedProperties.map((relatedProperty) => (
                     <Card key={relatedProperty.id} className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -262,7 +274,7 @@ export default function PropertyDetail() {
                           className="w-full mt-3"
                           onClick={() => setLocation(`/property/${relatedProperty.id}`)}
                         >
-                          View Details
+                          عرض التفاصيل
                         </Button>
                       </CardContent>
                     </Card>

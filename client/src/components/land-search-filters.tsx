@@ -35,6 +35,12 @@ interface LandSearchFiltersProps {
 export default function LandSearchFilters({ onSearch, isHomePage = false }: LandSearchFiltersProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
   
+  // Fetch property types
+  const { data: propertyTypes = [] } = useQuery({
+    queryKey: ["/api/property-types"],
+    enabled: true
+  });
+  
   const form = useForm<LandSearchFormData>({
     resolver: zodResolver(landSearchSchema),
     defaultValues: {
@@ -128,10 +134,11 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="rounded-xl border-2 shadow-xl">
-                        <SelectItem value="land">أرض سكنية</SelectItem>
-                        <SelectItem value="farm">أرض زراعية</SelectItem>
-                        <SelectItem value="commercial">أرض تجارية</SelectItem>
-                        <SelectItem value="industrial">أرض صناعية</SelectItem>
+                        {propertyTypes.map((type: any) => (
+                          <SelectItem key={type.id} value={type.nameAr}>
+                            {type.nameAr}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormItem>
