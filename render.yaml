@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: rand-real-estate
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node server/production-server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: FORCE_HTTPS
+        value: true
