@@ -151,9 +151,15 @@ export default function PropertyDetail() {
               <div className="relative">
                 <div className="relative mb-4">
                   <img 
-                    src={property.images?.[currentImageIndex] || property.images?.[0] || "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"} 
+                    src={property.images?.[currentImageIndex] || property.images?.[0] || "/uploads/default-land.svg"} 
                     alt={property.title}
                     className="w-full h-96 object-cover rounded-xl shadow-lg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target.src !== "/uploads/default-land.svg") {
+                        target.src = "/uploads/default-land.svg";
+                      }
+                    }}
                   />
                   {property.featured && (
                     <Badge className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold px-3 py-1">
@@ -205,6 +211,12 @@ export default function PropertyDetail() {
                           src={image}
                           alt={`${property.title} - صورة ${index + 1}`}
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (target.src !== "/uploads/default-land.svg") {
+                              target.src = "/uploads/default-land.svg";
+                            }
+                          }}
                         />
                       </button>
                     ))}
@@ -330,6 +342,12 @@ export default function PropertyDetail() {
                         src={relatedProperty.images?.[0] || "/uploads/default-land.svg"} 
                         alt={relatedProperty.title}
                         className="w-full h-48 object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          if (target.src !== "/uploads/default-land.svg") {
+                            target.src = "/uploads/default-land.svg";
+                          }
+                        }}
                       />
                       <CardContent className="p-4">
                         <h4 className="font-semibold mb-2 line-clamp-1">{relatedProperty.title}</h4>

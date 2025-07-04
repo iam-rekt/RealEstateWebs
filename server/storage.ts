@@ -182,9 +182,9 @@ export class MemStorage implements IStorage {
         location: "عبدون، عمان",
         address: "دوار عبدون، عمان",
         images: [
-          "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg"
         ],
         governorateId: 1, // عمان
         directorateId: 1, // عبدون
@@ -208,8 +208,8 @@ export class MemStorage implements IStorage {
         location: "الصويفية، عمان",
         address: "شارع الثقافة، الصويفية",
         images: [
-          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1574263867128-5c60a8c01b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg"
         ],
         governorateId: 1,
         directorateId: 2,
@@ -233,8 +233,8 @@ export class MemStorage implements IStorage {
         location: "جبل عمان، عمان",
         address: "شارع الرينبو، جبل عمان",
         images: [
-          "https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg"
         ],
         governorateId: 1,
         directorateId: 3,
@@ -258,8 +258,8 @@ export class MemStorage implements IStorage {
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
         images: [
-          "https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg"
         ],
         governorateId: 1,
         directorateId: 4,
@@ -283,8 +283,8 @@ export class MemStorage implements IStorage {
         location: "جبل اللويبدة، عمان",
         address: "الدوار الأول، جبل اللويبدة",
         images: [
-          "https://images.unsplash.com/photo-1519452575417-564c1401ecc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg"
         ],
         governorateId: 1,
         directorateId: 5,
@@ -308,8 +308,8 @@ export class MemStorage implements IStorage {
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
         images: [
-          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "/uploads/default-land.svg",
+          "/uploads/default-land.svg"
         ],
         governorateId: 1,
         directorateId: 6,
