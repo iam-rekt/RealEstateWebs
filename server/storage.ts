@@ -182,9 +182,9 @@ export class MemStorage implements IStorage {
         location: "عبدون، عمان",
         address: "دوار عبدون، عمان",
         images: [
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg"
+          "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/2437297/pexels-photo-2437297.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/2828723/pexels-photo-2828723.jpeg?auto=compress&cs=tinysrgb&w=800"
         ],
         governorateId: 1, // عمان
         directorateId: 1, // عبدون
@@ -208,8 +208,8 @@ export class MemStorage implements IStorage {
         location: "الصويفية، عمان",
         address: "شارع الثقافة، الصويفية",
         images: [
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg"
+          "https://images.pexels.com/photos/2132180/pexels-photo-2132180.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/1595904/pexels-photo-1595904.jpeg?auto=compress&cs=tinysrgb&w=800"
         ],
         governorateId: 1,
         directorateId: 2,
@@ -233,8 +233,8 @@ export class MemStorage implements IStorage {
         location: "جبل عمان، عمان",
         address: "شارع الرينبو، جبل عمان",
         images: [
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg"
+          "https://images.pexels.com/photos/1595905/pexels-photo-1595905.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&w=800"
         ],
         governorateId: 1,
         directorateId: 3,
@@ -258,8 +258,8 @@ export class MemStorage implements IStorage {
         location: "دابوق، عمان",
         address: "شارع دابوق الرئيسي، عمان",
         images: [
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg"
+          "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/2909077/pexels-photo-2909077.jpeg?auto=compress&cs=tinysrgb&w=800"
         ],
         governorateId: 1,
         directorateId: 4,
@@ -283,8 +283,8 @@ export class MemStorage implements IStorage {
         location: "جبل اللويبدة، عمان",
         address: "الدوار الأول، جبل اللويبدة",
         images: [
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg"
+          "https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800"
         ],
         governorateId: 1,
         directorateId: 5,
@@ -308,8 +308,8 @@ export class MemStorage implements IStorage {
         location: "الشميساني، عمان",
         address: "شارع الشريف عبد الحميد شرف، الشميساني",
         images: [
-          "/uploads/default-land.svg",
-          "/uploads/default-land.svg"
+          "https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&w=800",
+          "https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=800"
         ],
         governorateId: 1,
         directorateId: 6,

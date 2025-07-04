@@ -27,13 +27,13 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
     <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-0 bg-white rounded-2xl group" dir="rtl">
       <div className="relative overflow-hidden">
         <img
-          src={property.images?.[0] || "/uploads/default-land.svg"}
+          src={property.images?.[0] || "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800"}
           alt={property.title}
           className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            if (target.src !== "/uploads/default-land.svg") {
-              target.src = "/uploads/default-land.svg";
+            if (target.src !== "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800") {
+              target.src = "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800";
             }
           }}
         />
