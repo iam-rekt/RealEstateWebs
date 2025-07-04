@@ -180,7 +180,7 @@ export default function Home() {
               استكشف العقارات
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              تصفح العقارات حسب الفئة أو استكشف مناطق مختلفة في عمان
+              تصفح العقارات حسب الفئة أو استكشف مناطق مختلفة في الأردن
             </p>
           </div>
 
@@ -373,7 +373,7 @@ export default function Home() {
 
             <TabsContent value="regions" className="space-y-6">
               <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 mb-8 shadow-lg border border-blue-100/50">
-                <h4 className="text-xl font-bold text-gray-900 mb-6">استكشاف حسب منطقة عمان</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-6">استكشاف حسب منطقة الأردن</h4>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                   {ammanAreas.map((area) => (
                     <Button

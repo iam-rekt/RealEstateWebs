@@ -17,7 +17,7 @@ export default function Header() {
   });
 
   const settings = settingsData ? (settingsData as Record<string, string>) : {} as Record<string, string>;
-  const tagline = settings.footer_tagline || "الأراضي في عمان";
+  const tagline = settings.footer_tagline || "الأراضي في الأردن";
 
   const navigation = [
     { name: "العقارات", href: "/properties" },
@@ -49,7 +49,7 @@ export default function Header() {
                   />
                   <div className="text-right">
                     <h1 className="text-lg font-bold text-gray-800 tracking-wide">شركة رند للاستثمار العقاري و تطويره</h1>
-                    <p className="text-xs text-gray-500 font-medium">عمان • {tagline}</p>
+                    <p className="text-xs text-gray-500 font-medium">الأردن • {tagline}</p>
                   </div>
                 </div>
               </Link>
