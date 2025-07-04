@@ -149,7 +149,7 @@ export default function Home() {
               <img 
                 src="/logo.png" 
                 alt="شركة رند للاستثمار العقاري و تطويره" 
-                className="h-20 lg:h-24 w-auto object-contain"
+                className="h-28 lg:h-32 w-auto object-contain"
               />
               <h1 className="text-2xl lg:text-4xl font-bold text-blue-600 tracking-wide leading-tight">
                 شركة رند للاستثمار العقاري و تطويره
