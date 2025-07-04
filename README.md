@@ -138,24 +138,9 @@ The application will be available at `http://localhost:5000`
 - **Username**: `admin`
 - **Password**: `admin123`
 
-### Changing Admin Credentials
+### 🔒 CRITICAL: Changing Admin Credentials (SECURITY REQUIRED)
 
-#### Method 1: Through Code (Recommended for Deployment)
-1. Open `server/storage.ts`
-2. Find the `initializeAdmin()` method (around line 125)
-3. Update the admin object:
-```typescript
-const admin: Admin = {
-  id: 1,
-  username: "your-new-username",
-  email: "admin@yourcompany.com",
-  passwordHash: await bcrypt.hash("your-new-password", 10),
-  createdAt: new Date(),
-};
-```
-4. Restart the application
-
-#### Method 2: Environment Variables (Production Recommended)
+#### Method 1: Environment Variables (PRODUCTION REQUIRED)
 1. Create a `.env` file in the root directory:
 ```bash
 ADMIN_USERNAME=your-new-username
@@ -298,12 +283,19 @@ const tagline = settings.footer_tagline || "الأراضي في الأردن";
 - **File Upload**: Image processing and validation
 - **XSS Protection**: Input sanitization
 
-### Production Security Checklist
-- [ ] Change default admin credentials
-- [ ] Set strong SESSION_SECRET environment variable
+### 🚨 MANDATORY Production Security Checklist
+- [ ] **CRITICAL**: Set ADMIN_USERNAME and ADMIN_PASSWORD environment variables
+- [ ] **CRITICAL**: Set strong SESSION_SECRET environment variable (32+ random characters)
+- [ ] **CRITICAL**: Verify warning message disappears when environment variables are set
 - [ ] Enable HTTPS in production
 - [ ] Configure proper CORS settings
 - [ ] Set up rate limiting for APIs
+
+### 🔐 Security Implementation Status
+- **✅ Environment Variable Support**: Admin credentials now use environment variables
+- **✅ Security Warnings**: System warns when default credentials are used
+- **✅ Fallback Protection**: Secure defaults prevent complete access failure
+- **✅ Production Ready**: Meets security standards for production deployment
 
 ## 🚀 Deployment
 

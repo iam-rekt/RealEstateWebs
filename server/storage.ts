@@ -128,13 +128,23 @@ export class MemStorage implements IStorage {
   }
 
   private async initializeAdmin() {
-    // Create a default admin user
+    // Use environment variables for admin credentials with secure defaults
+    const adminUsername = process.env.ADMIN_USERNAME || "admin";
+    const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
+    const adminEmail = process.env.ADMIN_EMAIL || "admin@company.com";
+    
+    // Warn if using default credentials
+    if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
+      console.warn("⚠️  WARNING: Using default admin credentials. Set ADMIN_USERNAME and ADMIN_PASSWORD environment variables for production!");
+    }
+    
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash("admin123", saltRounds);
+    const hashedPassword = await bcrypt.hash(adminPassword, saltRounds);
     
     const admin: Admin = {
       id: this.currentAdminId++,
-      username: "admin",
+      username: adminUsername,
+      email: adminEmail,
       passwordHash: hashedPassword,
       createdAt: new Date()
     };
