@@ -15,7 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText, Settings } from "lucide-react";
 import { format } from "date-fns";
-import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty } from "@shared/schema";
+import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty, Governorate, Directorate, InsertGovernorate, InsertDirectorate } from "@shared/schema";
 import ImageUpload from "@/components/image-upload";
 
 interface AdminAuth {
@@ -121,6 +121,18 @@ export default function Admin() {
     enabled: auth?.authenticated,
   });
   const propertyRequests = propertyRequestsData || [];
+
+  const { data: governoratesData } = useQuery<Governorate[]>({
+    queryKey: ["/api/admin/governorates"],
+    enabled: auth?.authenticated,
+  });
+  const governorates = governoratesData || [];
+
+  const { data: directoratesData } = useQuery<Directorate[]>({
+    queryKey: ["/api/admin/directorates"],
+    enabled: auth?.authenticated,
+  });
+  const directorates = directoratesData || [];
 
   // Delete mutations
   const createDeleteMutation = (endpoint: string, queryKey: string[]) => {
@@ -650,12 +662,13 @@ export default function Admin() {
 
           {/* Tabs */}
           <Tabs defaultValue="properties" className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
+            <TabsList className="grid w-full grid-cols-7">
               <TabsTrigger value="properties">الأراضي</TabsTrigger>
               <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
               <TabsTrigger value="newsletters">النشرة الإخبارية</TabsTrigger>
               <TabsTrigger value="entrustments">الاستشارات</TabsTrigger>
               <TabsTrigger value="requests">طلبات الأراضي</TabsTrigger>
+              <TabsTrigger value="locations">المواقع</TabsTrigger>
               <TabsTrigger value="settings">
                 <Settings className="w-4 h-4 mr-1" />
                 الإعدادات
@@ -1164,6 +1177,154 @@ export default function Admin() {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            {/* Locations Tab */}
+            <TabsContent value="locations">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Governorates Management */}
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle>المحافظات</CardTitle>
+                        <CardDescription>إدارة محافظات الأردن</CardDescription>
+                      </div>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button>
+                            <Plus className="w-4 h-4 mr-2" />
+                            إضافة محافظة
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>إضافة محافظة جديدة</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor="govNameAr">الاسم بالعربية</Label>
+                              <Input id="govNameAr" placeholder="اسم المحافظة بالعربية" />
+                            </div>
+                            <div>
+                              <Label htmlFor="govNameEn">الاسم بالإنجليزية</Label>
+                              <Input id="govNameEn" placeholder="Governorate name in English" />
+                            </div>
+                            <Button className="w-full">إضافة</Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      {governorates.length === 0 ? (
+                        <p className="text-center py-8 text-gray-500">لا توجد محافظات</p>
+                      ) : (
+                        governorates.map((governorate) => (
+                          <div key={governorate.id} className="flex items-center justify-between p-3 border rounded-lg">
+                            <div>
+                              <p className="font-medium">{governorate.nameAr}</p>
+                              {governorate.nameEn && (
+                                <p className="text-sm text-gray-500">{governorate.nameEn}</p>
+                              )}
+                            </div>
+                            <div className="flex gap-2">
+                              <Button variant="outline" size="sm">
+                                <Edit className="w-4 h-4" />
+                              </Button>
+                              <Button variant="destructive" size="sm">
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Directorates Management */}
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle>المديريات</CardTitle>
+                        <CardDescription>إدارة مديريات المحافظات</CardDescription>
+                      </div>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button>
+                            <Plus className="w-4 h-4 mr-2" />
+                            إضافة مديرية
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>إضافة مديرية جديدة</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor="dirGov">المحافظة</Label>
+                              <Select>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="اختر المحافظة" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {governorates.map((gov) => (
+                                    <SelectItem key={gov.id} value={gov.id.toString()}>
+                                      {gov.nameAr}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <div>
+                              <Label htmlFor="dirNameAr">الاسم بالعربية</Label>
+                              <Input id="dirNameAr" placeholder="اسم المديرية بالعربية" />
+                            </div>
+                            <div>
+                              <Label htmlFor="dirNameEn">الاسم بالإنجليزية</Label>
+                              <Input id="dirNameEn" placeholder="Directorate name in English" />
+                            </div>
+                            <Button className="w-full">إضافة</Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2 max-h-96 overflow-y-auto">
+                      {directorates.length === 0 ? (
+                        <p className="text-center py-8 text-gray-500">لا توجد مديريات</p>
+                      ) : (
+                        directorates.map((directorate) => {
+                          const governorate = governorates.find(g => g.id === directorate.governorateId);
+                          return (
+                            <div key={directorate.id} className="flex items-center justify-between p-3 border rounded-lg">
+                              <div>
+                                <p className="font-medium">{directorate.nameAr}</p>
+                                <p className="text-sm text-gray-500">
+                                  {governorate?.nameAr || 'غير محدد'}
+                                  {directorate.nameEn && ` • ${directorate.nameEn}`}
+                                </p>
+                              </div>
+                              <div className="flex gap-2">
+                                <Button variant="outline" size="sm">
+                                  <Edit className="w-4 h-4" />
+                                </Button>
+                                <Button variant="destructive" size="sm">
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
             {/* Settings Tab */}

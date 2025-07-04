@@ -6,6 +6,8 @@ import {
   propertyRequests,
   admins,
   siteSettings,
+  governorates,
+  directorates,
   type Property, 
   type InsertProperty,
   type Contact,
@@ -20,6 +22,10 @@ import {
   type InsertAdmin,
   type SiteSettings,
   type InsertSiteSettings,
+  type Governorate,
+  type InsertGovernorate,
+  type Directorate,
+  type InsertDirectorate,
   type SearchFilters
 } from "@shared/schema";
 import bcrypt from "bcryptjs";
@@ -63,6 +69,19 @@ export interface IStorage {
   getSiteSetting(key: string): Promise<SiteSettings | undefined>;
   getAllSiteSettings(): Promise<SiteSettings[]>;
   updateSiteSetting(key: string, value: string): Promise<SiteSettings>;
+  
+  // Governorates
+  getAllGovernorates(): Promise<Governorate[]>;
+  createGovernorate(governorate: InsertGovernorate): Promise<Governorate>;
+  updateGovernorate(id: number, governorate: Partial<InsertGovernorate>): Promise<Governorate | undefined>;
+  deleteGovernorate(id: number): Promise<boolean>;
+  
+  // Directorates
+  getAllDirectorates(): Promise<Directorate[]>;
+  getDirectoratesByGovernorate(governorateId: number): Promise<Directorate[]>;
+  createDirectorate(directorate: InsertDirectorate): Promise<Directorate>;
+  updateDirectorate(id: number, directorate: Partial<InsertDirectorate>): Promise<Directorate | undefined>;
+  deleteDirectorate(id: number): Promise<boolean>;
 }
 
 // In-memory storage implementation - production ready with zero dependencies
@@ -73,12 +92,16 @@ export class MemStorage implements IStorage {
   private entrustments: Map<number, Entrustment>;
   private propertyRequests: Map<number, PropertyRequest>;
   private admins: Map<number, Admin>;
+  private governorates: Map<number, Governorate>;
+  private directorates: Map<number, Directorate>;
   private currentPropertyId: number;
   private currentContactId: number;
   private currentNewsletterId: number;
   private currentEntrustmentId: number;
   private currentPropertyRequestId: number;
   private currentAdminId: number;
+  private currentGovernorateId: number;
+  private currentDirectorateId: number;
 
   constructor() {
     this.properties = new Map();
@@ -87,16 +110,21 @@ export class MemStorage implements IStorage {
     this.entrustments = new Map();
     this.propertyRequests = new Map();
     this.admins = new Map();
+    this.governorates = new Map();
+    this.directorates = new Map();
     this.currentPropertyId = 1;
     this.currentContactId = 1;
     this.currentNewsletterId = 1;
     this.currentEntrustmentId = 1;
     this.currentPropertyRequestId = 1;
     this.currentAdminId = 1;
+    this.currentGovernorateId = 1;
+    this.currentDirectorateId = 1;
     
-    // Initialize with sample properties and admin
+    // Initialize with sample properties, admin, and Jordan locations
     this.initializeSampleProperties();
     this.initializeAdmin();
+    this.initializeJordanLocations();
   }
 
   private async initializeAdmin() {
@@ -443,12 +471,139 @@ export class MemStorage implements IStorage {
       id: existing?.id ?? this.currentSiteSettingsId++,
       settingKey: key,
       settingValue: value,
-      createdAt: existing?.createdAt ?? new Date(),
       updatedAt: new Date()
     };
     
     this.siteSettings.set(key, setting);
     return setting;
+  }
+
+  // Initialize Jordan locations
+  private initializeJordanLocations() {
+    // Initialize Jordan governorates
+    const jordanGovernorates = [
+      { nameAr: "عمان", nameEn: "Amman" },
+      { nameAr: "إربد", nameEn: "Irbid" },
+      { nameAr: "الزرقاء", nameEn: "Zarqa" },
+      { nameAr: "البلقاء", nameEn: "Balqa" },
+      { nameAr: "مادبا", nameEn: "Madaba" },
+      { nameAr: "الكرك", nameEn: "Karak" },
+      { nameAr: "الطفيلة", nameEn: "Tafileh" },
+      { nameAr: "معان", nameEn: "Ma'an" },
+      { nameAr: "العقبة", nameEn: "Aqaba" },
+      { nameAr: "جرش", nameEn: "Jerash" },
+      { nameAr: "عجلون", nameEn: "Ajloun" },
+      { nameAr: "المفرق", nameEn: "Mafraq" }
+    ];
+
+    // Add governorates
+    jordanGovernorates.forEach(gov => {
+      const governorate: Governorate = {
+        id: this.currentGovernorateId++,
+        nameAr: gov.nameAr,
+        nameEn: gov.nameEn,
+        createdAt: new Date()
+      };
+      this.governorates.set(governorate.id, governorate);
+    });
+
+    // Initialize Amman directorates (governorate ID 1)
+    const ammanDirectorates = [
+      "قصبة عمان",
+      "الجامعة", 
+      "وادي السير",
+      "أبو نصير",
+      "ماركا",
+      "القويسمة",
+      "سحاب",
+      "الموقر",
+      "ناعور"
+    ];
+
+    ammanDirectorates.forEach(dir => {
+      const directorate: Directorate = {
+        id: this.currentDirectorateId++,
+        governorateId: 1, // Amman
+        nameAr: dir,
+        nameEn: undefined,
+        createdAt: new Date()
+      };
+      this.directorates.set(directorate.id, directorate);
+    });
+  }
+
+  // Governorate methods
+  async getAllGovernorates(): Promise<Governorate[]> {
+    return Array.from(this.governorates.values()).sort((a, b) => a.nameAr.localeCompare(b.nameAr));
+  }
+
+  async createGovernorate(governorate: InsertGovernorate): Promise<Governorate> {
+    const newGovernorate: Governorate = {
+      id: this.currentGovernorateId++,
+      ...governorate,
+      createdAt: new Date()
+    };
+    this.governorates.set(newGovernorate.id, newGovernorate);
+    return newGovernorate;
+  }
+
+  async updateGovernorate(id: number, governorateData: Partial<InsertGovernorate>): Promise<Governorate | undefined> {
+    const existing = this.governorates.get(id);
+    if (!existing) return undefined;
+
+    const updated: Governorate = {
+      ...existing,
+      ...governorateData
+    };
+    this.governorates.set(id, updated);
+    return updated;
+  }
+
+  async deleteGovernorate(id: number): Promise<boolean> {
+    // Also delete related directorates
+    for (const [dirId, directorate] of this.directorates.entries()) {
+      if (directorate.governorateId === id) {
+        this.directorates.delete(dirId);
+      }
+    }
+    return this.governorates.delete(id);
+  }
+
+  // Directorate methods
+  async getAllDirectorates(): Promise<Directorate[]> {
+    return Array.from(this.directorates.values()).sort((a, b) => a.nameAr.localeCompare(b.nameAr));
+  }
+
+  async getDirectoratesByGovernorate(governorateId: number): Promise<Directorate[]> {
+    return Array.from(this.directorates.values())
+      .filter(dir => dir.governorateId === governorateId)
+      .sort((a, b) => a.nameAr.localeCompare(b.nameAr));
+  }
+
+  async createDirectorate(directorate: InsertDirectorate): Promise<Directorate> {
+    const newDirectorate: Directorate = {
+      id: this.currentDirectorateId++,
+      ...directorate,
+      createdAt: new Date()
+    };
+    this.directorates.set(newDirectorate.id, newDirectorate);
+    return newDirectorate;
+  }
+
+  async updateDirectorate(id: number, directorateData: Partial<InsertDirectorate>): Promise<Directorate | undefined> {
+    const existing = this.directorates.get(id);
+    if (!existing) return undefined;
+
+    const updated: Directorate = {
+      ...existing,
+      ...directorateData
+    };
+    this.directorates.set(id, updated);
+    return updated;
+  }
+
+  async deleteDirectorate(id: number): Promise<boolean> {
+    return this.directorates.delete(id);
   }
 }
 

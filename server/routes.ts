@@ -10,7 +10,9 @@ import {
   insertEntrustmentSchema, 
   insertPropertyRequestSchema,
   insertPropertySchema,
-  searchFiltersSchema 
+  searchFiltersSchema,
+  insertGovernorateSchema,
+  insertDirectorateSchema
 } from "@shared/schema";
 import { z } from "zod";
 import session from "express-session";
@@ -430,6 +432,158 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to update site settings:", error);
       res.status(500).json({ message: "Failed to update site settings" });
+    }
+  });
+
+  // Admin governorates management
+  app.get("/api/admin/governorates", isAdmin, async (req, res) => {
+    try {
+      const governorates = await storage.getAllGovernorates();
+      res.json(governorates);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch governorates" });
+    }
+  });
+
+  app.post("/api/admin/governorates", isAdmin, async (req, res) => {
+    try {
+      const result = insertGovernorateSchema.safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({ message: "Invalid governorate data", errors: result.error.issues });
+      }
+
+      const governorate = await storage.createGovernorate(result.data);
+      res.status(201).json(governorate);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to create governorate" });
+    }
+  });
+
+  app.put("/api/admin/governorates/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const result = insertGovernorateSchema.partial().safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({ message: "Invalid governorate data", errors: result.error.issues });
+      }
+
+      const governorate = await storage.updateGovernorate(id, result.data);
+      if (!governorate) {
+        return res.status(404).json({ message: "Governorate not found" });
+      }
+
+      res.json(governorate);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update governorate" });
+    }
+  });
+
+  app.delete("/api/admin/governorates/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const success = await storage.deleteGovernorate(id);
+      
+      if (!success) {
+        return res.status(404).json({ message: "Governorate not found" });
+      }
+      
+      res.json({ message: "Governorate deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete governorate" });
+    }
+  });
+
+  // Admin directorates management
+  app.get("/api/admin/directorates", isAdmin, async (req, res) => {
+    try {
+      const { governorateId } = req.query;
+      let directorates;
+      
+      if (governorateId) {
+        directorates = await storage.getDirectoratesByGovernorate(parseInt(governorateId as string));
+      } else {
+        directorates = await storage.getAllDirectorates();
+      }
+      
+      res.json(directorates);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch directorates" });
+    }
+  });
+
+  app.post("/api/admin/directorates", isAdmin, async (req, res) => {
+    try {
+      const result = insertDirectorateSchema.safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({ message: "Invalid directorate data", errors: result.error.issues });
+      }
+
+      const directorate = await storage.createDirectorate(result.data);
+      res.status(201).json(directorate);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to create directorate" });
+    }
+  });
+
+  app.put("/api/admin/directorates/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const result = insertDirectorateSchema.partial().safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({ message: "Invalid directorate data", errors: result.error.issues });
+      }
+
+      const directorate = await storage.updateDirectorate(id, result.data);
+      if (!directorate) {
+        return res.status(404).json({ message: "Directorate not found" });
+      }
+
+      res.json(directorate);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update directorate" });
+    }
+  });
+
+  app.delete("/api/admin/directorates/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const success = await storage.deleteDirectorate(id);
+      
+      if (!success) {
+        return res.status(404).json({ message: "Directorate not found" });
+      }
+      
+      res.json({ message: "Directorate deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete directorate" });
+    }
+  });
+
+  // Public governorates endpoint (for search filters)
+  app.get("/api/governorates", async (req, res) => {
+    try {
+      const governorates = await storage.getAllGovernorates();
+      res.json(governorates);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch governorates" });
+    }
+  });
+
+  // Public directorates endpoint (for search filters)
+  app.get("/api/directorates", async (req, res) => {
+    try {
+      const { governorateId } = req.query;
+      let directorates;
+      
+      if (governorateId) {
+        directorates = await storage.getDirectoratesByGovernorate(parseInt(governorateId as string));
+      } else {
+        directorates = await storage.getAllDirectorates();
+      }
+      
+      res.json(directorates);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch directorates" });
     }
   });
 

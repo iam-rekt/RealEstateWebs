@@ -86,6 +86,23 @@ export const siteSettings = pgTable("site_settings", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Governorates table
+export const governorates = pgTable("governorates", {
+  id: serial("id").primaryKey(),
+  nameAr: text("name_ar").notNull(),
+  nameEn: text("name_en"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Directorates table
+export const directorates = pgTable("directorates", {
+  id: serial("id").primaryKey(),
+  governorateId: integer("governorate_id").references(() => governorates.id),
+  nameAr: text("name_ar").notNull(),
+  nameEn: text("name_en"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertPropertySchema = createInsertSchema(properties).omit({
   id: true,
   createdAt: true,
@@ -120,6 +137,16 @@ export const insertSiteSettingsSchema = createInsertSchema(siteSettings).omit({
   id: true,
 });
 
+export const insertGovernorateSchema = createInsertSchema(governorates).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertDirectorateSchema = createInsertSchema(directorates).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type Admin = typeof admins.$inferSelect;
 export type InsertAdmin = z.infer<typeof insertAdminSchema>;
 export type Property = typeof properties.$inferSelect;
@@ -134,6 +161,10 @@ export type PropertyRequest = typeof propertyRequests.$inferSelect;
 export type InsertPropertyRequest = z.infer<typeof insertPropertyRequestSchema>;
 export type SiteSettings = typeof siteSettings.$inferSelect;
 export type InsertSiteSettings = z.infer<typeof insertSiteSettingsSchema>;
+export type Governorate = typeof governorates.$inferSelect;
+export type InsertGovernorate = z.infer<typeof insertGovernorateSchema>;
+export type Directorate = typeof directorates.$inferSelect;
+export type InsertDirectorate = z.infer<typeof insertDirectorateSchema>;
 
 // Search filters type
 export const searchFiltersSchema = z.object({
