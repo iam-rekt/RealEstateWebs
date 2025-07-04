@@ -55,13 +55,6 @@ public/uploads/*
 # Replit specific files
 .replit
 replit.md
-attached_assets/
-
-# Testing files (exclude from deployment)
-test-script.js
-COMPREHENSIVE_TEST_PLAN.md
-QUICK_TEST_CHECKLIST.md
-SECURITY_AUDIT.md
 
 # Cache and build artifacts
 .vite/
