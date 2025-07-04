@@ -289,6 +289,7 @@ export default function Admin() {
   // Governorate mutations
   const createGovernorateMutation = useMutation({
     mutationFn: async (governorateData: InsertGovernorate) => {
+      console.log("Creating governorate with data:", governorateData);
       return apiRequest("/api/admin/governorates", "POST", governorateData);
     },
     onSuccess: () => {
@@ -299,7 +300,8 @@ export default function Admin() {
         description: "تم إضافة المحافظة بنجاح",
       });
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("Error creating governorate:", error);
       toast({
         title: "خطأ",
         description: "فشل في إضافة المحافظة",
