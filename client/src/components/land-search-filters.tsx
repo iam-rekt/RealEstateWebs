@@ -110,7 +110,7 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
       <CardHeader className="pb-4">
         <CardTitle className="text-xl font-bold text-gray-800 flex items-center gap-2">
           <Search className="w-5 h-5 text-blue-600" />
-          البحث عن الأراضي
+          البحث عن العقار
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
@@ -125,12 +125,12 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="block text-base font-semibold text-gray-800 mb-3">
-                      نوع الأرض
+                      نوع العقار
                     </FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-3 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-200 text-gray-700 font-medium bg-white text-right">
-                          <SelectValue placeholder="اختر نوع الأرض" />
+                          <SelectValue placeholder="اختر نوع العقار" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="rounded-xl border-2 shadow-xl">
@@ -390,7 +390,7 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <Search className="w-5 h-5 ml-2" />
-                البحث عن الأراضي
+                البحث عن العقار
               </Button>
             </div>
           </form>
