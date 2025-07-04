@@ -59,6 +59,8 @@ export default function Admin() {
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
   const [governorateForm, setGovernorateForm] = useState({ nameAr: "", nameEn: "" });
   const [directorateForm, setDirectorateForm] = useState({ nameAr: "", nameEn: "", governorateId: "" });
+  const [isGovernorateDialogOpen, setIsGovernorateDialogOpen] = useState(false);
+  const [isDirectorateDialogOpen, setIsDirectorateDialogOpen] = useState(false);
   const [formData, setFormData] = useState<PropertyFormData>({
     title: "",
     description: "",
@@ -295,6 +297,7 @@ export default function Admin() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/governorates"] });
       setGovernorateForm({ nameAr: "", nameEn: "" });
+      setIsGovernorateDialogOpen(false);
       toast({
         title: "نجح الإضافة",
         description: "تم إضافة المحافظة بنجاح",
@@ -1489,7 +1492,7 @@ export default function Admin() {
                         <CardTitle>المحافظات</CardTitle>
                         <CardDescription>إدارة محافظات الأردن</CardDescription>
                       </div>
-                      <Dialog>
+                      <Dialog open={isGovernorateDialogOpen} onOpenChange={setIsGovernorateDialogOpen}>
                         <DialogTrigger asChild>
                           <Button>
                             <Plus className="w-4 h-4 mr-2" />
@@ -1522,11 +1525,15 @@ export default function Admin() {
                             <Button 
                               className="w-full"
                               onClick={() => {
+                                console.log("Button clicked, form data:", governorateForm);
                                 if (governorateForm.nameAr.trim()) {
+                                  console.log("Form validation passed, creating governorate...");
                                   createGovernorateMutation.mutate({
                                     nameAr: governorateForm.nameAr.trim(),
                                     nameEn: governorateForm.nameEn.trim() || undefined
                                   });
+                                } else {
+                                  console.log("Form validation failed - nameAr is empty");
                                 }
                               }}
                               disabled={createGovernorateMutation.isPending || !governorateForm.nameAr.trim()}
