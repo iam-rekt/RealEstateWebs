@@ -83,9 +83,9 @@
 
 /* Glass morphism effect */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(252, 251, 249, 0.25);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(252, 251, 249, 0.18);
 }
 
 /* Enhanced elegant glass effect for search filters with lighter blue theme */
@@ -99,7 +99,7 @@
 
 /* Modern search card with clean design */
 .modern-search-card {
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  background: linear-gradient(145deg, hsl(45, 20%, 98%) 0%, hsl(45, 15%, 94%) 100%);
   border: 1px solid #e2e8f0;
   box-shadow: 
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
@@ -118,11 +118,16 @@
 
 /* Modern input field styling */
 .modern-input {
-  @apply px-4 py-3 border border-gray-200 rounded-xl bg-white/90 backdrop-blur-sm;
+  @apply px-4 py-3 border border-gray-200 rounded-xl backdrop-blur-sm;
+  background: hsl(45, 20%, 98%);
   @apply text-gray-900 font-medium placeholder:text-gray-400 placeholder:font-normal;
   @apply transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20;
-  @apply focus:border-blue-500 focus:bg-white hover:border-gray-300;
+  @apply focus:border-blue-500 hover:border-gray-300;
   @apply shadow-sm hover:shadow-md focus:shadow-lg;
+}
+
+.modern-input:focus {
+  background: hsl(45, 20%, 98%);
 }
 
 .glass-effect-dark {
@@ -181,19 +186,19 @@
 }
 
 :root {
-  --background: hsl(0, 0%, 100%);
+  --background: hsl(45, 20%, 98%);
   --foreground: hsl(224, 71.4%, 4.1%);
-  --muted: hsl(220, 14.3%, 95.9%);
+  --muted: hsl(45, 15%, 94%);
   --muted-foreground: hsl(220, 8.9%, 46.1%);
-  --popover: hsl(0, 0%, 100%);
+  --popover: hsl(45, 20%, 98%);
   --popover-foreground: hsl(224, 71.4%, 4.1%);
-  --card: hsl(0, 0%, 100%);
+  --card: hsl(45, 20%, 98%);
   --card-foreground: hsl(224, 71.4%, 4.1%);
   --border: hsl(220, 13%, 91%);
   --input: hsl(220, 13%, 91%);
   --primary: hsl(214, 95%, 57%);
   --primary-foreground: hsl(210, 40%, 98%);
-  --secondary: hsl(220, 14.3%, 95.9%);
+  --secondary: hsl(45, 15%, 94%);
   --secondary-foreground: hsl(220.9, 39.3%, 11%);
   --accent: hsl(38, 92%, 50%);
   --accent-foreground: hsl(210, 40%, 98%);
@@ -201,7 +206,7 @@
   --destructive-foreground: hsl(210, 40%, 98%);
   --ring: hsl(214, 95%, 57%);
   --radius: 0.5rem;
-  --neutral: hsl(210, 40%, 98%);
+  --neutral: hsl(45, 18%, 96%);
   --text-primary: hsl(220, 8.9%, 12%);
   --primary-dark: hsl(214, 95%, 47%);
 }
