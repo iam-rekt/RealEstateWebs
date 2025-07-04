@@ -46,6 +46,15 @@ export default function Admin() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Format price in Arabic numerals
+  const formatPriceArabic = (price: string) => {
+    const numPrice = parseFloat(price);
+    return new Intl.NumberFormat('ar-JO', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(numPrice);
+  };
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
   const [formData, setFormData] = useState<PropertyFormData>({
@@ -56,7 +65,7 @@ export default function Admin() {
     propertyType: "",
     location: "",
     address: "",
-    imageUrl: "",
+    images: [],
     governorateId: "",
     directorateId: "",
     village: "",
@@ -1007,7 +1016,7 @@ export default function Admin() {
                               </Badge>
                             </div>
                             <p className="text-sm text-gray-600 dark:text-gray-300">
-                              {property.location} • {property.price} • {property.size}m²
+                              {property.location} • {formatPriceArabic(property.price)} د.أ • {property.size}m²
                             </p>
                             <p className="text-xs text-gray-500">
                               Created: {format(new Date(property.createdAt), "MMM dd, yyyy")}
@@ -1395,8 +1404,8 @@ export default function Admin() {
                               Requirements: 
                               {request.propertyType && ` ${request.propertyType}`}
                               {request.location && ` in ${request.location}`}
-                              {request.minPrice && ` • Min: ${request.minPrice}`}
-                              {request.maxPrice && ` • Max: ${request.maxPrice}`}
+                              {request.minPrice && ` • Min: ${formatPriceArabic(request.minPrice)} د.أ`}
+                              {request.maxPrice && ` • Max: ${formatPriceArabic(request.maxPrice)} د.أ`}
                               {request.bedrooms && ` • ${request.bedrooms}+ bed`}
                               {request.bathrooms && ` • ${request.bathrooms}+ bath`}
                             </div>

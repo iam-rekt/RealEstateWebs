@@ -14,6 +14,15 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
     }
   };
 
+  const formatPriceArabic = (price: string) => {
+    const numPrice = parseFloat(price);
+    const formattedPrice = new Intl.NumberFormat('ar-JO', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(numPrice);
+    return formattedPrice;
+  };
+
   return (
     <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-0 bg-white rounded-2xl group" dir="rtl">
       <div className="relative overflow-hidden">
@@ -63,7 +72,7 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
 
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-2xl font-bold text-blue-600">{property.price}</span>
+              <span className="text-2xl font-bold text-blue-600">{formatPriceArabic(property.price)}</span>
               <span className="text-gray-500 text-sm mr-1">د.أ</span>
             </div>
             <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
