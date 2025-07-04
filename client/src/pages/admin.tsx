@@ -189,6 +189,8 @@ export default function Admin() {
   const deleteNewsletter = createDeleteMutation("/api/admin/newsletters", ["/api/admin/newsletters"]);
   const deleteEntrustment = createDeleteMutation("/api/admin/entrustments", ["/api/admin/entrustments"]);
   const deletePropertyRequest = createDeleteMutation("/api/admin/property-requests", ["/api/admin/property-requests"]);
+  const deleteGovernorate = createDeleteMutation("/api/admin/governorates", ["/api/admin/governorates", "/api/properties"]);
+  const deleteDirectorate = createDeleteMutation("/api/admin/directorates", ["/api/admin/directorates", "/api/properties"]);
 
   // Create property mutation
   const createPropertyMutation = useMutation({
@@ -1594,7 +1596,12 @@ export default function Admin() {
                               <Button variant="outline" size="sm">
                                 <Edit className="w-4 h-4" />
                               </Button>
-                              <Button variant="destructive" size="sm">
+                              <Button 
+                                variant="destructive" 
+                                size="sm"
+                                onClick={() => deleteGovernorate.mutate(governorate.id)}
+                                disabled={deleteGovernorate.isPending}
+                              >
                                 <Trash2 className="w-4 h-4" />
                               </Button>
                             </div>
@@ -1701,7 +1708,12 @@ export default function Admin() {
                                 <Button variant="outline" size="sm">
                                   <Edit className="w-4 h-4" />
                                 </Button>
-                                <Button variant="destructive" size="sm">
+                                <Button 
+                                  variant="destructive" 
+                                  size="sm"
+                                  onClick={() => deleteDirectorate.mutate(directorate.id)}
+                                  disabled={deleteDirectorate.isPending}
+                                >
                                   <Trash2 className="w-4 h-4" />
                                 </Button>
                               </div>
