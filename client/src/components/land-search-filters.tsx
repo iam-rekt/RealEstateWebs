@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -6,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search } from "lucide-react";
+import { Search, ChevronDown, ChevronUp } from "lucide-react";
 import { SearchFilters } from "@/lib/types";
 
 const landSearchSchema = z.object({
@@ -31,6 +32,8 @@ interface LandSearchFiltersProps {
 }
 
 export default function LandSearchFilters({ onSearch, isHomePage = false }: LandSearchFiltersProps) {
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  
   const form = useForm<LandSearchFormData>({
     resolver: zodResolver(landSearchSchema),
     defaultValues: {
@@ -219,9 +222,24 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
               />
             </div>
 
-            {/* Jordan Location Hierarchy */}
-            <div className="pt-6 border-t border-gray-200/50">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">تفاصيل الموقع في الأردن</h4>
+            {/* Advanced Search Options Toggle */}
+            <div className="pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-blue-200 text-blue-600 hover:bg-blue-50 transition-all duration-200 font-semibold"
+              >
+                {showAdvanced ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                خيارات بحث متقدمة
+                {!showAdvanced && <span className="text-blue-500">+</span>}
+              </Button>
+            </div>
+
+            {/* Jordan Location Hierarchy - Collapsible */}
+            {showAdvanced && (
+              <div className="pt-6 border-t border-gray-200/50 animate-in slide-in-from-top duration-300">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4">تفاصيل الموقع في الأردن</h4>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Governorate */}
@@ -355,6 +373,7 @@ export default function LandSearchFilters({ onSearch, isHomePage = false }: Land
                 />
               </div>
             </div>
+            )}
 
             {/* Search Button */}
             <div className="pt-6">
