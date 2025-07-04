@@ -103,6 +103,15 @@ export const directorates = pgTable("directorates", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Property types table for customizable land types
+export const propertyTypes = pgTable("property_types", {
+  id: serial("id").primaryKey(),
+  nameAr: text("name_ar").notNull(),
+  nameEn: text("name_en"),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertPropertySchema = createInsertSchema(properties).omit({
   id: true,
   createdAt: true,
@@ -147,6 +156,11 @@ export const insertDirectorateSchema = createInsertSchema(directorates).omit({
   createdAt: true,
 });
 
+export const insertPropertyTypeSchema = createInsertSchema(propertyTypes).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type Admin = typeof admins.$inferSelect;
 export type InsertAdmin = z.infer<typeof insertAdminSchema>;
 export type Property = typeof properties.$inferSelect;
@@ -165,6 +179,8 @@ export type Governorate = typeof governorates.$inferSelect;
 export type InsertGovernorate = z.infer<typeof insertGovernorateSchema>;
 export type Directorate = typeof directorates.$inferSelect;
 export type InsertDirectorate = z.infer<typeof insertDirectorateSchema>;
+export type PropertyType = typeof propertyTypes.$inferSelect;
+export type InsertPropertyType = z.infer<typeof insertPropertyTypeSchema>;
 
 // Search filters type
 export const searchFiltersSchema = z.object({

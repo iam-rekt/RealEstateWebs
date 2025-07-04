@@ -8,6 +8,7 @@ import {
   siteSettings,
   governorates,
   directorates,
+  propertyTypes,
   type Property, 
   type InsertProperty,
   type Contact,
@@ -26,6 +27,8 @@ import {
   type InsertGovernorate,
   type Directorate,
   type InsertDirectorate,
+  type PropertyType,
+  type InsertPropertyType,
   type SearchFilters
 } from "@shared/schema";
 import bcrypt from "bcryptjs";
@@ -82,6 +85,13 @@ export interface IStorage {
   createDirectorate(directorate: InsertDirectorate): Promise<Directorate>;
   updateDirectorate(id: number, directorate: Partial<InsertDirectorate>): Promise<Directorate | undefined>;
   deleteDirectorate(id: number): Promise<boolean>;
+  
+  // Property Types
+  getAllPropertyTypes(): Promise<PropertyType[]>;
+  getActivePropertyTypes(): Promise<PropertyType[]>;
+  createPropertyType(propertyType: InsertPropertyType): Promise<PropertyType>;
+  updatePropertyType(id: number, propertyType: Partial<InsertPropertyType>): Promise<PropertyType | undefined>;
+  deletePropertyType(id: number): Promise<boolean>;
 }
 
 // In-memory storage implementation - production ready with zero dependencies
@@ -94,6 +104,7 @@ export class MemStorage implements IStorage {
   private admins: Map<number, Admin>;
   private governorates: Map<number, Governorate>;
   private directorates: Map<number, Directorate>;
+  private propertyTypes: Map<number, PropertyType>;
   private currentPropertyId: number;
   private currentContactId: number;
   private currentNewsletterId: number;
@@ -102,6 +113,7 @@ export class MemStorage implements IStorage {
   private currentAdminId: number;
   private currentGovernorateId: number;
   private currentDirectorateId: number;
+  private currentPropertyTypeId: number;
 
   constructor() {
     this.properties = new Map();
@@ -112,6 +124,7 @@ export class MemStorage implements IStorage {
     this.admins = new Map();
     this.governorates = new Map();
     this.directorates = new Map();
+    this.propertyTypes = new Map();
     this.currentPropertyId = 1;
     this.currentContactId = 1;
     this.currentNewsletterId = 1;
@@ -120,11 +133,13 @@ export class MemStorage implements IStorage {
     this.currentAdminId = 1;
     this.currentGovernorateId = 1;
     this.currentDirectorateId = 1;
+    this.currentPropertyTypeId = 1;
     
     // Initialize with sample properties, admin, and Jordan locations
     this.initializeSampleProperties();
     this.initializeAdmin();
     this.initializeJordanLocations();
+    this.initializePropertyTypes();
   }
 
   private async initializeAdmin() {
@@ -614,6 +629,63 @@ export class MemStorage implements IStorage {
 
   async deleteDirectorate(id: number): Promise<boolean> {
     return this.directorates.delete(id);
+  }
+
+  // Property Types methods
+  private initializePropertyTypes() {
+    const defaultPropertyTypes = [
+      { nameAr: "أرض سكنية", nameEn: "Residential Land" },
+      { nameAr: "أرض تجارية", nameEn: "Commercial Land" },
+      { nameAr: "أرض صناعية", nameEn: "Industrial Land" },
+      { nameAr: "أرض زراعية", nameEn: "Agricultural Land" },
+      { nameAr: "أرض خدماتية", nameEn: "Service Land" },
+      { nameAr: "أرض مختلطة", nameEn: "Mixed Use Land" }
+    ];
+
+    for (const propertyType of defaultPropertyTypes) {
+      const type: PropertyType = {
+        id: this.currentPropertyTypeId++,
+        nameAr: propertyType.nameAr,
+        nameEn: propertyType.nameEn,
+        isActive: true,
+        createdAt: new Date()
+      };
+      this.propertyTypes.set(type.id, type);
+    }
+  }
+
+  async getAllPropertyTypes(): Promise<PropertyType[]> {
+    return Array.from(this.propertyTypes.values());
+  }
+
+  async getActivePropertyTypes(): Promise<PropertyType[]> {
+    return Array.from(this.propertyTypes.values()).filter(type => type.isActive);
+  }
+
+  async createPropertyType(propertyType: InsertPropertyType): Promise<PropertyType> {
+    const newPropertyType: PropertyType = {
+      id: this.currentPropertyTypeId++,
+      ...propertyType,
+      createdAt: new Date()
+    };
+    this.propertyTypes.set(newPropertyType.id, newPropertyType);
+    return newPropertyType;
+  }
+
+  async updatePropertyType(id: number, propertyTypeData: Partial<InsertPropertyType>): Promise<PropertyType | undefined> {
+    const existing = this.propertyTypes.get(id);
+    if (!existing) return undefined;
+
+    const updated: PropertyType = {
+      ...existing,
+      ...propertyTypeData
+    };
+    this.propertyTypes.set(id, updated);
+    return updated;
+  }
+
+  async deletePropertyType(id: number): Promise<boolean> {
+    return this.propertyTypes.delete(id);
   }
 }
 

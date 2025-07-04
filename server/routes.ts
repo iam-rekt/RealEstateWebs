@@ -12,7 +12,8 @@ import {
   insertPropertySchema,
   searchFiltersSchema,
   insertGovernorateSchema,
-  insertDirectorateSchema
+  insertDirectorateSchema,
+  insertPropertyTypeSchema
 } from "@shared/schema";
 import { z } from "zod";
 import session from "express-session";
@@ -654,6 +655,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(directorates);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch directorates" });
+    }
+  });
+
+  // Property Types API routes
+  app.get("/api/property-types", async (req, res) => {
+    try {
+      const propertyTypes = await storage.getActivePropertyTypes();
+      res.json(propertyTypes);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch property types" });
+    }
+  });
+
+  // Admin property types management
+  app.get("/api/admin/property-types", isAdmin, async (req, res) => {
+    try {
+      const propertyTypes = await storage.getAllPropertyTypes();
+      res.json(propertyTypes);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch property types" });
+    }
+  });
+
+  app.post("/api/admin/property-types", isAdmin, async (req, res) => {
+    try {
+      const validatedData = insertPropertyTypeSchema.parse(req.body);
+      const newPropertyType = await storage.createPropertyType(validatedData);
+      res.status(201).json(newPropertyType);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid input", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create property type" });
+    }
+  });
+
+  app.put("/api/admin/property-types/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const validatedData = insertPropertyTypeSchema.partial().parse(req.body);
+      const updatedPropertyType = await storage.updatePropertyType(id, validatedData);
+      
+      if (!updatedPropertyType) {
+        return res.status(404).json({ message: "Property type not found" });
+      }
+      
+      res.json(updatedPropertyType);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid input", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to update property type" });
+    }
+  });
+
+  app.delete("/api/admin/property-types/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const success = await storage.deletePropertyType(id);
+      
+      if (!success) {
+        return res.status(404).json({ message: "Property type not found" });
+      }
+      
+      res.json({ message: "Property type deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete property type" });
     }
   });
 

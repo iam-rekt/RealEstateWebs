@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { Search, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,12 @@ interface SearchFiltersProps {
 
 export default function SearchFiltersComponent({ onSearch, isHomePage = false }: SearchFiltersProps) {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
+  
+  // Fetch property types
+  const { data: propertyTypes = [] } = useQuery({
+    queryKey: ["/api/property-types"],
+    enabled: true
+  });
   
   const form = useForm<SearchFilters>({
     resolver: zodResolver(searchSchema),
@@ -211,10 +218,11 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
                           </FormControl>
                           <SelectContent className="rounded-xl border-2 shadow-xl">
                             <SelectItem value="">جميع الأنواع</SelectItem>
-                            <SelectItem value="land">أرض</SelectItem>
-                            <SelectItem value="apartment">شقة</SelectItem>
-                            <SelectItem value="villa">فيلا</SelectItem>
-                            <SelectItem value="farm">مزرعة</SelectItem>
+                            {propertyTypes.map((type: any) => (
+                              <SelectItem key={type.id} value={type.nameAr}>
+                                {type.nameAr}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </FormItem>

@@ -15,7 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Trash2, Plus, Edit, LogOut, Home, Building, Users, Mail, MessageSquare, FileText, Settings } from "lucide-react";
 import { format } from "date-fns";
-import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty, Governorate, Directorate, InsertGovernorate, InsertDirectorate } from "@shared/schema";
+import type { Property, Contact, Newsletter, Entrustment, PropertyRequest, InsertProperty, Governorate, Directorate, InsertGovernorate, InsertDirectorate, PropertyType, InsertPropertyType } from "@shared/schema";
 import ImageUpload from "@/components/image-upload";
 
 interface AdminAuth {
@@ -662,13 +662,14 @@ export default function Admin() {
 
           {/* Tabs */}
           <Tabs defaultValue="properties" className="w-full">
-            <TabsList className="grid w-full grid-cols-7">
+            <TabsList className="grid w-full grid-cols-8">
               <TabsTrigger value="properties">الأراضي</TabsTrigger>
               <TabsTrigger value="contacts">الاتصالات</TabsTrigger>
               <TabsTrigger value="newsletters">النشرة الإخبارية</TabsTrigger>
               <TabsTrigger value="entrustments">الاستشارات</TabsTrigger>
               <TabsTrigger value="requests">طلبات الأراضي</TabsTrigger>
               <TabsTrigger value="locations">المواقع</TabsTrigger>
+              <TabsTrigger value="property-types">أنواع الأراضي</TabsTrigger>
               <TabsTrigger value="settings">
                 <Settings className="w-4 h-4 mr-1" />
                 الإعدادات
@@ -1327,6 +1328,11 @@ export default function Admin() {
               </div>
             </TabsContent>
 
+            {/* Property Types Tab */}
+            <TabsContent value="property-types">
+              <PropertyTypesTab />
+            </TabsContent>
+
             {/* Settings Tab */}
             <TabsContent value="settings">
               <SettingsTab />
@@ -1335,5 +1341,248 @@ export default function Admin() {
         </div>
       </main>
     </div>
+  );
+}
+
+// Property Types Management Component
+function PropertyTypesTab() {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [editingPropertyType, setEditingPropertyType] = useState<PropertyType | null>(null);
+  const [formData, setFormData] = useState({
+    nameAr: "",
+    nameEn: "",
+    isActive: true
+  });
+
+  // Fetch property types
+  const { data: propertyTypes = [], isLoading } = useQuery({
+    queryKey: ["/api/admin/property-types"],
+    enabled: true
+  });
+
+  // Create property type mutation
+  const createMutation = useMutation({
+    mutationFn: async (data: InsertPropertyType) => {
+      return await apiRequest("/api/admin/property-types", "POST", data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/property-types"] });
+      setIsCreateDialogOpen(false);
+      resetForm();
+      toast({
+        title: "تم إنشاء نوع الأرض بنجاح",
+        description: "تم إضافة نوع الأرض الجديد إلى النظام",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "خطأ في إنشاء نوع الأرض",
+        description: "حدث خطأ أثناء إضافة نوع الأرض الجديد",
+        variant: "destructive",
+      });
+    }
+  });
+
+  // Update property type mutation
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: number; data: Partial<InsertPropertyType> }) => {
+      return await apiRequest(`/api/admin/property-types/${id}`, "PUT", data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/property-types"] });
+      setEditingPropertyType(null);
+      resetForm();
+      toast({
+        title: "تم تحديث نوع الأرض بنجاح",
+        description: "تم تحديث بيانات نوع الأرض بنجاح",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "خطأ في تحديث نوع الأرض",
+        description: "حدث خطأ أثناء تحديث بيانات نوع الأرض",
+        variant: "destructive",
+      });
+    }
+  });
+
+  // Delete property type mutation
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      return await apiRequest(`/api/admin/property-types/${id}`, "DELETE");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/property-types"] });
+      toast({
+        title: "تم حذف نوع الأرض بنجاح",
+        description: "تم حذف نوع الأرض من النظام",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "خطأ في حذف نوع الأرض",
+        description: "حدث خطأ أثناء حذف نوع الأرض",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const resetForm = () => {
+    setFormData({
+      nameAr: "",
+      nameEn: "",
+      isActive: true
+    });
+  };
+
+  const handleSubmit = () => {
+    if (!formData.nameAr.trim()) {
+      toast({
+        title: "خطأ في البيانات",
+        description: "الرجاء إدخال اسم نوع الأرض باللغة العربية",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (editingPropertyType) {
+      updateMutation.mutate({ id: editingPropertyType.id, data: formData });
+    } else {
+      createMutation.mutate(formData);
+    }
+  };
+
+  const handleEdit = (propertyType: PropertyType) => {
+    setEditingPropertyType(propertyType);
+    setFormData({
+      nameAr: propertyType.nameAr,
+      nameEn: propertyType.nameEn || "",
+      isActive: propertyType.isActive ?? true
+    });
+    setIsCreateDialogOpen(true);
+  };
+
+  const handleDelete = (id: number) => {
+    if (confirm("هل أنت متأكد من حذف هذا النوع؟")) {
+      deleteMutation.mutate(id);
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex justify-between items-center">
+          <div>
+            <CardTitle>إدارة أنواع الأراضي</CardTitle>
+            <CardDescription>إضافة وتعديل أنواع الأراضي المتاحة</CardDescription>
+          </div>
+          <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+            <DialogTrigger asChild>
+              <Button onClick={() => { setEditingPropertyType(null); resetForm(); }}>
+                <Plus className="w-4 h-4 mr-2" />
+                إضافة نوع جديد
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[500px]">
+              <DialogHeader>
+                <DialogTitle>{editingPropertyType ? "تعديل نوع الأرض" : "إضافة نوع أرض جديد"}</DialogTitle>
+                <DialogDescription>
+                  {editingPropertyType ? "تعديل بيانات نوع الأرض" : "إضافة نوع أرض جديد إلى النظام"}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="nameAr">الاسم بالعربية *</Label>
+                  <Input
+                    id="nameAr"
+                    value={formData.nameAr}
+                    onChange={(e) => setFormData({ ...formData, nameAr: e.target.value })}
+                    placeholder="مثل: أرض سكنية"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="nameEn">الاسم بالإنجليزية</Label>
+                  <Input
+                    id="nameEn"
+                    value={formData.nameEn}
+                    onChange={(e) => setFormData({ ...formData, nameEn: e.target.value })}
+                    placeholder="e.g: Residential Land"
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="isActive"
+                    checked={formData.isActive}
+                    onCheckedChange={(checked) => setFormData({ ...formData, isActive: !!checked })}
+                  />
+                  <Label htmlFor="isActive">نشط</Label>
+                </div>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                  إلغاء
+                </Button>
+                <Button 
+                  onClick={handleSubmit}
+                  disabled={createMutation.isPending || updateMutation.isPending}
+                >
+                  {editingPropertyType ? "تحديث" : "إضافة"}
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </CardHeader>
+      <CardContent>
+        {isLoading ? (
+          <div className="text-center py-4">جارٍ التحميل...</div>
+        ) : (
+          <div className="space-y-4">
+            {propertyTypes.map((propertyType: PropertyType) => (
+              <div key={propertyType.id} className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-medium">{propertyType.nameAr}</h3>
+                    {propertyType.nameEn && (
+                      <span className="text-sm text-gray-500">({propertyType.nameEn})</span>
+                    )}
+                    <Badge variant={propertyType.isActive ? "default" : "secondary"}>
+                      {propertyType.isActive ? "نشط" : "غير نشط"}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    تم الإنشاء: {format(new Date(propertyType.createdAt!), "dd/MM/yyyy")}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEdit(propertyType)}
+                  >
+                    <Edit className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleDelete(propertyType.id)}
+                    disabled={deleteMutation.isPending}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+            {propertyTypes.length === 0 && (
+              <div className="text-center py-8 text-gray-500">
+                لا توجد أنواع أراضي مضافة حالياً
+              </div>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
