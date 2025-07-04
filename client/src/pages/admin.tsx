@@ -291,8 +291,7 @@ export default function Admin() {
   // Governorate mutations
   const createGovernorateMutation = useMutation({
     mutationFn: async (governorateData: InsertGovernorate) => {
-      console.log("Creating governorate with data:", governorateData);
-      return apiRequest("/api/admin/governorates", "POST", governorateData);
+      return apiRequest("POST", "/api/admin/governorates", governorateData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/governorates"] });
@@ -316,7 +315,7 @@ export default function Admin() {
   // Directorate mutations
   const createDirectorateMutation = useMutation({
     mutationFn: async (directorateData: InsertDirectorate) => {
-      return apiRequest("/api/admin/directorates", "POST", directorateData);
+      return apiRequest("POST", "/api/admin/directorates", directorateData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/directorates"] });
@@ -1525,15 +1524,11 @@ export default function Admin() {
                             <Button 
                               className="w-full"
                               onClick={() => {
-                                console.log("Button clicked, form data:", governorateForm);
                                 if (governorateForm.nameAr.trim()) {
-                                  console.log("Form validation passed, creating governorate...");
                                   createGovernorateMutation.mutate({
                                     nameAr: governorateForm.nameAr.trim(),
                                     nameEn: governorateForm.nameEn.trim() || undefined
                                   });
-                                } else {
-                                  console.log("Form validation failed - nameAr is empty");
                                 }
                               }}
                               disabled={createGovernorateMutation.isPending || !governorateForm.nameAr.trim()}
