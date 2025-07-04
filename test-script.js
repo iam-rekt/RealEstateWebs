@@ -215,8 +215,8 @@ class TestRunner {
         available: true
       });
       assert(response.status === 201, `Expected 201, got ${response.status}`);
-      assert(response.data.title === 'أرض للبيع في الكرك', 'Title mismatch');
-      testPropertyId = response.data.id;
+      assert(response.data.property.title === 'أرض للبيع في الكرك', 'Title mismatch');
+      testPropertyId = response.data.property.id;
     });
 
     await this.runTest('PROPERTIES', 'Update Property', async () => {
@@ -260,8 +260,8 @@ class TestRunner {
     await this.runTest('PROPERTIES', 'Search Properties', async () => {
       const response = await makeRequest('POST', '/api/properties/search', {
         propertyType: 'أرض سكنية',
-        minPrice: 100000,
-        maxPrice: 200000
+        minPrice: '100000',
+        maxPrice: '200000'
       });
       assert(response.status === 200, `Expected 200, got ${response.status}`);
       assert(Array.isArray(response.data), 'Should return array of search results');
@@ -272,31 +272,33 @@ class TestRunner {
   async testContactForms() {
     await this.runTest('CONTACTS', 'Submit Contact Form', async () => {
       const response = await makeRequest('POST', '/api/contacts', {
-        name: 'أحمد محمد',
+        firstName: 'أحمد',
+        lastName: 'محمد',
         email: 'ahmed@example.com',
         phone: '0791234567',
-        message: 'مرحبا، أريد الاستفسار عن الأراضي المتاحة',
-        propertyId: 1
+        subject: 'استفسار عن الأراضي',
+        message: 'مرحبا، أريد الاستفسار عن الأراضي المتاحة'
       });
       assert(response.status === 201, `Expected 201, got ${response.status}`);
     });
 
     await this.runTest('CONTACTS', 'Submit Newsletter Subscription', async () => {
+      const randomEmail = `test${Date.now()}@example.com`;
       const response = await makeRequest('POST', '/api/newsletter', {
-        email: 'newsletter@example.com'
+        email: randomEmail
       });
       assert(response.status === 201, `Expected 201, got ${response.status}`);
     });
 
     await this.runTest('CONTACTS', 'Submit Entrustment Request', async () => {
       const response = await makeRequest('POST', '/api/entrustments', {
-        name: 'فاطمة علي',
+        firstName: 'فاطمة',
+        lastName: 'علي',
         email: 'fatima@example.com',
         phone: '0791234568',
         propertyType: 'أرض سكنية',
         location: 'عمان',
-        size: '500',
-        price: '80000',
+        serviceType: 'sell',
         description: 'أرض للبيع في موقع ممتاز'
       });
       assert(response.status === 201, `Expected 201, got ${response.status}`);
@@ -304,14 +306,15 @@ class TestRunner {
 
     await this.runTest('CONTACTS', 'Submit Property Request', async () => {
       const response = await makeRequest('POST', '/api/property-requests', {
-        name: 'محمد أحمد',
+        firstName: 'محمد',
+        lastName: 'أحمد',
         email: 'mohammed@example.com',
         phone: '0791234569',
         propertyType: 'أرض زراعية',
         location: 'إربد',
         maxPrice: '100000',
-        minSize: '1000',
-        description: 'أبحث عن أرض زراعية في إربد'
+        minSize: 1000,
+        message: 'أبحث عن أرض زراعية في إربد'
       });
       assert(response.status === 201, `Expected 201, got ${response.status}`);
     });
@@ -328,7 +331,7 @@ class TestRunner {
     await this.runTest('SETTINGS', 'Get Site Settings', async () => {
       const response = await makeRequest('GET', '/api/site-settings');
       assert(response.status === 200, `Expected 200, got ${response.status}`);
-      assert(Array.isArray(response.data), 'Should return array of settings');
+      assert(typeof response.data === 'object', 'Should return settings object');
     });
 
     await this.runTest('SETTINGS', 'Update Site Setting', async () => {
