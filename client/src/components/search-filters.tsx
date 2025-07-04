@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form";
 import { Card, CardContent } from "@/components/ui/card";
-import type { SearchFilters } from "@/lib/types";
+import type { SearchFilters } from "@shared/schema";
+import type { PropertyType, Governorate, Directorate } from "@shared/schema";
 
 const searchSchema = z.object({
   minPrice: z.string().optional(),
@@ -35,19 +36,19 @@ export default function SearchFiltersComponent({ onSearch, isHomePage = false }:
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   
   // Fetch property types
-  const { data: propertyTypes = [] } = useQuery({
+  const { data: propertyTypes = [] } = useQuery<PropertyType[]>({
     queryKey: ["/api/property-types"],
     enabled: true
   });
 
   // Fetch governorates
-  const { data: governorates = [] } = useQuery({
+  const { data: governorates = [] } = useQuery<Governorate[]>({
     queryKey: ["/api/admin/governorates"],
     enabled: true
   });
 
   // Fetch directorates  
-  const { data: directorates = [] } = useQuery({
+  const { data: directorates = [] } = useQuery<Directorate[]>({
     queryKey: ["/api/admin/directorates"],
     enabled: true
   });

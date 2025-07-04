@@ -57,6 +57,8 @@ export default function Admin() {
   };
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
+  const [governorateForm, setGovernorateForm] = useState({ nameAr: "", nameEn: "" });
+  const [directorateForm, setDirectorateForm] = useState({ nameAr: "", nameEn: "", governorateId: "" });
   const [formData, setFormData] = useState<PropertyFormData>({
     title: "",
     description: "",
@@ -279,6 +281,50 @@ export default function Admin() {
       toast({
         title: "Error",
         description: "Failed to update property",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Governorate mutations
+  const createGovernorateMutation = useMutation({
+    mutationFn: async (governorateData: InsertGovernorate) => {
+      return apiRequest("/api/admin/governorates", "POST", governorateData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/governorates"] });
+      setGovernorateForm({ nameAr: "", nameEn: "" });
+      toast({
+        title: "نجح الإضافة",
+        description: "تم إضافة المحافظة بنجاح",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "خطأ",
+        description: "فشل في إضافة المحافظة",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Directorate mutations
+  const createDirectorateMutation = useMutation({
+    mutationFn: async (directorateData: InsertDirectorate) => {
+      return apiRequest("/api/admin/directorates", "POST", directorateData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/directorates"] });
+      setDirectorateForm({ nameAr: "", nameEn: "", governorateId: "" });
+      toast({
+        title: "نجح الإضافة",
+        description: "تم إضافة المديرية بنجاح",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "خطأ",
+        description: "فشل في إضافة المديرية",
         variant: "destructive",
       });
     },
@@ -1455,13 +1501,36 @@ export default function Admin() {
                           <div className="space-y-4">
                             <div>
                               <Label htmlFor="govNameAr">الاسم بالعربية</Label>
-                              <Input id="govNameAr" placeholder="اسم المحافظة بالعربية" />
+                              <Input 
+                                id="govNameAr" 
+                                placeholder="اسم المحافظة بالعربية" 
+                                value={governorateForm.nameAr}
+                                onChange={(e) => setGovernorateForm(prev => ({ ...prev, nameAr: e.target.value }))}
+                              />
                             </div>
                             <div>
                               <Label htmlFor="govNameEn">الاسم بالإنجليزية</Label>
-                              <Input id="govNameEn" placeholder="Governorate name in English" />
+                              <Input 
+                                id="govNameEn" 
+                                placeholder="Governorate name in English" 
+                                value={governorateForm.nameEn}
+                                onChange={(e) => setGovernorateForm(prev => ({ ...prev, nameEn: e.target.value }))}
+                              />
                             </div>
-                            <Button className="w-full">إضافة</Button>
+                            <Button 
+                              className="w-full"
+                              onClick={() => {
+                                if (governorateForm.nameAr.trim()) {
+                                  createGovernorateMutation.mutate({
+                                    nameAr: governorateForm.nameAr.trim(),
+                                    nameEn: governorateForm.nameEn.trim() || undefined
+                                  });
+                                }
+                              }}
+                              disabled={createGovernorateMutation.isPending || !governorateForm.nameAr.trim()}
+                            >
+                              {createGovernorateMutation.isPending ? "جاري الإضافة..." : "إضافة"}
+                            </Button>
                           </div>
                         </DialogContent>
                       </Dialog>
@@ -1517,7 +1586,10 @@ export default function Admin() {
                           <div className="space-y-4">
                             <div>
                               <Label htmlFor="dirGov">المحافظة</Label>
-                              <Select>
+                              <Select 
+                                value={directorateForm.governorateId} 
+                                onValueChange={(value) => setDirectorateForm(prev => ({ ...prev, governorateId: value }))}
+                              >
                                 <SelectTrigger>
                                   <SelectValue placeholder="اختر المحافظة" />
                                 </SelectTrigger>
@@ -1532,13 +1604,37 @@ export default function Admin() {
                             </div>
                             <div>
                               <Label htmlFor="dirNameAr">الاسم بالعربية</Label>
-                              <Input id="dirNameAr" placeholder="اسم المديرية بالعربية" />
+                              <Input 
+                                id="dirNameAr" 
+                                placeholder="اسم المديرية بالعربية" 
+                                value={directorateForm.nameAr}
+                                onChange={(e) => setDirectorateForm(prev => ({ ...prev, nameAr: e.target.value }))}
+                              />
                             </div>
                             <div>
                               <Label htmlFor="dirNameEn">الاسم بالإنجليزية</Label>
-                              <Input id="dirNameEn" placeholder="Directorate name in English" />
+                              <Input 
+                                id="dirNameEn" 
+                                placeholder="Directorate name in English" 
+                                value={directorateForm.nameEn}
+                                onChange={(e) => setDirectorateForm(prev => ({ ...prev, nameEn: e.target.value }))}
+                              />
                             </div>
-                            <Button className="w-full">إضافة</Button>
+                            <Button 
+                              className="w-full"
+                              onClick={() => {
+                                if (directorateForm.nameAr.trim() && directorateForm.governorateId) {
+                                  createDirectorateMutation.mutate({
+                                    nameAr: directorateForm.nameAr.trim(),
+                                    nameEn: directorateForm.nameEn.trim() || undefined,
+                                    governorateId: parseInt(directorateForm.governorateId)
+                                  });
+                                }
+                              }}
+                              disabled={createDirectorateMutation.isPending || !directorateForm.nameAr.trim() || !directorateForm.governorateId}
+                            >
+                              {createDirectorateMutation.isPending ? "جاري الإضافة..." : "إضافة"}
+                            </Button>
                           </div>
                         </DialogContent>
                       </Dialog>
@@ -1607,7 +1703,7 @@ function PropertyTypesTab() {
   });
 
   // Fetch property types
-  const { data: propertyTypes = [], isLoading } = useQuery({
+  const { data: propertyTypes = [], isLoading } = useQuery<PropertyType[]>({
     queryKey: ["/api/admin/property-types"],
     enabled: true
   });
