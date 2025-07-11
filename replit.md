@@ -181,6 +181,13 @@ Changelog:
   - Removed all testing files and documentation not needed for live deployment
   - Cleaned up .gitignore to exclude only necessary development files
   - System is production-ready with secure environment variable configuration
+- July 11, 2025. Critical database data recovery and persistence fix:
+  - CRITICAL: Recovered lost Jordan data after database reset (all governorates, directorates, property types were missing)
+  - Fixed database schema misalignment - added missing 'images' column and Jordan location fields
+  - Updated Drizzle schema to match database structure (removed location/address columns, made bedrooms/bathrooms nullable)
+  - Renamed database columns to match code expectations (featured→is_featured, available→is_published)
+  - Successfully restored all Jordan-specific data: 12 governorates, 7 Amman directorates, 6 property types, 4 sample land properties
+  - Database persistence now working correctly with PostgreSQL - no more data loss on server restarts
 ```
 
 ## User Preferences

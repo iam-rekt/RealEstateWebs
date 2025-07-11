@@ -17,11 +17,10 @@ export const properties = pgTable("properties", {
   description: text("description").notNull(),
   price: decimal("price", { precision: 10, scale: 2 }).notNull(),
   size: integer("size").notNull(), // in square meters
-  bedrooms: integer("bedrooms").notNull(),
-  bathrooms: integer("bathrooms").notNull(),
-  propertyType: text("property_type").notNull(), // apartment, house, villa, studio
-  location: text("location").notNull(),
-  address: text("address").notNull(),
+  bedrooms: integer("bedrooms"),
+  bathrooms: integer("bathrooms"),
+  propertyType: text("property_type").notNull(), // land types
+  image: text("image"),
   images: text("images").array().notNull().default(["https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"]),
   // Jordan-specific location fields
   governorateId: integer("governorate_id").references(() => governorates.id),
