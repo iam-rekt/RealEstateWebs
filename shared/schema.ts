@@ -30,8 +30,9 @@ export const properties = pgTable("properties", {
   basin: text("basin"),
   neighborhood: text("neighborhood"),
   plotNumber: text("plot_number"),
-  featured: boolean("featured").default(false),
-  available: boolean("available").default(true),
+  isFeatured: boolean("is_featured").default(false),
+  isPublished: boolean("is_published").default(true),
+  updatedAt: timestamp("updated_at").defaultNow(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 

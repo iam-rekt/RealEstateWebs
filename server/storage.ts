@@ -32,6 +32,7 @@ import {
   type SearchFilters
 } from "@shared/schema";
 import bcrypt from "bcryptjs";
+import { DbStorage } from './db-storage';
 
 export interface IStorage {
   // Properties
@@ -816,4 +817,5 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Use database storage if DATABASE_URL is available, otherwise fall back to memory storage
+export const storage = process.env.DATABASE_URL ? new DbStorage() : new MemStorage();
