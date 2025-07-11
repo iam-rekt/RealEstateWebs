@@ -1,0 +1,120 @@
+{
+  "passed": 14,
+  "failed": 5,
+  "tests": [
+    {
+      "test": "Home page loads",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:30.897Z"
+    },
+    {
+      "test": "Site settings endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:31.564Z"
+    },
+    {
+      "test": "Properties listing endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:31.652Z"
+    },
+    {
+      "test": "Featured properties endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:31.739Z"
+    },
+    {
+      "test": "Property search endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:31.871Z"
+    },
+    {
+      "test": "Governorates endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:31.952Z"
+    },
+    {
+      "test": "Directorates endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.033Z"
+    },
+    {
+      "test": "Property types endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.114Z"
+    },
+    {
+      "test": "Contact form submission",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T12:58:32.120Z"
+    },
+    {
+      "test": "Newsletter subscription",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.444Z"
+    },
+    {
+      "test": "Duplicate newsletter prevention",
+      "success": false,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.679Z"
+    },
+    {
+      "test": "Entrustment form submission",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T12:58:32.686Z"
+    },
+    {
+      "test": "Property request submission",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T12:58:32.690Z"
+    },
+    {
+      "test": "Admin login rejection",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.781Z"
+    },
+    {
+      "test": "Admin login success",
+      "success": false,
+      "error": "Request failed with status code 500",
+      "timestamp": "2025-07-11T12:58:32.861Z"
+    },
+    {
+      "test": "Invalid email validation",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.865Z"
+    },
+    {
+      "test": "Required fields validation",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.869Z"
+    },
+    {
+      "test": "SQL injection prevention",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:32.948Z"
+    },
+    {
+      "test": "API rate limiting (allows legitimate traffic)",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T12:58:33.214Z"
+    }
+  ]
+}

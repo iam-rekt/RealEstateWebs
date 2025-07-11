@@ -74,22 +74,22 @@ export class DbStorage implements IStorage {
     
     await this.db.insert(admins).values({
       username,
-      password: hashedPassword,
+      passwordHash: hashedPassword,
       email: process.env.ADMIN_EMAIL || 'admin@rand-realestate.com'
     });
   }
 
   private async initializeSiteSettings() {
     const defaultSettings = [
-      { key: 'footer_company_name', value: 'شركة رند للاستثمار العقاري و تطويره' },
-      { key: 'footer_address', value: 'عمان - الأردن' },
-      { key: 'footer_phone', value: '+962 6 123 4567' },
-      { key: 'footer_fax', value: '+962 6 123 4568' },
-      { key: 'footer_mobile', value: '+962 79 123 4567' },
-      { key: 'footer_email', value: 'info@rand-realestate.com' },
-      { key: 'footer_pobox', value: '11953' },
-      { key: 'footer_manager', value: 'م. أحمد الحديدي' },
-      { key: 'footer_working_hours', value: 'الأحد - الخميس: 9:00 صباحاً - 6:00 مساءً' }
+      { settingKey: 'footer_company_name', settingValue: 'شركة رند للاستثمار العقاري و تطويره' },
+      { settingKey: 'footer_address', settingValue: 'عمان - الأردن' },
+      { settingKey: 'footer_phone', settingValue: '+962 6 123 4567' },
+      { settingKey: 'footer_fax', settingValue: '+962 6 123 4568' },
+      { settingKey: 'footer_mobile', settingValue: '+962 79 123 4567' },
+      { settingKey: 'footer_email', settingValue: 'info@rand-realestate.com' },
+      { settingKey: 'footer_pobox', settingValue: '11953' },
+      { settingKey: 'footer_manager', settingValue: 'م. أحمد الحديدي' },
+      { settingKey: 'footer_working_hours', settingValue: 'الأحد - الخميس: 9:00 صباحاً - 6:00 مساءً' }
     ];
 
     for (const setting of defaultSettings) {
@@ -337,7 +337,7 @@ export class DbStorage implements IStorage {
   async createAdmin(admin: InsertAdmin): Promise<Admin> {
     const hashedPassword = await bcrypt.hash(admin.password, 10);
     const [newAdmin] = await this.db.insert(admins)
-      .values({ ...admin, password: hashedPassword })
+      .values({ ...admin, passwordHash: hashedPassword })
       .returning();
     return newAdmin;
   }
@@ -353,7 +353,7 @@ export class DbStorage implements IStorage {
     const admin = await this.getAdminByUsername(username);
     if (!admin) return undefined;
     
-    const isValid = await bcrypt.compare(password, admin.password);
+    const isValid = await bcrypt.compare(password, admin.passwordHash);
     return isValid ? admin : undefined;
   }
 
@@ -361,7 +361,7 @@ export class DbStorage implements IStorage {
   async getSiteSetting(key: string): Promise<SiteSettings | undefined> {
     const [setting] = await this.db.select()
       .from(siteSettings)
-      .where(eq(siteSettings.key, key));
+      .where(eq(siteSettings.settingKey, key));
     return setting;
   }
 
@@ -372,16 +372,16 @@ export class DbStorage implements IStorage {
   async updateSiteSetting(key: string, value: string): Promise<SiteSettings> {
     let [setting] = await this.db.select()
       .from(siteSettings)
-      .where(eq(siteSettings.key, key));
+      .where(eq(siteSettings.settingKey, key));
     
     if (setting) {
       [setting] = await this.db.update(siteSettings)
-        .set({ value, updatedAt: new Date() })
-        .where(eq(siteSettings.key, key))
+        .set({ settingValue: value, updatedAt: new Date() })
+        .where(eq(siteSettings.settingKey, key))
         .returning();
     } else {
       [setting] = await this.db.insert(siteSettings)
-        .values({ key, value })
+        .values({ settingKey: key, settingValue: value })
         .returning();
     }
     

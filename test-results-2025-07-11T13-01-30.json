@@ -1,0 +1,237 @@
+{
+  "passed": 33,
+  "failed": 5,
+  "tests": [
+    {
+      "test": "Home page loads",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.339Z"
+    },
+    {
+      "test": "Site settings endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.569Z"
+    },
+    {
+      "test": "Properties listing endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.650Z"
+    },
+    {
+      "test": "Featured properties endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.730Z"
+    },
+    {
+      "test": "Property search endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.822Z"
+    },
+    {
+      "test": "Governorates endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.905Z"
+    },
+    {
+      "test": "Directorates endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:25.990Z"
+    },
+    {
+      "test": "Property types endpoint",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.070Z"
+    },
+    {
+      "test": "Contact form submission",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T13:01:26.076Z"
+    },
+    {
+      "test": "Newsletter subscription",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.397Z"
+    },
+    {
+      "test": "Duplicate newsletter prevention",
+      "success": false,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.476Z"
+    },
+    {
+      "test": "Entrustment form submission",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T13:01:26.480Z"
+    },
+    {
+      "test": "Property request submission",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T13:01:26.485Z"
+    },
+    {
+      "test": "Admin login rejection",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.587Z"
+    },
+    {
+      "test": "Admin login success",
+      "success": {
+        "id": 2,
+        "username": "admin"
+      },
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.767Z"
+    },
+    {
+      "test": "Admin auth status check",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.772Z"
+    },
+    {
+      "test": "Admin fetch contacts",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.852Z"
+    },
+    {
+      "test": "Admin fetch newsletters",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:26.931Z"
+    },
+    {
+      "test": "Admin fetch entrustments",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.013Z"
+    },
+    {
+      "test": "Admin fetch property requests",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.097Z"
+    },
+    {
+      "test": "Admin fetch site settings",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.175Z"
+    },
+    {
+      "test": "Admin update site settings",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.497Z"
+    },
+    {
+      "test": "Admin create property",
+      "success": false,
+      "error": "Request failed with status code 400",
+      "timestamp": "2025-07-11T13:01:27.502Z"
+    },
+    {
+      "test": "Admin fetch governorates",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.580Z"
+    },
+    {
+      "test": "Admin create governorate",
+      "success": 13,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.665Z"
+    },
+    {
+      "test": "Admin create directorate",
+      "success": 8,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.752Z"
+    },
+    {
+      "test": "Admin delete directorate",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.831Z"
+    },
+    {
+      "test": "Admin delete governorate",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.910Z"
+    },
+    {
+      "test": "Admin fetch property types",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:27.989Z"
+    },
+    {
+      "test": "Admin create property type",
+      "success": 7,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.073Z"
+    },
+    {
+      "test": "Admin update property type",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.154Z"
+    },
+    {
+      "test": "Admin delete property type",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.232Z"
+    },
+    {
+      "test": "Admin logout",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.236Z"
+    },
+    {
+      "test": "Access denied after logout",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.238Z"
+    },
+    {
+      "test": "Invalid email validation",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.241Z"
+    },
+    {
+      "test": "Required fields validation",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.243Z"
+    },
+    {
+      "test": "SQL injection prevention",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:28.321Z"
+    },
+    {
+      "test": "API rate limiting (allows legitimate traffic)",
+      "success": true,
+      "error": null,
+      "timestamp": "2025-07-11T13:01:30.586Z"
+    }
+  ]
+}
