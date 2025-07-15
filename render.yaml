@@ -1,8 +1,9 @@
 services:
   - type: web
-    name: rand-real-estate
+    name: RealEstateWebs
     runtime: node
-    plan: free
+    repo: https://github.com/iam-rekt/RealEstateWebs
+    plan: standard
     buildCommand: npm install && npm run build && npm run migrate
     startCommand: node server/production-server.js
     envVars:
@@ -22,9 +23,16 @@ services:
         fromDatabase:
           name: rand-real-estate-db
           property: connectionString
+    region: oregon
+    domains:
+      - randestate.co
+      - www.randestate.co
+    autoDeployTrigger: commit
 
 databases:
   - name: rand-real-estate-db
     databaseName: rand_real_estate
     user: postgres
-    plan: free 
+    plan: free
+
+version: "1" 
