@@ -1,0 +1,31 @@
+{
+  "summary": {
+    "total": 38,
+    "passed": 34,
+    "failed": 4,
+    "successRate": "89.47%",
+    "timestamp": "2025-07-15T08:46:03.859Z"
+  },
+  "failures": [
+    {
+      "category": "Properties",
+      "testName": "Property search",
+      "details": ""
+    },
+    {
+      "category": "Validation",
+      "testName": "Invalid email rejected",
+      "details": ""
+    },
+    {
+      "category": "Security",
+      "testName": "Unauthorized access blocked",
+      "details": ""
+    },
+    {
+      "category": "Edge Cases",
+      "testName": "Large values accepted",
+      "details": ""
+    }
+  ]
+}
