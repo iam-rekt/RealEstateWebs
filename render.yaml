@@ -32,7 +32,6 @@ services:
 databases:
   - name: rand-real-estate-db
     databaseName: rand_real_estate
-    user: postgres
     plan: free
 
 version: "1" 
