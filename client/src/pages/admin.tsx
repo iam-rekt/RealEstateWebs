@@ -29,8 +29,6 @@ interface PropertyFormData {
   price: string;
   size: string;
   propertyType: string;
-  location: string;
-  address: string;
   images: string[];
   governorateId: string;
   directorateId: string;
@@ -67,8 +65,6 @@ export default function Admin() {
     price: "",
     size: "",
     propertyType: "",
-    location: "",
-    address: "",
     images: [],
     governorateId: "",
     directorateId: "",
@@ -203,24 +199,25 @@ export default function Admin() {
         bedrooms: 0, // Set to 0 for land properties
         bathrooms: 0, // Set to 0 for land properties
         propertyType: data.propertyType,
-        location: data.location,
-        address: data.address,
-        images: data.images,
+        images: data.images || [],
         governorateId: data.governorateId ? parseInt(data.governorateId) : null,
         directorateId: data.directorateId ? parseInt(data.directorateId) : null,
         village: data.village || null,
         basin: data.basin || null,
         neighborhood: data.neighborhood || null,
         plotNumber: data.plotNumber || null,
-        featured: data.featured,
-        available: data.available,
+        isFeatured: data.featured,
+        isPublished: data.available,
       };
       const response = await fetch("/api/admin/properties", {
         method: "POST",
         body: JSON.stringify(propertyData),
         headers: { "Content-Type": "application/json" },
       });
-      if (!response.ok) throw new Error("Failed to create property");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to create property");
+      }
       return response.json();
     },
     onSuccess: () => {
@@ -253,24 +250,25 @@ export default function Admin() {
         bedrooms: 0, // Set to 0 for land properties
         bathrooms: 0, // Set to 0 for land properties
         propertyType: data.propertyType,
-        location: data.location,
-        address: data.address,
-        images: data.images,
+        images: data.images || [],
         governorateId: data.governorateId ? parseInt(data.governorateId) : null,
         directorateId: data.directorateId ? parseInt(data.directorateId) : null,
         village: data.village || null,
         basin: data.basin || null,
         neighborhood: data.neighborhood || null,
         plotNumber: data.plotNumber || null,
-        featured: data.featured,
-        available: data.available,
+        isFeatured: data.featured,
+        isPublished: data.available,
       };
       const response = await fetch(`/api/admin/properties/${id}`, {
         method: "PUT",
         body: JSON.stringify(propertyData),
         headers: { "Content-Type": "application/json" },
       });
-      if (!response.ok) throw new Error("Failed to update property");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to update property");
+      }
       return response.json();
     },
     onSuccess: () => {
@@ -350,8 +348,6 @@ export default function Admin() {
       price: "",
       size: "",
       propertyType: "",
-      location: "",
-      address: "",
       images: [] as string[],
       governorateId: "",
       directorateId: "",
@@ -377,8 +373,6 @@ export default function Admin() {
       price: property.price,
       size: property.size.toString(),
       propertyType: property.propertyType,
-      location: property.location,
-      address: property.address,
       images: property.images || [],
       governorateId: property.governorateId?.toString() || "",
       directorateId: property.directorateId?.toString() || "",
@@ -386,8 +380,8 @@ export default function Admin() {
       basin: property.basin || "",
       neighborhood: property.neighborhood || "",
       plotNumber: property.plotNumber || "",
-      featured: property.featured || false,
-      available: property.available !== false,
+      featured: property.isFeatured || false,
+      available: property.isPublished !== false,
     });
   };
 
@@ -922,28 +916,10 @@ export default function Admin() {
                                 </SelectContent>
                               </Select>
                             </div>
-                            <div>
-                              <Label htmlFor="location">الموقع</Label>
-                              <Input
-                                id="location"
-                                value={formData.location}
-                                onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                                placeholder="مثال: عبدون، عمان"
-                                required
-                              />
-                            </div>
+
                           </div>
 
-                          <div>
-                            <Label htmlFor="address">العنوان التفصيلي</Label>
-                            <Input
-                              id="address"
-                              value={formData.address}
-                              onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
-                              placeholder="العنوان الكامل للأرض"
-                              required
-                            />
-                          </div>
+
 
                           <div className="grid grid-cols-2 gap-4">
                             <div>
@@ -1190,26 +1166,10 @@ export default function Admin() {
                           </SelectContent>
                         </Select>
                       </div>
-                      <div>
-                        <Label htmlFor="edit-location">Location</Label>
-                        <Input
-                          id="edit-location"
-                          value={formData.location}
-                          onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                          required
-                        />
-                      </div>
+
                     </div>
 
-                    <div>
-                      <Label htmlFor="edit-address">Address</Label>
-                      <Input
-                        id="edit-address"
-                        value={formData.address}
-                        onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
-                        required
-                      />
-                    </div>
+
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>

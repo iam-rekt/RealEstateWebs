@@ -188,6 +188,12 @@ Changelog:
   - Renamed database columns to match code expectations (featured→is_featured, available→is_published)
   - Successfully restored all Jordan-specific data: 12 governorates, 7 Amman directorates, 6 property types, 4 sample land properties
   - Database persistence now working correctly with PostgreSQL - no more data loss on server restarts
+- July 15, 2025. Fixed critical property creation bug:
+  - RESOLVED: Property creation was failing due to frontend-backend field name mismatches
+  - Fixed field names: featured→isFeatured, available→isPublished in admin panel
+  - Removed non-existent location/address fields from PropertyFormData interface and forms
+  - Made database 'image' column nullable to prevent NOT NULL constraint violations
+  - Property creation and editing now working correctly with proper field mappings
 ```
 
 ## User Preferences
