@@ -1,0 +1,889 @@
+{
+  "summary": {
+    "totalTests": 57,
+    "passedTests": 50,
+    "failedTests": 7,
+    "successRate": "87.72%",
+    "timestamp": "2025-07-15T08:57:48.282Z"
+  },
+  "categories": {
+    "Public Endpoints": {
+      "passed": 7,
+      "failed": 3,
+      "tests": [
+        {
+          "category": "Public Endpoints",
+          "testName": "Get all properties",
+          "success": true,
+          "details": "Status: 200",
+          "timestamp": "2025-07-15T08:57:43.556Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get all properties - Has data",
+          "success": true,
+          "details": "Count: 5",
+          "timestamp": "2025-07-15T08:57:43.557Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get featured properties",
+          "success": true,
+          "details": "Status: 200",
+          "timestamp": "2025-07-15T08:57:43.642Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get featured properties - Has data",
+          "success": true,
+          "details": "Count: 2",
+          "timestamp": "2025-07-15T08:57:43.642Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get property types",
+          "success": true,
+          "details": "Status: 200",
+          "timestamp": "2025-07-15T08:57:43.721Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get property types - Has data",
+          "success": true,
+          "details": "Count: 6",
+          "timestamp": "2025-07-15T08:57:43.721Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get site settings",
+          "success": true,
+          "details": "Status: 200",
+          "timestamp": "2025-07-15T08:57:43.800Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get governorates",
+          "success": false,
+          "details": "Status: 401",
+          "timestamp": "2025-07-15T08:57:43.803Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Get directorates",
+          "success": false,
+          "details": "Status: 401",
+          "timestamp": "2025-07-15T08:57:43.805Z"
+        },
+        {
+          "category": "Public Endpoints",
+          "testName": "Property search",
+          "success": false,
+          "details": "Results: 0",
+          "timestamp": "2025-07-15T08:57:43.822Z"
+        }
+      ]
+    },
+    "Contact Forms": {
+      "passed": 6,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Contact Forms",
+          "testName": "Submit contact form",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:43.912Z"
+        },
+        {
+          "category": "Contact Forms",
+          "testName": "Reject invalid contact",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:43.916Z"
+        },
+        {
+          "category": "Contact Forms",
+          "testName": "Newsletter subscription",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.218Z"
+        },
+        {
+          "category": "Contact Forms",
+          "testName": "Reject duplicate newsletter",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.296Z"
+        },
+        {
+          "category": "Contact Forms",
+          "testName": "Submit entrustment",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.381Z"
+        },
+        {
+          "category": "Contact Forms",
+          "testName": "Submit property request",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.471Z"
+        }
+      ]
+    },
+    "Admin Auth": {
+      "passed": 4,
+      "failed": 1,
+      "tests": [
+        {
+          "category": "Admin Auth",
+          "testName": "Reject invalid login",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.553Z"
+        },
+        {
+          "category": "Admin Auth",
+          "testName": "Accept valid login",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.733Z"
+        },
+        {
+          "category": "Admin Auth",
+          "testName": "Auth check with valid session",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.736Z"
+        },
+        {
+          "category": "Admin Auth",
+          "testName": "Block unauthenticated access",
+          "success": false,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.752Z"
+        },
+        {
+          "category": "Admin Auth",
+          "testName": "Logout successful",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.762Z"
+        }
+      ]
+    },
+    "Admin Properties": {
+      "passed": 5,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Admin Properties",
+          "testName": "Get all properties",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:44.943Z"
+        },
+        {
+          "category": "Admin Properties",
+          "testName": "Create property",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.032Z"
+        },
+        {
+          "category": "Admin Properties",
+          "testName": "Update property",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.193Z"
+        },
+        {
+          "category": "Admin Properties",
+          "testName": "Delete property",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.345Z"
+        },
+        {
+          "category": "Admin Properties",
+          "testName": "Reject invalid property",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.349Z"
+        }
+      ]
+    },
+    "Admin Contacts": {
+      "passed": 5,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Admin Contacts",
+          "testName": "Get all contacts",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.428Z"
+        },
+        {
+          "category": "Admin Contacts",
+          "testName": "Get newsletters",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.507Z"
+        },
+        {
+          "category": "Admin Contacts",
+          "testName": "Get entrustments",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.586Z"
+        },
+        {
+          "category": "Admin Contacts",
+          "testName": "Get property requests",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.665Z"
+        },
+        {
+          "category": "Admin Contacts",
+          "testName": "Delete contact",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.744Z"
+        }
+      ]
+    },
+    "Location Management": {
+      "passed": 6,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Location Management",
+          "testName": "Create governorate",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.827Z"
+        },
+        {
+          "category": "Location Management",
+          "testName": "Update governorate",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.907Z"
+        },
+        {
+          "category": "Location Management",
+          "testName": "Create directorate",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:45.989Z"
+        },
+        {
+          "category": "Location Management",
+          "testName": "Update directorate",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.069Z"
+        },
+        {
+          "category": "Location Management",
+          "testName": "Delete directorate",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.158Z"
+        },
+        {
+          "category": "Location Management",
+          "testName": "Delete governorate",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.237Z"
+        }
+      ]
+    },
+    "Property Types": {
+      "passed": 4,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Property Types",
+          "testName": "Get all property types",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.315Z"
+        },
+        {
+          "category": "Property Types",
+          "testName": "Create property type",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.398Z"
+        },
+        {
+          "category": "Property Types",
+          "testName": "Update property type",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.480Z"
+        },
+        {
+          "category": "Property Types",
+          "testName": "Delete property type",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.559Z"
+        }
+      ]
+    },
+    "Site Settings": {
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Site Settings",
+          "testName": "Get all settings",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.640Z"
+        },
+        {
+          "category": "Site Settings",
+          "testName": "Update setting",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.648Z"
+        }
+      ]
+    },
+    "Input Validation": {
+      "passed": 2,
+      "failed": 2,
+      "tests": [
+        {
+          "category": "Input Validation",
+          "testName": "XSS prevention in contact form",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.731Z"
+        },
+        {
+          "category": "Input Validation",
+          "testName": "SQL injection prevention",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.810Z"
+        },
+        {
+          "category": "Input Validation",
+          "testName": "Email format validation",
+          "success": false,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.893Z"
+        },
+        {
+          "category": "Input Validation",
+          "testName": "Required fields validation",
+          "success": false,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:46.971Z"
+        }
+      ]
+    },
+    "Rate Limiting": {
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Rate Limiting",
+          "testName": "Allow normal API usage",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.243Z"
+        },
+        {
+          "category": "Rate Limiting",
+          "testName": "Login rate limiting",
+          "success": true,
+          "details": "Blocked after excessive attempts",
+          "timestamp": "2025-07-15T08:57:47.331Z"
+        }
+      ]
+    },
+    "Error Handling": {
+      "passed": 2,
+      "failed": 1,
+      "tests": [
+        {
+          "category": "Error Handling",
+          "testName": "404 for non-existent property",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.409Z"
+        },
+        {
+          "category": "Error Handling",
+          "testName": "Handle invalid JSON",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.413Z"
+        },
+        {
+          "category": "Error Handling",
+          "testName": "Method not allowed",
+          "success": false,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.418Z"
+        }
+      ]
+    },
+    "Database Consistency": {
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Database Consistency",
+          "testName": "Deleted items removed from listings",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.816Z"
+        },
+        {
+          "category": "Database Consistency",
+          "testName": "Featured properties are actually featured",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.893Z"
+        },
+        {
+          "category": "Database Consistency",
+          "testName": "Public properties are all published",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:47.971Z"
+        }
+      ]
+    },
+    "Image Handling": {
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        {
+          "category": "Image Handling",
+          "testName": "Create property with images",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:48.051Z"
+        },
+        {
+          "category": "Image Handling",
+          "testName": "Images stored correctly",
+          "success": true,
+          "details": "",
+          "timestamp": "2025-07-15T08:57:48.128Z"
+        }
+      ]
+    }
+  },
+  "allTests": [
+    {
+      "category": "Public Endpoints",
+      "testName": "Get all properties",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-07-15T08:57:43.556Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get all properties - Has data",
+      "success": true,
+      "details": "Count: 5",
+      "timestamp": "2025-07-15T08:57:43.557Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get featured properties",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-07-15T08:57:43.642Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get featured properties - Has data",
+      "success": true,
+      "details": "Count: 2",
+      "timestamp": "2025-07-15T08:57:43.642Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get property types",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-07-15T08:57:43.721Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get property types - Has data",
+      "success": true,
+      "details": "Count: 6",
+      "timestamp": "2025-07-15T08:57:43.721Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get site settings",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-07-15T08:57:43.800Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get governorates",
+      "success": false,
+      "details": "Status: 401",
+      "timestamp": "2025-07-15T08:57:43.803Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Get directorates",
+      "success": false,
+      "details": "Status: 401",
+      "timestamp": "2025-07-15T08:57:43.805Z"
+    },
+    {
+      "category": "Public Endpoints",
+      "testName": "Property search",
+      "success": false,
+      "details": "Results: 0",
+      "timestamp": "2025-07-15T08:57:43.822Z"
+    },
+    {
+      "category": "Contact Forms",
+      "testName": "Submit contact form",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:43.912Z"
+    },
+    {
+      "category": "Contact Forms",
+      "testName": "Reject invalid contact",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:43.916Z"
+    },
+    {
+      "category": "Contact Forms",
+      "testName": "Newsletter subscription",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.218Z"
+    },
+    {
+      "category": "Contact Forms",
+      "testName": "Reject duplicate newsletter",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.296Z"
+    },
+    {
+      "category": "Contact Forms",
+      "testName": "Submit entrustment",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.381Z"
+    },
+    {
+      "category": "Contact Forms",
+      "testName": "Submit property request",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.471Z"
+    },
+    {
+      "category": "Admin Auth",
+      "testName": "Reject invalid login",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.553Z"
+    },
+    {
+      "category": "Admin Auth",
+      "testName": "Accept valid login",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.733Z"
+    },
+    {
+      "category": "Admin Auth",
+      "testName": "Auth check with valid session",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.736Z"
+    },
+    {
+      "category": "Admin Auth",
+      "testName": "Block unauthenticated access",
+      "success": false,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.752Z"
+    },
+    {
+      "category": "Admin Auth",
+      "testName": "Logout successful",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.762Z"
+    },
+    {
+      "category": "Admin Properties",
+      "testName": "Get all properties",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:44.943Z"
+    },
+    {
+      "category": "Admin Properties",
+      "testName": "Create property",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.032Z"
+    },
+    {
+      "category": "Admin Properties",
+      "testName": "Update property",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.193Z"
+    },
+    {
+      "category": "Admin Properties",
+      "testName": "Delete property",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.345Z"
+    },
+    {
+      "category": "Admin Properties",
+      "testName": "Reject invalid property",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.349Z"
+    },
+    {
+      "category": "Admin Contacts",
+      "testName": "Get all contacts",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.428Z"
+    },
+    {
+      "category": "Admin Contacts",
+      "testName": "Get newsletters",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.507Z"
+    },
+    {
+      "category": "Admin Contacts",
+      "testName": "Get entrustments",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.586Z"
+    },
+    {
+      "category": "Admin Contacts",
+      "testName": "Get property requests",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.665Z"
+    },
+    {
+      "category": "Admin Contacts",
+      "testName": "Delete contact",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.744Z"
+    },
+    {
+      "category": "Location Management",
+      "testName": "Create governorate",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.827Z"
+    },
+    {
+      "category": "Location Management",
+      "testName": "Update governorate",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.907Z"
+    },
+    {
+      "category": "Location Management",
+      "testName": "Create directorate",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:45.989Z"
+    },
+    {
+      "category": "Location Management",
+      "testName": "Update directorate",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.069Z"
+    },
+    {
+      "category": "Location Management",
+      "testName": "Delete directorate",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.158Z"
+    },
+    {
+      "category": "Location Management",
+      "testName": "Delete governorate",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.237Z"
+    },
+    {
+      "category": "Property Types",
+      "testName": "Get all property types",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.315Z"
+    },
+    {
+      "category": "Property Types",
+      "testName": "Create property type",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.398Z"
+    },
+    {
+      "category": "Property Types",
+      "testName": "Update property type",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.480Z"
+    },
+    {
+      "category": "Property Types",
+      "testName": "Delete property type",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.559Z"
+    },
+    {
+      "category": "Site Settings",
+      "testName": "Get all settings",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.640Z"
+    },
+    {
+      "category": "Site Settings",
+      "testName": "Update setting",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.648Z"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "XSS prevention in contact form",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.731Z"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "SQL injection prevention",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.810Z"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "Email format validation",
+      "success": false,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.893Z"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "Required fields validation",
+      "success": false,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:46.971Z"
+    },
+    {
+      "category": "Rate Limiting",
+      "testName": "Allow normal API usage",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.243Z"
+    },
+    {
+      "category": "Rate Limiting",
+      "testName": "Login rate limiting",
+      "success": true,
+      "details": "Blocked after excessive attempts",
+      "timestamp": "2025-07-15T08:57:47.331Z"
+    },
+    {
+      "category": "Error Handling",
+      "testName": "404 for non-existent property",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.409Z"
+    },
+    {
+      "category": "Error Handling",
+      "testName": "Handle invalid JSON",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.413Z"
+    },
+    {
+      "category": "Error Handling",
+      "testName": "Method not allowed",
+      "success": false,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.418Z"
+    },
+    {
+      "category": "Database Consistency",
+      "testName": "Deleted items removed from listings",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.816Z"
+    },
+    {
+      "category": "Database Consistency",
+      "testName": "Featured properties are actually featured",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.893Z"
+    },
+    {
+      "category": "Database Consistency",
+      "testName": "Public properties are all published",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:47.971Z"
+    },
+    {
+      "category": "Image Handling",
+      "testName": "Create property with images",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:48.051Z"
+    },
+    {
+      "category": "Image Handling",
+      "testName": "Images stored correctly",
+      "success": true,
+      "details": "",
+      "timestamp": "2025-07-15T08:57:48.128Z"
+    }
+  ]
+}
