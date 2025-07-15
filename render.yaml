@@ -3,7 +3,7 @@ services:
     name: rand-real-estate
     runtime: node
     plan: free
-    buildCommand: npm install && npx vite build && npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+    buildCommand: npm install && npm run build
     startCommand: node server/production-server.js
     envVars:
       - key: NODE_ENV
@@ -15,4 +15,4 @@ services:
       - key: ADMIN_PASSWORD
         sync: false
       - key: FORCE_HTTPS
-        value: true
+        value: true 
