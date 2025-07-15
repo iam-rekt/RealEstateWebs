@@ -155,6 +155,12 @@ export default function Admin() {
   });
   const directorates = directoratesData || [];
 
+  // Fetch active property types for property creation forms
+  const { data: activePropertyTypes = [] } = useQuery<PropertyType[]>({
+    queryKey: ["/api/property-types"],
+    enabled: auth?.authenticated,
+  });
+
   // Delete mutations
   const createDeleteMutation = (endpoint: string, queryKey: string[]) => {
     return useMutation({
@@ -909,10 +915,11 @@ export default function Admin() {
                                   <SelectValue placeholder="اختر نوع الأرض" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  <SelectItem value="land">أرض سكنية</SelectItem>
-                                  <SelectItem value="farm">أرض زراعية</SelectItem>
-                                  <SelectItem value="commercial">أرض تجارية</SelectItem>
-                                  <SelectItem value="industrial">أرض صناعية</SelectItem>
+                                  {activePropertyTypes.map((type) => (
+                                    <SelectItem key={type.id} value={type.nameAr}>
+                                      {type.nameAr}
+                                    </SelectItem>
+                                  ))}
                                 </SelectContent>
                               </Select>
                             </div>
@@ -1159,10 +1166,11 @@ export default function Admin() {
                             <SelectValue placeholder="اختر نوع الأرض" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="land">أرض سكنية</SelectItem>
-                            <SelectItem value="farm">أرض زراعية</SelectItem>
-                            <SelectItem value="commercial">أرض تجارية</SelectItem>
-                            <SelectItem value="industrial">أرض صناعية</SelectItem>
+                            {activePropertyTypes.map((type) => (
+                              <SelectItem key={type.id} value={type.nameAr}>
+                                {type.nameAr}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>

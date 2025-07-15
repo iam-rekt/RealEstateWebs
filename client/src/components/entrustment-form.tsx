@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Handshake } from "lucide-react";
 import type { EntrustmentFormData } from "@/lib/types";
+import type { PropertyType } from "@shared/schema";
 
 const entrustmentSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -27,6 +28,12 @@ const entrustmentSchema = z.object({
 
 export default function EntrustmentForm() {
   const { toast } = useToast();
+  
+  // Fetch property types
+  const { data: propertyTypes = [] } = useQuery<PropertyType[]>({
+    queryKey: ["/api/property-types"],
+    enabled: true
+  });
   
   const form = useForm<EntrustmentFormData & { size: string }>({
     resolver: zodResolver(entrustmentSchema),
@@ -163,10 +170,11 @@ export default function EntrustmentForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="apartment">Apartment</SelectItem>
-                          <SelectItem value="house">House</SelectItem>
-                          <SelectItem value="villa">Villa</SelectItem>
-                          <SelectItem value="studio">Studio</SelectItem>
+                          {propertyTypes.map((type) => (
+                            <SelectItem key={type.id} value={type.nameAr}>
+                              {type.nameAr}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </FormItem>

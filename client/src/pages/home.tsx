@@ -13,7 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { apiRequest } from "@/lib/queryClient";
-import type { Property } from "@shared/schema";
+import type { Property, PropertyType } from "@shared/schema";
 import type { SearchFilters as SearchFiltersType } from "@/lib/types";
 import LandSearchFilters from "@/components/land-search-filters";
 
@@ -33,6 +33,11 @@ export default function Home() {
     queryKey: ["/api/properties"],
   });
 
+  const { data: propertyTypes = [] } = useQuery<PropertyType[]>({
+    queryKey: ["/api/property-types"],
+    enabled: true
+  });
+
 
 
   // Enhanced filter function with multiple criteria
@@ -43,16 +48,16 @@ export default function Home() {
     if (category === "land") {
       filtered = filtered.filter(p => p.propertyType === "land");
     } else if (category === "buy") {
-      filtered = filtered.filter(p => p.available === true);
+      filtered = filtered.filter(p => p.isPublished === true);
     } else if (category === "renting") {
-      filtered = filtered.filter(p => p.available === false);
+      filtered = filtered.filter(p => p.isPublished === false);
     } else if (category === "featured") {
       filtered = featuredProperties;
     }
     
     // Region filtering
     if (selectedRegion) {
-      filtered = filtered.filter(p => p.location.toLowerCase().includes(selectedRegion.toLowerCase()));
+      filtered = filtered.filter(p => p.village?.toLowerCase().includes(selectedRegion.toLowerCase()));
     }
     
     // Property type filtering
@@ -63,7 +68,7 @@ export default function Home() {
     // Bedrooms filtering
     if (bedrooms && bedrooms !== "all") {
       const bedroomCount = parseInt(bedrooms);
-      filtered = filtered.filter(p => p.bedrooms >= bedroomCount);
+      filtered = filtered.filter(p => p.bedrooms && p.bedrooms >= bedroomCount);
     }
     
     // Price range filtering
@@ -215,10 +220,11 @@ export default function Home() {
                     className="w-full px-3 py-2 rounded-md border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all duration-200 bg-white text-gray-700 text-sm text-right"
                   >
                     <option value="">جميع أنواع الأراضي</option>
-                    <option value="land">أرض سكنية</option>
-                    <option value="farm">أرض زراعية</option>
-                    <option value="commercial">أرض تجارية</option>
-                    <option value="industrial">أرض صناعية</option>
+                    {propertyTypes.map((type) => (
+                      <option key={type.id} value={type.nameAr}>
+                        {type.nameAr}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 
