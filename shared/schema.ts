@@ -132,6 +132,8 @@ export const insertContactSchema = createInsertSchema(contacts).omit({
 export const insertNewsletterSchema = createInsertSchema(newsletters).omit({
   id: true,
   createdAt: true,
+}).extend({
+  email: z.string().email("Invalid email format"),
 });
 
 export const insertEntrustmentSchema = createInsertSchema(entrustments).omit({

@@ -208,8 +208,7 @@ export class DbStorage implements IStorage {
   }
 
   async searchProperties(filters: SearchFilters): Promise<Property[]> {
-    let query = this.db.select().from(properties).where(eq(properties.isPublished, true));
-    const conditions = [];
+    const conditions = [eq(properties.isPublished, true)]; // Always include isPublished check
 
     if (filters.propertyType) {
       conditions.push(eq(properties.propertyType, filters.propertyType));
@@ -221,22 +220,19 @@ export class DbStorage implements IStorage {
       conditions.push(eq(properties.directorateId, filters.directorateId));
     }
     if (filters.minPrice) {
-      conditions.push(gte(properties.price, parseInt(filters.minPrice)));
+      conditions.push(gte(properties.price, filters.minPrice));
     }
     if (filters.maxPrice) {
-      conditions.push(lte(properties.price, parseInt(filters.maxPrice)));
+      conditions.push(lte(properties.price, filters.maxPrice));
     }
     if (filters.minSize) {
-      conditions.push(gte(properties.size, parseInt(filters.minSize)));
+      conditions.push(gte(properties.size, filters.minSize));
     }
     if (filters.maxSize) {
-      conditions.push(lte(properties.size, parseInt(filters.maxSize)));
+      conditions.push(lte(properties.size, filters.maxSize));
     }
 
-    if (conditions.length > 0) {
-      query = query.where(and(...conditions));
-    }
-
+    const query = this.db.select().from(properties).where(and(...conditions));
     return await query;
   }
 

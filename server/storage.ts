@@ -361,7 +361,7 @@ export class MemStorage implements IStorage {
     const allProperties = Array.from(this.properties.values());
     
     const filteredProperties = allProperties.filter(property => {
-      if (!property.available) return false;
+      if (!property.isPublished) return false;
       
       if (filters.minPrice && parseFloat(property.price) < parseFloat(filters.minPrice)) return false;
       if (filters.maxPrice && parseFloat(property.price) > parseFloat(filters.maxPrice)) return false;

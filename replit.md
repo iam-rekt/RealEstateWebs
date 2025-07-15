@@ -202,6 +202,12 @@ Changelog:
   - Security testing passed: XSS/SQL injection prevention working correctly
   - Database integrity confirmed: all properties have correct field names and relationships
   - Created detailed test report in COMPREHENSIVE_TEST_REPORT.md
+- July 15, 2025. Fixed critical issues from testing:
+  - RESOLVED: Property search bug - fixed database query logic that was overwriting isPublished filter
+  - RESOLVED: Newsletter email validation - added proper email format validation using Zod
+  - CLARIFIED: GET /api/admin/properties endpoint doesn't exist, returns HTML (not a security issue)
+  - VERIFIED: All admin endpoints properly protected with authentication middleware
+  - Updated both PostgreSQL and in-memory storage to use correct field names (isPublished)
 ```
 
 ## User Preferences
